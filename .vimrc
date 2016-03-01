@@ -55,4 +55,3 @@ set softtabstop=4
 set shiftwidth=4
 filetype indent on
 colorscheme desert256
-let g:rustfmt_autosave = 1
