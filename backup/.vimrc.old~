@@ -1,0 +1,3 @@
+set number
+set backupdir=c:\Users\rmli223.AD\.vim\backup\
+set directory=c:\Users\rmli223.AD\.vim\temp\
