@@ -1,9 +1,8 @@
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim
-let path='~/.vim/bundle'
-call vundle#begin(path)
+set rtp+=%HOMEPATH%/.vim/bundle/Vundle.vim
+call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 " :PluginInstall - to install, append '!' to update
@@ -12,8 +11,8 @@ Plugin 'tpope/vim-fugitive'
 " :PluginSearch name - search for plugin
 call vundle#end()
 filetype plugin indent on
-set backupdir=~/.vim/backup
-set directory=~/.vim/temp
+set backupdir=c:\Users\rmli223.AD\.vim\backup\
+set directory=c:\Users\rmli223.AD\.vim\temp\
 set number
 set guifont=Menlo\ Regular:h18
 let mapleader=" "
@@ -22,17 +21,20 @@ colorscheme Tomorrow-Night-Eighties
 
 set nowrap
 set tabstop=4
-set shiftwidth=2
+set shiftwidth=4
 set expandtab
 set smartindent
 set autoindent
 set hlsearch
 set backspace=indent,eol,start
 set hidden
-set history=100
+set history=1000
 set showmatch
 
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
+
+vmap <Tab> >>
+vmap <S-Tab> <<
