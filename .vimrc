@@ -5,6 +5,7 @@ set rtp+=%HOMEPATH%/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
 " :PluginInstall - to install, append '!' to update
 " :PluginClean - removes unused plugins, append '!' to refresh local cache
 " :PluginList -list
