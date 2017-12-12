@@ -6,6 +6,7 @@ call vundle#begin('$HOME/.vim/bundle/')
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
+Plugin 'rust-lang/rust.vim'
 " :PluginInstall - to install, append '!' to update
 " :PluginClean - removes unused plugins, append '!' to refresh local cache
 " :PluginList -list
