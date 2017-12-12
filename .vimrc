@@ -1,8 +1,8 @@
 set nocompatible
 filetype off
 
-set rtp+=%HOMEPATH%\.vim\bundle\Vundle.vim
-call vundle#begin()
+set rtp+=$HOME/.vim/bundle/Vundle.vim/
+call vundle#begin('$HOME/.vim/bundle/')
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
@@ -12,8 +12,8 @@ Plugin 'tpope/vim-surround'
 " :PluginSearch name - search for plugin
 call vundle#end()
 filetype plugin indent on
-set backupdir=%HOMEPATH%\\.vim\\backup
-set directory=%HOMEPATH%\\.vim\\temp
+set backupdir=$HOME/.vim/backup/
+set directory=$HOME/.vim/temp/
 set number
 set guifont=Menlo\ Regular:h18
 let mapleader=" "
