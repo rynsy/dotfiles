@@ -5,8 +5,12 @@ set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
-" Plugin 'tpope/vim-fugitive'
-" Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+Plugin 'kien/ctrlp.vim'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'pangloss/vim-javascript'
+Plugin 'plasticboy/vim-markdown'
 " Plugin 'rust-lang/rust.vim'
 " :PluginInstall - to install, append '!' to update
 " :PluginClean - removes unused plugins, append '!' to refresh local cache
