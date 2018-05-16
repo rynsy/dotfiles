@@ -7,19 +7,19 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-sensible'
 Plugin 'kien/ctrlp.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'pangloss/vim-javascript'
 Plugin 'plasticboy/vim-markdown'
-" Plugin 'rust-lang/rust.vim'
 " :PluginInstall - to install, append '!' to update
 " :PluginClean - removes unused plugins, append '!' to refresh local cache
 " :PluginList -list
 " :PluginSearch name - search for plugin
 call vundle#end()
 filetype plugin indent on
-set backupdir=~/.vim/backup/
-set directory=~/.vim/temp/
+set backupdir=~/.vim/backup
+set directory=~/.vim/temp
 set tags=tags;
 set number
 set guifont=Menlo\ Regular:h18
@@ -44,6 +44,9 @@ noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
+
+nnoremap fg <C-^>
+
 function! OpenNerdTree()
 if &modifiable && strlen(expand('%')) > 0 && !&diff
  NERDTreeFind
