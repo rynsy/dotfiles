@@ -25,7 +25,6 @@ set number
 set guifont=Menlo\ Regular:h18
 let mapleader=" "
 syntax on
-colorscheme Tomorrow-Night-Eighties
 
 set nowrap
 set tabstop=4
@@ -44,8 +43,9 @@ noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
-
 nnoremap fg <C-^>
+inoremap jk <esc>
+nnoremap ; :
 
 function! OpenNerdTree()
 if &modifiable && strlen(expand('%')) > 0 && !&diff
