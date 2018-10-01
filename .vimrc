@@ -43,14 +43,9 @@ noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
-<<<<<<< HEAD
-nnoremap fg <C-^>
 inoremap jk <esc>
 nnoremap ; :
-=======
-
 noremap gf <C-^> 
->>>>>>> a67296079e4dfb2751a137b6942ad905aef65b5a
 
 function! OpenNerdTree()
 if &modifiable && strlen(expand('%')) > 0 && !&diff
