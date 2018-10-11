@@ -26,6 +26,11 @@ set guifont=Menlo\ Regular:h18
 let mapleader=" "
 syntax on
 
+" Set the filetype based on the file's extension, but only if
+" 'filetype' has not already been set
+au BufRead,BufNewFile *.jlex setfiletype java
+au BufRead,BufNewFile *.cup setfiletype java
+
 set nowrap
 set tabstop=4
 set shiftwidth=4
@@ -46,7 +51,10 @@ noremap <C-l> <C-w>l
 inoremap jk <esc>
 nnoremap ; :
 noremap gf <C-^> 
+vmap <Tab> >>
+vmap <S-Tab> <<
 
+" Set key for opening NerdTree
 function! OpenNerdTree()
 if &modifiable && strlen(expand('%')) > 0 && !&diff
  NERDTreeFind
@@ -55,10 +63,6 @@ else
 endif
 endfunction
 nnoremap <silent> <C-\> :call OpenNerdTree()<CR>
-
-vmap <Tab> >>
-vmap <S-Tab> <<
-
 
 " Bind F5 to save file if modified and execute python script in a buffer.
 nnoremap <silent> <F5> :call SaveAndExecutePython()<CR>
