@@ -29,8 +29,16 @@ syntax on
 
 " Set the filetype based on the file's extension, but only if
 " 'filetype' has not already been set
-au BufRead,BufNewFile *.jlex setfiletype java
-au BufRead,BufNewFile *.cup setfiletype cup
+augroup filetype
+    au BufRead,BufNewFile *.flex,*.jflex    set filetype=jflex
+augroup END
+au Syntax jflex so ~/.vim/syntax/jflex.vim
+
+
+augroup filetype
+    au BufRead,BufNewFile *.cup,*.cup    set filetype=cup
+augroup END
+au Syntax cup so ~/.vim/syntax/cup.vim
 
 set nowrap
 set tabstop=4
