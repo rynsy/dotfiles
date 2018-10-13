@@ -30,7 +30,7 @@ syntax on
 " Set the filetype based on the file's extension, but only if
 " 'filetype' has not already been set
 au BufRead,BufNewFile *.jlex setfiletype java
-au BufRead,BufNewFile *.cup setfiletype java
+au BufRead,BufNewFile *.cup setfiletype cup
 
 set nowrap
 set tabstop=4
