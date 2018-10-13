@@ -12,6 +12,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'pangloss/vim-javascript'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'xuhdev/vim-latex-live-preview'
 " :PluginInstall - to install, append '!' to update
 " :PluginClean - removes unused plugins, append '!' to refresh local cache
 " :PluginList -list
@@ -108,7 +109,7 @@ function! SaveAndExecutePython()
     %delete _
 
     " add the console output
-    silent execute ".!python " . shellescape(s:current_buffer_file_path, 1)
+    silent execute ".!python3 " . shellescape(s:current_buffer_file_path, 1)
 
     " resize window to content length
     " Note: This is annoying because if you print a lot of lines then your code buffer is forced to a height of one line every time you run this function.
@@ -120,4 +121,3 @@ function! SaveAndExecutePython()
     setlocal readonly
     setlocal nomodifiable
 endfunction
-
