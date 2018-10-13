@@ -30,7 +30,7 @@ syntax on
 " Set the filetype based on the file's extension, but only if
 " 'filetype' has not already been set
 augroup filetype
-    au BufRead,BufNewFile *.flex,*.jflex    set filetype=jflex
+    au BufRead,BufNewFile *.jlex,*.flex,*.jflex    set filetype=jflex
 augroup END
 au Syntax jflex so ~/.vim/syntax/jflex.vim
 
