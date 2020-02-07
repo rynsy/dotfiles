@@ -5,14 +5,16 @@ set rtp+=$HOME/.vim/bundle/Vundle.vim/
 call vundle#begin('$HOME/.vim/bundle/')
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-sensible'
-Plugin 'kien/ctrlp.vim'
+Plugin 'lervag/vimtex'
+" Plugin 'tpope/vim-sensible'
+" Plugin 'tpope/vim-fugitive'
+" Plugin 'tpope/vim-surround'
+" Plugin 'kien/ctrlp.vim'
 " Plugin 'altercation/vim-colors-solarized'
 " Plugin 'pangloss/vim-javascript'
 " Plugin 'plasticboy/vim-markdown'
 " Plugin 'xuhdev/vim-latex-live-preview'
+"
 " :PluginInstall - to install, append '!' to update
 " :PluginClean - removes unused plugins, append '!' to refresh local cache
 " :PluginList -list
@@ -60,3 +62,6 @@ else
 endif
 endfunction
 nnoremap <silent> <C-\> :call OpenNerdTree()<CR>
+
+" Latex settings
+let g:tex_flavor = 'latex'
