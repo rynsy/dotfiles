@@ -6,6 +6,7 @@ call vundle#begin('$HOME/.vim/bundle/')
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'lervag/vimtex'
+Plugin 'vimwiki/vimwiki'
 " Plugin 'tpope/vim-sensible'
 " Plugin 'tpope/vim-fugitive'
 " Plugin 'tpope/vim-surround'
