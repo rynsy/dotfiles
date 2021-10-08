@@ -5,12 +5,15 @@ set rtp+=$HOME/.vim/bundle/Vundle.vim/
 call vundle#begin('$HOME/.vim/bundle/')
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
-Plugin 'lervag/vimtex'
 Plugin 'vimwiki/vimwiki'
+Plugin 'tpope/vim-fugitive'
+Plugin 'kien/ctrlp.vim'
+Plugin 'morhetz/gruvbox'
+Plugin 'sonph/onehalf'
+Plugin 'joshdick/onedark.vim'
+" Plugin 'lervag/vimtex'
 " Plugin 'tpope/vim-sensible'
-" Plugin 'tpope/vim-fugitive'
 " Plugin 'tpope/vim-surround'
-" Plugin 'kien/ctrlp.vim'
 " Plugin 'altercation/vim-colors-solarized'
 " Plugin 'pangloss/vim-javascript'
 " Plugin 'plasticboy/vim-markdown'
@@ -27,7 +30,7 @@ set directory=~/.vim/temp
 set tags=tags;
 set number
 " set guifont=Menlo\ Regular:h18
-colorscheme peachpuff
+colorscheme onedark 
 let mapleader=" "
 syntax on
 
@@ -64,5 +67,13 @@ endif
 endfunction
 nnoremap <silent> <C-\> :call OpenNerdTree()<CR>
 
+" Onehalf color settings
+let g:airline_theme='onehalfdark'
+
 " Latex settings
-let g:tex_flavor = 'latex'
+" let g:tex_flavor = 'latex'
+
+
+" Settings for Snakemake syntax
+au BufNewFile,BufRead Snakefile set syntax=snakemake
+au BufNewFile,BufRead *.snake set syntax=snakemake

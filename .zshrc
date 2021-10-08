@@ -2,19 +2,19 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH="/home/ryan/.oh-my-zsh"
+export ZSH="/home/ryan/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="random"
+ZSH_THEME="half-life"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
 # If set to an empty array, this variable will have no effect.
-ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" "half-life" )
+#ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "half-life" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -103,3 +103,32 @@ alias apti="apt-get install -y"
 alias aptu="apt-get upgrade -y"
 alias python="python3"
 alias pip="pip3"
+alias yarn="yarnpkg"
+
+
+# Install Ruby Gems to ~/gems
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"
+
+
+# Java Setup
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+export PATH="$JAVA_HOME/bin:$PATH"
+export PATH="/usr/lib/jvm/java-11-openjdk-amd64/bin:$PATH"
+# export PATH="/home/ryan/.miniconda3/bin:$PATH"  # commented out by conda initialize
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/ryan/.miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/ryan/.miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/ryan/.miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/ryan/.miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
