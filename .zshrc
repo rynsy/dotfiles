@@ -106,6 +106,9 @@ alias pip="pip3"
 alias yarn="yarnpkg"
 
 
+# Color fixes
+export LS_COLORS='ow=01;36;40'
+
 # Install Ruby Gems to ~/gems
 export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
