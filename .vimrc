@@ -9,9 +9,10 @@ Plugin 'vimwiki/vimwiki'
 Plugin 'tpope/vim-fugitive'
 Plugin 'kien/ctrlp.vim'
 Plugin 'morhetz/gruvbox'
-Plugin 'sonph/onehalf'
+" Plugin 'sonph/onehalf'
 Plugin 'joshdick/onedark.vim'
-" Plugin 'lervag/vimtex'
+Plugin 'lervag/vimtex'
+Plugin 'tomlion/vim-solidity'
 " Plugin 'tpope/vim-sensible'
 " Plugin 'tpope/vim-surround'
 " Plugin 'altercation/vim-colors-solarized'
@@ -30,7 +31,7 @@ set directory=~/.vim/temp
 set tags=tags;
 set number
 " set guifont=Menlo\ Regular:h18
-colorscheme onedark 
+colorscheme onedark
 let mapleader=" "
 syntax on
 
@@ -71,8 +72,13 @@ nnoremap <silent> <C-\> :call OpenNerdTree()<CR>
 let g:airline_theme='onehalfdark'
 
 " Latex settings
-" let g:tex_flavor = 'latex'
-
+let g:tex_flavor = 'latex'
+let g:vimtex_view_general_viewer = 'SumatraPDF'
+let g:vimtex_view_general_options = '-reuse-instance @pdf'
+let g:vimtex_view_general_options_latexmk = '-reuse-instance'
+let g:vimtex_compiler_latexmk = {
+            \ 'build_dir' : 'build',
+            \}
 
 " Settings for Snakemake syntax
 au BufNewFile,BufRead Snakefile set syntax=snakemake

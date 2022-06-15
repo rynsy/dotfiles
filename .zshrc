@@ -105,6 +105,8 @@ alias python="python3"
 alias pip="pip3"
 alias yarn="yarnpkg"
 
+# Missing local bin
+export PATH="$HOME/.local/bin:$PATH"
 
 # Color fixes
 export LS_COLORS='ow=01;36;40'
@@ -113,6 +115,8 @@ export LS_COLORS='ow=01;36;40'
 export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
 
+# Composer setup
+export PATH="$HOME/.composer/vendor/bin:$PATH"
 
 # Java Setup
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
@@ -135,3 +139,6 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+alias sail=./vendor/bin/sail
+alias supdate=sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get autoremove -y
+RPROMPT=''
