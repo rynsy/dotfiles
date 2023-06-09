@@ -1,0 +1,2 @@
+[submodule "nvim"]
+	url = https://github.com/rynsy/nvim-config
