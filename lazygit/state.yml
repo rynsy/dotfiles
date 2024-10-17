@@ -1,0 +1,42 @@
+lastupdatecheck: 0
+recentrepos:
+    - /home/ryan/code/projects/personal_site/blog
+    - /home/ryan/code/cdar/DUI_project
+    - /home/ryan/code/projects/ams
+    - /home/ryan/code/lab/dotnet/nawlins
+    - /home/ryan/code/lab/php/yii2-app-basic
+    - /home/ryan/code/lab/rust/codecrafters/codecrafters-interpreter-rust
+    - /home/ryan/code/lab/cpp/codecrafters/codecrafters-grep-cpp
+    - /home/ryan/code/lab/rust/codecrafters/codecrafters-grep-rust
+    - /home/ryan/code/lab/rust/codecrafters/codecrafters-http-server-rust
+    - /home/ryan/code/lab/rust/codecrafters/codecrafters-sqlite-rust
+    - /home/ryan/.config
+    - /home/ryan/code/lab/rust/gramphics
+    - /home/ryan/code/lab/projects/timeclock/timeclock
+    - /home/ryan/code/resume
+    - /home/ryan/code/lab/rust/conway/game_of_life_wasm
+    - /home/ryan/code/lab/rust/codecrafters/codecrafters-shell-rust
+    - /home/ryan/code/lab/php/spaday
+    - /home/ryan/code/cdar/cdar_website
+    - /home/ryan/code/lab/rust/rustlings
+    - /home/ryan/code/cdar/cares
+    - /home/ryan/code/cdar/cjktos
+    - /home/ryan/code/cdar/prototype/CDAR.Survey.Portal
+    - /home/ryan/code/cdar/new_kymoms
+    - /home/ryan/code/lab/rust/api
+    - /home/ryan/code/lab/cloud/cluster/local-infrastructure
+    - /home/ryan/code/lab/python/chess
+    - /home/ryan/code/lab/cloud/geohell
+startuppopupversion: 5
+lastversion: 0.44.0
+customcommandshistory:
+    - qa!
+    - qa
+hidecommandlog: false
+ignorewhitespaceindiffview: true
+diffcontextsize: 3
+renamesimilaritythreshold: 50
+localbranchsortorder: recency
+remotebranchsortorder: alphabetical
+gitlogorder: topo-order
+gitlogshowgraph: always

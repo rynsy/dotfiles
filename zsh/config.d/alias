@@ -1,0 +1,31 @@
+alias termbin="nc termbin.com 9999"
+alias ls='ls --color'
+alias gcm="git commit -m" 
+alias gcl="git clone"
+alias wifi="nmcli dev wifi connect"
+alias python="python3"
+alias pip="pip3"
+alias yarn="yarnpkg"
+alias navicat='QT_QPA_PLATFORM="wayland;xcb" /opt/navicat16-premium-en/AppRun'
+alias n=nvim
+alias z=zellij
+alias sail=./vendor/bin/sail
+
+killemall(){
+  kill -9 $(ps aux | rg -i $1 | tr -s ' ' | cut -d ' ' -f 2)
+}
+alias killall="killemall"
+
+# Shortcuts
+alias lab="cd ~/code/lab/"
+alias cdar="cd ~/code/cdar/"
+alias kdai="cd ~/code/cdar/kdai_data/"
+alias proj="cd ~/code/projects/"
+alias dui="cd ~/code/cdar/DUI_project/"
+alias study="cd ~/code/study/"
+alias s="study"
+alias p="proj"
+
+
+
+alias zig-wasm="zig build -Dtarget=wasm32-emscripten --sysroot '$EMSDK/upstream/emscripten'"

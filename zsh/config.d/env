@@ -1,0 +1,13 @@
+# Color fixes
+export LS_COLORS='ow=01;36;40'
+
+export DOTNET_CLI_TELEMETRY_OPTOUT=true
+export VCPKGROOT="/lib/vcpkg"
+export VCPKG_DISABLE_METRICS='True'
+
+export CONFIG_ZMK_BLE_EXPERIMENTAL_FEATURES=y
+export CONFIG_ZMK_BLE_EXPERIMENTAL_SEC=y
+
+export LUA_PATH="/home/ryan/.luarocks/share/lua/5.4/?.lua;/home/ryan/.luarocks/share/lua/5.4/?/init.lua;./?.lua;/usr/local/share/lua/5.4/?.lua;/usr/local/share/lua/5.4/?/init.lua"
+export LUA_CPATH="/home/ryan/.luarocks/lib/lua/5.4/?.so;./?.so;/usr/local/lib/lua/5.4/?.so"
+
