@@ -26,6 +26,10 @@ alias study="cd ~/code/study/"
 alias s="study"
 alias p="proj"
 
+alias alacritty-light="cp ~/.config/alacritty/alacritty-light.toml ~/.config/alacritty/alacritty.toml"
+alias alacritty-dark="cp ~/.config/alacritty/alacritty-dark.toml ~/.config/alacritty/alacritty.toml"
+
+alias dc="docker-compose"
 
 
 alias zig-wasm="zig build -Dtarget=wasm32-emscripten --sysroot '$EMSDK/upstream/emscripten'"
