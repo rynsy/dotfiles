@@ -5,9 +5,9 @@ DIRECTORIES=("alacritty" "autorandr" "bluetuith" "gh" "lazygit" "manjaro" "nvim"
 
 # Create the directories and copy each one to ~/dotfiles
 for DIR in "${DIRECTORIES[@]}"; do
-	# Create the directory under ~/dotfiles
+	# Create the directory under ~/dotfiles if it doesn't exist
 	mkdir -p "$HOME/dotfiles/$DIR"
 
-	# Copy the directory from ~/.config to ~/dotfiles
-	cp -rf "$HOME/.config/$DIR" "$HOME/dotfiles/"
+	# Use rsync to copy while excluding .git directories
+	rsync -a --exclude='.git' "$HOME/.config/$DIR/" "$HOME/dotfiles/$DIR"
 done
