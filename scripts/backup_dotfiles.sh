@@ -11,3 +11,8 @@ for DIR in "${DIRECTORIES[@]}"; do
 	# Use rsync to copy while excluding .git directories
 	rsync -a --exclude='.git' "$HOME/.config/$DIR/" "$HOME/dotfiles/$DIR"
 done
+
+cd "$HOME"/dotfiles/ || exit
+git add * || exit
+git commit -m "automated backup" || exit
+git push --all || exit
