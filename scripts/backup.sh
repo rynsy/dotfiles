@@ -41,7 +41,7 @@ retry() {
 perform_rsync() {
   src=$1
   dest=$2
-  retry rsync -ach --no-perms --no-owner --no-group --no-times --ignore-errors --partial --no-links --exclude='samba/' --exclude '*/samba/' --exclude='lost+found/' --exclude='*/lost+found/' "$src" "$dest"
+  retry rsync -ach --no-perms --no-owner --no-group --no-times --ignore-errors --partial --no-links --exclude 'mnt/' --exclude='.cache/' --exclude='samba/' --exclude '*/samba/' --exclude='lost+found/' --exclude='*/lost+found/' "$src" "$dest"
 }
 
 perform_backup() {
