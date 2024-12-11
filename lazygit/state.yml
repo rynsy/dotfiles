@@ -1,5 +1,6 @@
 lastupdatecheck: 0
 recentrepos:
+    - /home/ryan/code/lab/rust/codecrafters/codecrafters-redis-rust
     - /home/ryan/code/projects/platform
     - /home/ryan/code/cdar/DUI_project
     - /home/ryan/code/lab/cloud/vps_infrastructure_project
@@ -29,7 +30,7 @@ recentrepos:
     - /home/ryan/code/lab/python/chess
     - /home/ryan/code/lab/cloud/geohell
 startuppopupversion: 5
-lastversion: 0.44.0
+lastversion: 0.44.1
 customcommandshistory:
     - qa!
     - qa
