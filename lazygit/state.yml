@@ -1,8 +1,9 @@
 lastupdatecheck: 0
 recentrepos:
+    - /home/ryan/code/cdar/DUI_project
+    - /home/ryan/.config
     - /home/ryan/code/lab/rust/codecrafters/codecrafters-redis-rust
     - /home/ryan/code/projects/platform
-    - /home/ryan/code/cdar/DUI_project
     - /home/ryan/code/lab/cloud/vps_infrastructure_project
     - /home/ryan/code/projects/ams
     - /home/ryan/code/lab/dotnet/nawlins
@@ -12,7 +13,6 @@ recentrepos:
     - /home/ryan/code/lab/rust/codecrafters/codecrafters-grep-rust
     - /home/ryan/code/lab/rust/codecrafters/codecrafters-http-server-rust
     - /home/ryan/code/lab/rust/codecrafters/codecrafters-sqlite-rust
-    - /home/ryan/.config
     - /home/ryan/code/lab/rust/gramphics
     - /home/ryan/code/lab/projects/timeclock/timeclock
     - /home/ryan/code/resume
