@@ -1,5 +1,6 @@
 lastupdatecheck: 0
 recentrepos:
+    - /home/ryan/code/projects/personal_site
     - /home/ryan/code/cdar/tap
     - /home/ryan/code/cdar/DUI_project
     - /home/ryan/.config
@@ -33,8 +34,8 @@ recentrepos:
 startuppopupversion: 5
 lastversion: 0.44.1
 customcommandshistory:
-    - qa!
     - qa
+    - qa!
 hidecommandlog: false
 ignorewhitespaceindiffview: true
 diffcontextsize: 3
