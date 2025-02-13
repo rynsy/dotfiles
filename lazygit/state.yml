@@ -1,5 +1,6 @@
 lastupdatecheck: 0
 recentrepos:
+    - /home/ryan/code/lab/dotnet/CleanProject
     - /home/ryan/code/cdar/DUI_project
     - /home/ryan/code/cdar/tap
     - /home/ryan/code/projects/personal_site
@@ -32,7 +33,7 @@ recentrepos:
     - /home/ryan/code/lab/python/chess
     - /home/ryan/code/lab/cloud/geohell
 startuppopupversion: 5
-lastversion: 0.44.1
+lastversion: 0.45.2
 customcommandshistory:
     - qa
     - qa!
