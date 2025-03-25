@@ -13,3 +13,5 @@ export LUA_CPATH="/home/ryan/.luarocks/lib/lua/5.4/?.so;./?.so;/usr/local/lib/lu
 
 
 export DOTNET_ROOT=/snap/dotnet-sdk/current
+
+export XDG_SESSION_TYPE=wayland
