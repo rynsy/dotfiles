@@ -6,5 +6,7 @@ font.size = 12
 import = ["~/.config/alacritty/themes/themes/dracula_plus.toml"]
 
 [terminal]
-shell.program = "/usr/bin/zsh"
+shell.program = "zellij"
+shell.args = ["a", "portal"]
+#shell.program = "/usr/bin/zsh"
 #shell.args = ["-c", "zellij"]
