@@ -41,7 +41,7 @@ retry() {
 perform_rsync() {
   src=$1
   dest=$2
-  retry rsync -ach --no-perms --no-owner --no-group --no-times --ignore-errors --partial --no-links --exclude 'mnt/' --exclude=".conan2" --exclude='.local/' --exclude='.cache/' --exclude='.git/' --exclude='*Steam*' --exclude='samba/' --exclude '*/samba/' --exclude='lost+found/' --exclude='*/lost+found/' "$src" "$dest"
+  retry rsync -ach --no-perms --no-owner --no-group --no-times --ignore-errors --partial --no-links --exclude 'mnt/' --exclude='.cache/' --exclude='samba/' --exclude '*/samba/' --exclude='lost+found/' --exclude='*/lost+found/' "$src" "$dest"
 }
 
 perform_backup() {
@@ -52,47 +52,47 @@ perform_backup() {
     perform_rsync "/home/ryan" "/mnt/usb/"
     log "Local backup completed successfully."
 
-  #   # Mount Google Drive if not already mounted
-  #   if ! mountpoint -q /home/ryan/mnt/gdrive; then
-  #     retry "rclone mount gdrive: /home/ryan/mnt/gdrive --vfs-cache-mode writes &"
-  #     sleep 10
-  #   fi
-  #
-  #   # Backup Google Drive to USB
-  #   perform_rsync "/home/ryan/mnt/gdrive/" "/mnt/usb/gdrive/"
-  #
-  #   # Mount Google Photos if not already mounted
-  #   if ! mountpoint -q /home/ryan/mnt/gphotos; then
-  #     retry "rclone mount gphotos: /home/ryan/mnt/gphotos --vfs-cache-mode writes &"
-  #     sleep 10
-  #   fi
-  #
-  #   # Backup Google Drive to USB
-  #   perform_rsync "/home/ryan/mnt/gphotos/" "/mnt/usb/gphotos/"
-  #
-  #   # Mount UKY Google Drive if not already mounted
-  #   if ! mountpoint -q /home/ryan/mnt/uky_gdrive; then
-  #     retry "rclone mount uky_gdrive: /home/ryan/mnt/uky_gdrive --vfs-cache-mode writes &"
-  #     sleep 10
-  #   fi
-  #
-  #   # Backup Google Drive to USB
-  #   perform_rsync "/home/ryan/mnt/uky_gdrive/" "/mnt/usb/uky_gdrive/"
-  #
-  #   # Mount UKY OneDrive if not already mounted
-  #   if ! mountpoint -q /home/ryan/mnt/uky_onedrive; then
-  #     retry "rclone mount uky_onedrive: /home/ryan/mnt/uky_onedrive --vfs-cache-mode writes &"
-  #     sleep 10
-  #   fi
-  #
-  #   # Backup UKY OneDrive to USB
-  #   perform_rsync "/home/ryan/mnt/uky_onedrive" "/mnt/usb/uky_gdrive/"
-  #
-  #   log "Cloud backup completed successfully."
-  #   exit 0
-  # else
-  #   log "Drive is not mounted to /mnt/usb. Backup aborted."
-  #   exit 1
+    # Mount Google Drive if not already mounted
+    if ! mountpoint -q /home/ryan/mnt/gdrive; then
+      retry "rclone mount gdrive: /home/ryan/mnt/gdrive --vfs-cache-mode writes &"
+      sleep 10
+    fi
+
+    # Backup Google Drive to USB
+    perform_rsync "/home/ryan/mnt/gdrive/" "/mnt/usb/gdrive/"
+
+    # Mount Google Photos if not already mounted
+    if ! mountpoint -q /home/ryan/mnt/gphotos; then
+      retry "rclone mount gphotos: /home/ryan/mnt/gphotos --vfs-cache-mode writes &"
+      sleep 10
+    fi
+
+    # Backup Google Drive to USB
+    perform_rsync "/home/ryan/mnt/gphotos/" "/mnt/usb/gphotos/"
+
+    # Mount UKY Google Drive if not already mounted
+    if ! mountpoint -q /home/ryan/mnt/uky_gdrive; then
+      retry "rclone mount uky_gdrive: /home/ryan/mnt/uky_gdrive --vfs-cache-mode writes &"
+      sleep 10
+    fi
+
+    # Backup Google Drive to USB
+    perform_rsync "/home/ryan/mnt/uky_gdrive/" "/mnt/usb/uky_gdrive/"
+
+    # Mount UKY OneDrive if not already mounted
+    if ! mountpoint -q /home/ryan/mnt/uky_onedrive; then
+      retry "rclone mount uky_onedrive: /home/ryan/mnt/uky_onedrive --vfs-cache-mode writes &"
+      sleep 10
+    fi
+
+    # Backup UKY OneDrive to USB
+    perform_rsync "/home/ryan/mnt/uky_onedrive" "/mnt/usb/uky_gdrive/"
+
+    log "Cloud backup completed successfully."
+    exit 0
+  else
+    log "Drive is not mounted to /mnt/usb. Backup aborted."
+    exit 1
   fi
 }
 

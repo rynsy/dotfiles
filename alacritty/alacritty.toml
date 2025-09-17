@@ -1,13 +1,10 @@
+import = ["~/.config/alacritty/themes/themes/dracula_plus.toml"]
 window.opacity = 0.8
 font.normal.family = "RobotoMono Nerd Font"
 font.size = 12
 
-[general]
-import = ["~/.config/alacritty/themes/themes/dracula_plus.toml"]
-
-[terminal]
+[shell]
 shell.program = "zellij"
-shell.args = ["a", "migration"]
-#shell.args = ["a", "portal"]
+shell.args = ["-l", "portal"]
 #shell.program = "/usr/bin/zsh"
 #shell.args = ["-c", "zellij"]
