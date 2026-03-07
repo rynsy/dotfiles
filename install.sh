@@ -2,7 +2,7 @@
 set -euo pipefail
 
 DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
-PACKAGES=(nvim zsh claude git ssh)
+PACKAGES=(nvim zsh claude git ssh tmux)
 BACKUP_DIR="/tmp/dotfiles-backup/$(date +%Y%m%d-%H%M%S)"
 
 echo "=== Dotfiles Bootstrap ==="
@@ -11,7 +11,7 @@ echo ""
 
 # Step 1: Install packages
 echo "--- Installing packages ---"
-sudo pacman -S --needed stow zsh fzf zoxide
+sudo pacman -S --needed stow zsh fzf zoxide tmux
 
 # Step 2: Install zinit if missing
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -51,6 +51,9 @@ done
 for f in alias env path secrets.encrypted .gitignore; do
   check_conflict "$HOME/.config/zsh/config.d/$f"
 done
+
+check_conflict "$HOME/.config/tmux/tmux.conf"
+check_conflict "$HOME/.config/tmux/scripts/sessionizer.sh"
 
 check_conflict "$HOME/.claude/settings.json"
 check_conflict "$HOME/.claude/settings.local.json"
@@ -93,8 +96,9 @@ echo "=== Done! ==="
 echo ""
 echo "Post-install steps:"
 echo "  1. Decrypt secrets: cd $DOTFILES_DIR/zsh/.config/zsh/config.d && ansible-vault decrypt secrets.encrypted --output secrets"
-echo "  2. Launch nvim to install plugins (first run may take a moment)"
-echo "  3. Open a new zsh shell to install zinit plugins and p10k prompt"
+echo "  2. Install TPM plugins: ~/.tmux/plugins/tpm/bin/install_plugins"
+echo "  3. Launch nvim to install plugins (first run may take a moment)"
+echo "  4. Open a new zsh shell to install zinit plugins and p10k prompt"
 echo ""
 if [ ${#conflicts[@]} -gt 0 ]; then
   echo "Backups saved to: $BACKUP_DIR"

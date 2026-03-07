@@ -9,6 +9,7 @@ GNU Stow-managed dotfiles for Arch Linux with Hyprland (omarchy).
 | `nvim` | `~/.config/nvim/` | LazyVim config, keymaps, plugins, transparency |
 | `zsh` | `~/.zshenv`, `~/.config/zsh/` | zinit, p10k, aliases, env, secrets |
 | `claude` | `~/.claude/` | Claude Code settings |
+| `tmux` | `~/.config/tmux/` | tmux.conf, sessionizer script, catppuccin theme |
 | `git` | `~/.gitconfig` | User, aliases, credential helpers |
 | `ssh` | `~/.ssh/config` | Dev host config |
 
@@ -50,6 +51,7 @@ ansible-vault encrypt secrets --output secrets.encrypted
 ## What's excluded
 
 - **omarchy-managed nvim files**: `theme.lua`, `omarchy-theme-hotreload.lua` (symlinks managed by omarchy)
+- **TPM plugins**: `~/.config/tmux/plugins/`, `~/.tmux/plugins/` (installed at runtime by TPM)
 - **Generated files**: `lazy-lock.json`, `.zcompdump`, `.zcompcache/`
 - **Secrets/tokens**: SSH keys, `~/.config/gh/hosts.yml`, `~/.claude/.credentials.json`
 - **Claude runtime data**: history, cache, projects, session data
