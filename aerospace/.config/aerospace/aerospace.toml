@@ -1,6 +1,12 @@
 # =============================================================================
 # Aerospace — Tiling WM for macOS
-# Keybindings mirror Hyprland/Omarchy setup (Alt instead of Super)
+# Keybindings mirror Hyprland/Omarchy setup (Cmd as modifier)
+#
+# With ZMK Mac layer: physical Left Ctrl sends Cmd, so the same finger
+# that hits Super on Linux (right thumb GUI) now... wait, no:
+# On Linux, Super is right thumb. On Mac, Cmd is left thumb (physical Ctrl).
+# The WM modifier is a DIFFERENT physical key per OS, but the muscle memory
+# for the RIGHT HAND patterns (hjkl, 1-9) is identical.
 # =============================================================================
 
 # Start at login
@@ -29,73 +35,94 @@ outer.bottom = 8
 # =============================================================================
 # Keybindings — Main mode
 # =============================================================================
+#
+# Using Cmd as modifier. On ZMK Mac layer, physical Left Ctrl = Cmd.
+#
+# NOTE: Cmd+h is macOS "hide app" — Aerospace overrides it.
+# NOTE: Cmd+t/f/r/1-9 conflict with macOS/app defaults, but Aerospace
+# intercepts at the WM level before apps see them. This is the same
+# tradeoff as Hyprland intercepting Super+key on Linux.
+#
+# Known trade-offs vs stock macOS:
+#   Cmd+Tab   → NOT intercepted (kept for macOS app switcher)
+#   Cmd+H     → focus left (overrides macOS "hide app")
+#   Cmd+F     → fullscreen (overrides in-app Find)
+#   Cmd+T     → toggle float (overrides new tab in browsers)
+#   Cmd+R     → resize mode (overrides browser refresh)
+#   Cmd+1-9   → workspaces (overrides browser tab switching)
+#   Cmd+W     → NOT intercepted (kept for macOS close tab/window)
+#   Cmd+S     → NOT intercepted (kept for macOS save)
+#   Cmd+C/V/X → NOT intercepted (kept for copy/paste/cut)
 
 [mode.main.binding]
 
-# -- Focus (Alt + h/j/k/l) — matches Hyprland Super+Arrow/focus direction --
-alt-h = 'focus left'
-alt-j = 'focus down'
-alt-k = 'focus up'
-alt-l = 'focus right'
+# -- Focus (Cmd + h/j/k/l) — matches Hyprland Super+Arrow --
+cmd-h = 'focus left'
+cmd-j = 'focus down'
+cmd-k = 'focus up'
+cmd-l = 'focus right'
 
-# -- Move window (Alt+Shift + h/j/k/l) — matches Hyprland Super+Shift+Arrow --
-alt-shift-h = 'move left'
-alt-shift-j = 'move down'
-alt-shift-k = 'move up'
-alt-shift-l = 'move right'
+# -- Move window (Cmd+Shift + h/j/k/l) — matches Hyprland Super+Shift+Arrow --
+cmd-shift-h = 'move left'
+cmd-shift-j = 'move down'
+cmd-shift-k = 'move up'
+cmd-shift-l = 'move right'
 
-# -- Switch workspace (Alt + 1-9) — matches Hyprland Super+1-9 --
-alt-1 = 'workspace 1'
-alt-2 = 'workspace 2'
-alt-3 = 'workspace 3'
-alt-4 = 'workspace 4'
-alt-5 = 'workspace 5'
-alt-6 = 'workspace 6'
-alt-7 = 'workspace 7'
-alt-8 = 'workspace 8'
-alt-9 = 'workspace 9'
+# -- Switch workspace (Cmd + 1-9) — matches Hyprland Super+1-9 --
+cmd-1 = 'workspace 1'
+cmd-2 = 'workspace 2'
+cmd-3 = 'workspace 3'
+cmd-4 = 'workspace 4'
+cmd-5 = 'workspace 5'
+cmd-6 = 'workspace 6'
+cmd-7 = 'workspace 7'
+cmd-8 = 'workspace 8'
+cmd-9 = 'workspace 9'
 
-# -- Move window to workspace (Alt+Shift + 1-9) — matches Hyprland Super+Shift+1-9 --
-alt-shift-1 = 'move-node-to-workspace 1'
-alt-shift-2 = 'move-node-to-workspace 2'
-alt-shift-3 = 'move-node-to-workspace 3'
-alt-shift-4 = 'move-node-to-workspace 4'
-alt-shift-5 = 'move-node-to-workspace 5'
-alt-shift-6 = 'move-node-to-workspace 6'
-alt-shift-7 = 'move-node-to-workspace 7'
-alt-shift-8 = 'move-node-to-workspace 8'
-alt-shift-9 = 'move-node-to-workspace 9'
+# -- Move window to workspace (Cmd+Shift + 1-9) — matches Hyprland Super+Shift+1-9 --
+cmd-shift-1 = 'move-node-to-workspace 1'
+cmd-shift-2 = 'move-node-to-workspace 2'
+cmd-shift-3 = 'move-node-to-workspace 3'
+cmd-shift-4 = 'move-node-to-workspace 4'
+cmd-shift-5 = 'move-node-to-workspace 5'
+cmd-shift-6 = 'move-node-to-workspace 6'
+cmd-shift-7 = 'move-node-to-workspace 7'
+cmd-shift-8 = 'move-node-to-workspace 8'
+cmd-shift-9 = 'move-node-to-workspace 9'
 
-# -- Cycle workspaces (Alt + Tab) — matches Hyprland Super+Tab --
+# -- Cycle workspaces (Alt + Tab) --
+# NOT Cmd+Tab — that's the macOS app switcher and too ingrained to override.
+# On Hyprland, Super+Tab = next workspace, Alt+Tab = cycle windows.
+# Here Alt+Tab = next workspace, Cmd+Tab = macOS app switcher.
 alt-tab = 'workspace next'
 alt-shift-tab = 'workspace prev'
 
-# -- Fullscreen (Alt + f) — matches Hyprland Super+F --
-alt-f = 'fullscreen'
+# -- Fullscreen (Cmd + f) — matches Hyprland Super+F --
+cmd-f = 'fullscreen'
 
-# -- Toggle floating (Alt + t) — matches Hyprland Super+T --
-alt-t = 'layout floating tiling'
+# -- Toggle floating (Cmd + t) — matches Hyprland Super+T --
+cmd-t = 'layout floating tiling'
 
-# -- Toggle split direction (Alt + j) is taken, use Alt+slash --
-alt-slash = 'layout tiles horizontal vertical'
+# -- Toggle split direction --
+cmd-slash = 'layout tiles horizontal vertical'
 
-# -- Move window to monitor (Alt+Ctrl+Shift + h/l) — matches Hyprland Super+Ctrl+Shift --
-alt-ctrl-shift-h = ['move-node-to-monitor left', 'focus-monitor left']
-alt-ctrl-shift-l = ['move-node-to-monitor right', 'focus-monitor right']
-alt-ctrl-shift-k = ['move-node-to-monitor up', 'focus-monitor up']
-alt-ctrl-shift-j = ['move-node-to-monitor down', 'focus-monitor down']
+# -- Move window to monitor (Cmd+Ctrl+Shift + h/j/k/l) — matches Hyprland --
+cmd-ctrl-shift-h = ['move-node-to-monitor left', 'focus-monitor left']
+cmd-ctrl-shift-l = ['move-node-to-monitor right', 'focus-monitor right']
+cmd-ctrl-shift-k = ['move-node-to-monitor up', 'focus-monitor up']
+cmd-ctrl-shift-j = ['move-node-to-monitor down', 'focus-monitor down']
 
-# -- Focus monitor (Alt+Ctrl + h/l) --
-alt-ctrl-h = 'focus-monitor left'
-alt-ctrl-l = 'focus-monitor right'
-alt-ctrl-k = 'focus-monitor up'
-alt-ctrl-j = 'focus-monitor down'
+# -- Focus monitor (Cmd+Ctrl + h/l) --
+cmd-ctrl-h = 'focus-monitor left'
+cmd-ctrl-l = 'focus-monitor right'
+cmd-ctrl-k = 'focus-monitor up'
+cmd-ctrl-j = 'focus-monitor down'
 
-# -- Resize mode (Alt + r) --
-alt-r = 'mode resize'
+# -- Resize mode (Cmd + r) --
+cmd-r = 'mode resize'
 
-# -- Service mode (Alt + Shift + semicolon) --
-alt-shift-semicolon = 'mode service'
+# -- Service mode (Cmd + Shift + semicolon) --
+cmd-shift-semicolon = 'mode service'
 
 # =============================================================================
 # Resize mode

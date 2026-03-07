@@ -16,7 +16,7 @@ Ctrl-vs-Cmd modifier difference on macOS for OS-level shortcuts.
 ## Current Workflow
 
 - **Linux (primary):** Hyprland (Super for WM), tmux (Ctrl+b prefix), nvim, bash
-- **macOS (secondary):** Aerospace (Alt for WM), tmux, nvim, Ghostty
+- **macOS (secondary):** Aerospace (Cmd for WM), tmux, nvim, Ghostty
 - **Windows (rare):** SSH from another machine, minimal local use
 
 ## Actual Keyboard Layout — Thumb Clusters
@@ -203,11 +203,15 @@ profile per machine, you can set it once and forget it.
 | tmux prefix       | L.Ctrl + b       | Ctrl+b      | Cmd+b *    |
 | Beginning of line | Home key         | Home        | Cmd+Left   |
 | End of line       | End key          | End         | Cmd+Right  |
-| Tiling WM         | Alt + hjkl       | Alt (tmux)  | Alt (Aero) |
-| WM workspace      | R.GUI + 1-9 (LX) | Super+1-9  | —          |
-|                   | Alt + 1-9 (Mac)  | —           | Alt+1-9    |
+| Tiling WM focus   | L.Ctrl + hjkl    | —           | Cmd+hjkl   |
+|                   | Super + Arrow(LX)| Super+Arrow | —          |
+| WM workspace      | L.Ctrl + 1-9     | Ctrl+1-9    | Cmd+1-9    |
+|                   | R.GUI + 1-9 (LX) | Super+1-9   | —          |
+| Cycle workspaces  | Alt + Tab        | (not bound) | Alt+Tab ** |
+|                   | Super + Tab (LX) | Super+Tab   | —          |
 
 \* tmux prefix via Ghostty keybind: `keybind = cmd+b=text:\x02`
+\*\* Cmd+Tab left for macOS app switcher; Alt+Tab cycles workspaces in Aerospace
 
 ## Implementation Steps
 
