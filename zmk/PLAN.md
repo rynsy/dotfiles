@@ -1,4 +1,4 @@
-# ZMK Keymap Plan — Kinesis Advantage 360
+# ZMK Keymap Plan — Kinesis Advantage 360 Pro
 
 ## Goal
 
@@ -6,177 +6,222 @@ Create a portable keyboard configuration that preserves muscle memory across
 Linux, macOS, and (occasionally) Windows. The primary friction point is the
 Ctrl-vs-Cmd modifier difference on macOS for OS-level shortcuts.
 
+## Current Setup
+
+- **Fork:** github.com/rynsy/Adv360-Pro-ZMK (needs upstream sync)
+- **Custom macros:** quotes, double-quotes, brackets, braces on Fn layer
+- **Homerow mods:** defined but not actively used on base layer
+- **Profiles:** 5 Bluetooth profiles available (Mod+1-5)
+
 ## Current Workflow
 
 - **Linux (primary):** Hyprland (Super for WM), tmux (Ctrl+b prefix), nvim, bash
 - **macOS (secondary):** Aerospace (Alt for WM), tmux, nvim, Ghostty
 - **Windows (rare):** SSH from another machine, minimal local use
 
-Terminal tools (tmux, vim, shell) use Ctrl universally — no change needed.
-The only divergence is OS-level shortcuts (copy, paste, etc.).
+## Actual Keyboard Layout — Thumb Clusters
+
+```
+LEFT THUMB CLUSTER:              RIGHT THUMB CLUSTER:
+
+        Ctrl    Alt                  GUI/⊞    Ctrl
+    Bksp    Home                          PgUp
+    Del     End                  Enter    Space
+                                          PgDn
+```
+
+Full base layer matrix (from current keymap):
+```
+LEFT HALF:
+┌─────┬─────┬─────┬─────┬─────┬─────┬─────┐
+│  =  │  1  │  2  │  3  │  4  │  5  │ Kp  │
+├─────┼─────┼─────┼─────┼─────┼─────┤Toggle│
+│ Tab │  Q  │  W  │  E  │  R  │  T  ├─────┤
+├─────┼─────┼─────┼─────┼─────┼─────┤     │
+│ Esc │  A  │  S  │  D  │  F  │  G  │     │
+├─────┼─────┼─────┼─────┼─────┼─────┤     │
+│Shift│  Z  │  X  │  C  │  V  │  B  │     │
+├─────┼─────┼─────┼─────┼─────┼─────┘     │
+│ Fn  │  `  │Caps │  ←  │  →  │            │
+└─────┴─────┴─────┴─────┴─────┘            │
+                          Ctrl  Alt        │
+                      Bksp    Home         │
+                      Del     End          │
+                                           │
+RIGHT HALF:                                │
+┌─────┬─────┬─────┬─────┬─────┬─────┬─────┤
+│ Mod │  6  │  7  │  8  │  9  │  0  │  -  │
+├─────┼─────┼─────┼─────┼─────┼─────┼─────┤
+│     │  Y  │  U  │  I  │  O  │  P  │  \  │
+├─────┤─────┼─────┼─────┼─────┼─────┼─────┤
+│     │  H  │  J  │  K  │  L  │  ;  │  '  │
+├─────┤─────┼─────┼─────┼─────┼─────┼─────┤
+│     │  N  │  M  │  ,  │  .  │  /  │Shift│
+│     └─────┼─────┼─────┼─────┼─────┼─────┤
+│           │  ↑  │  ↓  │  [  │  ]  │ Fn  │
+│           └─────┴─────┴─────┴─────┴─────┘
+│        GUI/⊞   Ctrl
+│             PgUp
+│        Enter   Space
+│             PgDn
+```
+
+Key observations:
+- **No GUI/Super key on the left** — only Ctrl and Alt
+- **GUI/Super is only on the right** — paired with right Ctrl
+- **Home/End on left thumb**, PgUp/PgDn on right thumb
+- **Fn keys** are pinky keys (bottom corners), momentary layer shift
+- **Mod key** is top-right, accesses BT profiles, bootloader, etc.
 
 ## Layer Design
 
-### Layer 0: Default (Linux/Windows)
+### Layer 0: Default (Linux/Windows) — No changes needed
 
-Standard QWERTY. No modifications to modifier keys.
+All modifiers are stock. This is what you use today:
+- Left Ctrl + letter → OS shortcuts (copy, paste, etc.) AND terminal Ctrl
+- Right GUI + 1-9 → Hyprland workspaces (but physically awkward)
+- Alt + hjkl → tmux pane navigation (no prefix needed)
 
-```
-Left thumb cluster:                Right thumb cluster:
-┌───────┬───────┐                  ┌───────┬───────┐
-│  Ctrl │  Alt  │                  │  Alt  │ Ctrl  │
-├───────┼───────┤                  ├───────┼───────┤
-│ Super │ Space │                  │ Enter │ Super │
-├───────┼───────┤                  ├───────┼───────┤
-│ Shift │  Del  │                  │ Bksp  │ Shift │
-└───────┴───────┘                  └───────┴───────┘
-```
+Note: On Linux, you likely use Super+1-9 with a different hand position than
+the right thumb GUI key. Since Hyprland binds Super to workspace switching,
+and the only GUI key is on the right thumb, you're probably reaching for it
+with your right thumb while hitting numbers with your left hand. This works
+but isn't ideal.
 
-Modifiers send exactly what they say. All Linux shortcuts work as expected:
-- Ctrl+C/V/X/Z/A/S/F/T/W — standard shortcuts
-- Super+1-9 — Hyprland workspaces
-- Alt+hjkl — tmux pane navigation
+### Layer 4: macOS
 
-### Layer 1: macOS
-
-Activated by a toggle (see below). The ONLY change: **left and right Ctrl
-keys send Cmd (GUI)**. Everything else is identical to Layer 0.
+Added as a new layer (layers 1-3 are Keypad, Fn, Mod). The changes:
 
 ```
-Left thumb cluster:                Right thumb cluster:
-┌───────┬───────┐                  ┌───────┬───────┐
-│ ⌘ Cmd │  Alt  │                  │  Alt  │ ⌘ Cmd │
-├───────┼───────┤                  ├───────┼───────┤
-│ Super │ Space │                  │ Enter │ Super │
-├───────┼───────┤                  ├───────┼───────┤
-│ Shift │  Del  │                  │ Bksp  │ Shift │
-└───────┴───────┘                  └───────┴───────┘
+LEFT THUMB CLUSTER:              RIGHT THUMB CLUSTER:
+  (Mac layer)                      (Mac layer)
+
+        Cmd     Alt                  Ctrl     Cmd
+    Bksp    Home*                         PgUp*
+    Del     End*                 Enter    Space
+                                          PgDn*
 ```
 
-This means your muscle memory is preserved:
-- "Ctrl+C" (copy) → fingers hit same keys → sends Cmd+C on Mac ✓
-- "Ctrl+V" (paste) → same fingers → Cmd+V ✓
-- "Ctrl+Z" (undo) → same fingers → Cmd+Z ✓
-- Alt+hjkl → still Alt → Aerospace tiling works ✓
-- Ctrl+C in terminal → sends Cmd+C... wait.
+Changes from default:
+- **Left Ctrl → Cmd (LGUI):** OS shortcuts stay on the same finger
+- **Right GUI → Ctrl (RCTRL):** Terminal Ctrl moves to where GUI was
+- **Right Ctrl → Cmd (RGUI):** Right side also has Cmd for shortcuts
+- Home/End → Cmd+Left/Cmd+Right (via macro): fixes line navigation
+- PgUp/PgDn: consider remapping to Option+Up/Down for Mac behavior
 
-### The Terminal Problem
+### The Terminal Problem (and solution)
 
-On macOS, terminal apps need BOTH:
-- Cmd+C → copy from terminal
-- Ctrl+C → send SIGINT to process
+On macOS, terminal apps need BOTH Cmd (for copy/paste) and Ctrl (for
+SIGINT, history search, etc.). The swap handles this:
 
-If we remap Ctrl→Cmd at the keyboard level, we lose the ability to send
-real Ctrl keystrokes to the terminal.
+| Physical key | Linux sends | Mac layer sends | Purpose on Mac |
+|---|---|---|---|
+| Left Ctrl | Ctrl | Cmd | OS shortcuts (copy, paste, save...) |
+| Left Alt | Alt | Alt | Aerospace tiling WM |
+| Right GUI | GUI/Super | Ctrl | Terminal control (Ctrl+C, Ctrl+R...) |
+| Right Ctrl | Ctrl | Cmd | OS shortcuts (right hand) |
 
-**Solution: Configure Ghostty (and any Mac terminal) to handle this.**
+Your muscle memory:
+- "Copy" → left thumb Ctrl + C → Cmd+C on Mac ✓
+- "Kill process" → right thumb (was GUI, now Ctrl) + C → Ctrl+C ✓
+- "History search" → right thumb + R → Ctrl+R ✓
+- "Aerospace focus" → Alt + hjkl → unchanged ✓
+- "tmux prefix" → Ctrl+b → Cmd+b... WAIT
 
-Ghostty on macOS already does the right thing by default:
-- Cmd+C with text selected → copy
-- Cmd+C with no selection → sends Ctrl+C (SIGINT) to the process
-- Ctrl keybindings in apps (Ctrl+R for shell history, etc.) → still work
-  because the physical Ctrl key is sending Cmd, but Ghostty interprets
-  Cmd+R differently from Ctrl+R
+### The tmux prefix problem
 
-**Actually, this is the real problem.** If physical Ctrl sends Cmd, then:
-- Shell Ctrl+R (reverse search) → sends Cmd+R → won't work
-- Shell Ctrl+A (beginning of line) → sends Cmd+A → select all in terminal
-- Shell Ctrl+L (clear) → sends Cmd+L → address bar in browser
-- Vim Ctrl+W (window commands) → sends Cmd+W → closes window
+If left Ctrl sends Cmd on Mac, then Ctrl+b (tmux prefix) becomes Cmd+b,
+which tmux won't recognize.
 
-This breaks too many things. We need a smarter approach.
+**Solutions (pick one):**
+1. **Use right thumb (now Ctrl) + b** for tmux prefix on Mac. Slight
+   muscle memory shift but keeps everything else clean.
+2. **Remap tmux prefix to Cmd+b on Mac** in tmux.conf:
+   `if-shell "uname | grep -q Darwin" "set -g prefix C-b"` — actually
+   Cmd+b won't register as C-b. This won't work.
+3. **Add Ghostty keybind** to translate Cmd+b → Ctrl+b. This is the
+   cleanest solution — handle it in the terminal, not the keyboard.
 
-### Revised Layer 1: macOS (Smart Swap)
-
-Instead of blindly swapping Ctrl→Cmd, we swap **Ctrl and Cmd positions**.
-Physical Ctrl sends Cmd. Physical Super (which sends Cmd on Mac natively)
-sends Ctrl.
-
+**Recommended: Option 3.** Add to Ghostty config (Mac only):
 ```
-Left thumb cluster (Mac layer):   Right thumb cluster (Mac layer):
-┌───────┬───────┐                  ┌───────┬───────┐
-│ ⌘ Cmd │  Alt  │                  │  Alt  │ ⌘ Cmd │
-├───────┼───────┤                  ├───────┼───────┤
-│ Ctrl  │ Space │                  │ Enter │ Ctrl  │
-├───────┼───────┤                  ├───────┼───────┤
-│ Shift │  Del  │                  │ Bksp  │ Shift │
-└───────┴───────┘                  └───────┴───────┘
+keybind = cmd+b=text:\x02
 ```
+This makes Cmd+b send the Ctrl+b byte (0x02) to the terminal. Your left
+thumb hits the same key, tmux gets the same signal. Other Cmd+letter
+combos that need to reach the terminal can be handled the same way.
 
-Now on the Mac layer:
-- Physical Ctrl position → Cmd → copy/paste/cut/undo (OS shortcuts) ✓
-- Physical Super position → Ctrl → terminal Ctrl+C/R/A/L, vim Ctrl+W ✓
-- Alt stays Alt → Aerospace tiling ✓
+Alternatively, just get used to using right thumb for tmux prefix on Mac.
+It's one keybind to relearn.
 
-Your fingers do the same thing for the same intent:
-- "I want to copy" → hit the key where Ctrl is → works on both OSes
-- "I want to kill a process" → hit the key where Super is (now Ctrl) → Ctrl+C
-- "I want to switch workspace" → Alt+1-9 → Aerospace on Mac, different key
-  on Linux (Super+1-9) but that's already a different modifier anyway
+### Home/End Fix for macOS
+
+macOS uses Cmd+Left/Right for line navigation, not Home/End.
+On the Mac layer, we remap:
+- **Home → Cmd+Left** (beginning of line)
+- **End → Cmd+Right** (end of line)
+
+These are implemented as ZMK macros that press GUI+Arrow.
 
 ### Layer Toggle
 
-**Fn + M** (for Mac) — toggle between Layer 0 and Layer 1.
+**Mod + M** — toggle Mac layer on/off.
 
-This is a sticky toggle — press once to switch, stays until you press again.
-You'll set it when you sit down at your Mac and forget about it.
+Since the Kinesis 360 supports 5 Bluetooth profiles, the practical
+workflow is:
+- **Profile 1:** Paired with Linux desktop → Mac layer OFF
+- **Profile 2:** Paired with MacBook → Mac layer ON
 
-The Kinesis 360 has persistent layer state across power cycles if you save
-to the onboard profile, so you could also maintain separate profiles:
-- Profile 1: Linux/Windows (Layer 0 default)
-- Profile 2: Mac (Layer 1 default)
+Toggle once when switching machines. Or, if you always use the same
+profile per machine, you can set it once and forget it.
 
 ## Layer Summary
 
-| Layer | Purpose     | Ctrl key sends | Super key sends | Alt key sends |
-|-------|-------------|----------------|-----------------|---------------|
-| 0     | Linux/Win   | Ctrl           | Super           | Alt           |
-| 1     | macOS       | Cmd (GUI)      | Ctrl            | Alt           |
+| Layer | Name    | Purpose | Left Ctrl | Right GUI | Right Ctrl |
+|-------|---------|---------|-----------|-----------|------------|
+| 0     | Default | Linux   | Ctrl      | GUI       | Ctrl       |
+| 1     | Keypad  | Numpad  | (stock)   | (stock)   | (stock)    |
+| 2     | Fn      | F-keys  | (stock)   | (stock)   | (stock)    |
+| 3     | Mod     | BT/LED  | (stock)   | (stock)   | (stock)    |
+| 4     | macOS   | Mac     | Cmd       | Ctrl      | Cmd        |
 
 ## Shortcuts Cheat Sheet (Both Platforms)
 
-| Intent              | Physical keys        | Linux sends  | Mac sends    |
-|---------------------|----------------------|-------------|-------------|
-| Copy                | Ctrl pos + C         | Ctrl+C      | Cmd+C       |
-| Paste               | Ctrl pos + V         | Ctrl+V      | Cmd+V       |
-| Cut                 | Ctrl pos + X         | Ctrl+X      | Cmd+X       |
-| Undo                | Ctrl pos + Z         | Ctrl+Z      | Cmd+Z       |
-| Select all          | Ctrl pos + A         | Ctrl+A      | Cmd+A       |
-| Save                | Ctrl pos + S         | Ctrl+S      | Cmd+S       |
-| Find                | Ctrl pos + F         | Ctrl+F      | Cmd+F       |
-| Close tab           | Ctrl pos + W         | Ctrl+W      | Cmd+W       |
-| New tab             | Ctrl pos + T         | Ctrl+T      | Cmd+T       |
-| Quit app            | Ctrl pos + Q         | (not std)   | Cmd+Q       |
-| SIGINT              | Super pos + C        | Super+C (×) | Ctrl+C      |
-| Shell history       | Super pos + R        | Super+R (×) | Ctrl+R      |
-| Clear terminal      | Super pos + L        | Super+L (×) | Ctrl+L      |
-| Beginning of line   | Super pos + A        | Super+A (×) | Ctrl+A      |
-| Vim window cmd      | Super pos + W        | Super+W (×) | Ctrl+W      |
-| Tiling WM focus     | Alt + hjkl           | Alt (tmux)  | Alt (Aero)  |
-| Tiling WM workspace | Super pos + 1-9 (LX) | Super+1-9   | —           |
-|                     | Alt + 1-9 (Mac)      | —           | Alt+1-9     |
+| Intent            | Physical key     | Linux sends | Mac sends  |
+|-------------------|------------------|-------------|------------|
+| Copy              | L.Ctrl + C       | Ctrl+C      | Cmd+C      |
+| Paste             | L.Ctrl + V       | Ctrl+V      | Cmd+V      |
+| Cut               | L.Ctrl + X       | Ctrl+X      | Cmd+X      |
+| Undo              | L.Ctrl + Z       | Ctrl+Z      | Cmd+Z      |
+| Select all        | L.Ctrl + A       | Ctrl+A      | Cmd+A      |
+| Save              | L.Ctrl + S       | Ctrl+S      | Cmd+S      |
+| Find              | L.Ctrl + F       | Ctrl+F      | Cmd+F      |
+| Close tab         | L.Ctrl + W       | Ctrl+W      | Cmd+W      |
+| SIGINT            | L.Ctrl + C (LX)  | Ctrl+C      | —          |
+|                   | R.GUI + C (Mac)  | —           | Ctrl+C     |
+| Shell history     | L.Ctrl + R (LX)  | Ctrl+R      | —          |
+|                   | R.GUI + R (Mac)  | —           | Ctrl+R     |
+| tmux prefix       | L.Ctrl + b       | Ctrl+b      | Cmd+b *    |
+| Beginning of line | Home key         | Home        | Cmd+Left   |
+| End of line       | End key          | End         | Cmd+Right  |
+| Tiling WM         | Alt + hjkl       | Alt (tmux)  | Alt (Aero) |
+| WM workspace      | R.GUI + 1-9 (LX) | Super+1-9  | —          |
+|                   | Alt + 1-9 (Mac)  | —           | Alt+1-9    |
 
-Note: (×) marks combinations that don't do anything useful on Linux since
-Super+letter triggers Hyprland bindings, not terminal commands. This is fine
-because on Linux you already use Ctrl (the real Ctrl) for terminal shortcuts.
+\* tmux prefix via Ghostty keybind: `keybind = cmd+b=text:\x02`
 
-## Implementation
+## Implementation Steps
 
-The Kinesis 360 uses Adv360-Pro-ZMK firmware. The keymap is configured via:
-
-1. Fork https://github.com/KinesisCorporation/Adv360-Pro-ZMK
-2. Edit `config/adv360.keymap`
-3. Push to trigger GitHub Actions build
-4. Flash the firmware via USB
-
-See the `adv360.keymap` file in this directory for the actual keymap.
+1. **Sync fork** with upstream KinesisCorporation/Adv360-Pro-ZMK
+2. **Edit config/adv360.keymap** — add Mac layer (layer 4)
+3. **Add Home/End macros** for Cmd+Arrow behavior
+4. **Push to GitHub** — Actions will build firmware
+5. **Flash both halves** via USB bootloader
+6. **Add Ghostty Mac keybind** for tmux prefix: `keybind = cmd+b=text:\x02`
+7. **Test** on both Linux and Mac
 
 ## Future Considerations
 
-- **Colemak layer:** Could be added as Layer 2 if you decide to try it.
-  Would need both a Linux-Colemak and Mac-Colemak variant, or a single
-  Colemak layer with the Mac modifier swap on top (layer 2 + layer 1).
-- **Gaming layer:** If needed, a layer that disables any home-row mods
-  or special behaviors for clean WASD input.
-- **Numpad layer:** The Kinesis already has this built in, but a custom
-  one could be useful if the default doesn't suit your needs.
+- **Colemak layer:** Layer 5, with a Mac-Colemak variant as layer 6
+  (or use conditional layers to combine Colemak + Mac modifier swap)
+- **Gaming layer:** Disable homerow mods, clean WASD
+- **Numpad tweaks:** Layer 1 (Keypad) is already stock, customize if needed

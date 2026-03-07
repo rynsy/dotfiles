@@ -1,133 +1,175 @@
 /*
- * Kinesis Advantage 360 — ZMK Keymap
+ * Kinesis Advantage 360 Pro — ZMK Keymap
  *
- * Layer 0: Default (Linux/Windows) — standard QWERTY, no modifier changes
- * Layer 1: macOS — Ctrl↔Cmd swap (Ctrl position sends Cmd, Super position sends Ctrl)
+ * Layer 0: Default (Linux/Windows) — stock QWERTY
+ * Layer 1: Keypad — numpad on right half (stock)
+ * Layer 2: Fn — function keys (stock + custom macros)
+ * Layer 3: Mod — BT profiles, bootloader, LED control (stock)
+ * Layer 4: macOS — Ctrl<->Cmd swap + Home/End line nav fix
  *
- * Toggle: Fn+M switches between Linux and Mac mode
+ * Mac layer toggle: place &tog 4 on Mod layer (M key position)
  *
- * NOTE: This is a SKETCH — adapt to match the actual Adv360-Pro-ZMK repo
- * structure (https://github.com/KinesisCorporation/Adv360-Pro-ZMK).
- * The real keymap uses the Adv360 shield and its specific key positions.
- * Key position numbers below are approximate — verify against the repo's
- * matrix transform before flashing.
+ * IMPORTANT: This is based on the current rynsy/Adv360-Pro-ZMK fork.
+ * Sync with upstream before applying these changes.
  */
 
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
-
-#define DEFAULT 0
-#define MAC     1
+#include <dt-bindings/zmk/rgb.h>
+#include <dt-bindings/zmk/backlight.h>
 
 / {
+  behaviors {
+    #include "macros.dtsi"
+
+    hm: homerow_mods {
+        compatible = "zmk,behavior-hold-tap";
+        label = "HOMEROW_MODS";
+        #binding-cells = <2>;
+        tapping-term-ms = <200>;
+        quick_tap_ms = <175>;
+        flavor = "tap-preferred";
+        bindings = <&kp>, <&kp>;
+    };
+  };
+
+  macros {
+    /*
+     * Home/End → Cmd+Arrow macros for macOS line navigation.
+     * On Mac, Home/End scroll to top/bottom of document.
+     * Cmd+Left/Right moves to beginning/end of line.
+     */
+    mac_home: mac_home {
+        compatible = "zmk,behavior-macro";
+        label = "MAC_HOME";
+        #binding-cells = <0>;
+        bindings = <&kp LG(LEFT)>;
+    };
+
+    mac_end: mac_end {
+        compatible = "zmk,behavior-macro";
+        label = "MAC_END";
+        #binding-cells = <0>;
+        bindings = <&kp LG(RIGHT)>;
+    };
+  };
+
     keymap {
         compatible = "zmk,keymap";
 
-        /*
-         * ╔═══════════════════════════════════════════════════════════╗
-         * ║  LAYER 0 — DEFAULT (Linux / Windows)                     ║
-         * ╠═══════════════════════════════════════════════════════════╣
-         * ║  All modifiers are standard.                             ║
-         * ║  Ctrl = Ctrl, Super = Super, Alt = Alt                   ║
-         * ╚═══════════════════════════════════════════════════════════╝
+        /* ============================================================
+         * LAYER 0 — DEFAULT (Linux / Windows)
+         * ============================================================
+         * Stock QWERTY. No modifier changes.
          *
-         * ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┐   ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┐
-         * │ ESC │  1  │  2  │  3  │  4  │  5  │     │   │     │  6  │  7  │  8  │  9  │  0  │     │
-         * ├─────┼─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┼─────┤
-         * │ TAB │  Q  │  W  │  E  │  R  │  T  │     │   │     │  Y  │  U  │  I  │  O  │  P  │  \  │
-         * ├─────┼─────┼─────┼─────┼─────┼─────┤     │   │     ├─────┼─────┼─────┼─────┼─────┼─────┤
-         * │CAPS │  A  │  S  │  D  │  F  │  G  ├─────┤   ├─────┤  H  │  J  │  K  │  L  │  ;  │  '  │
-         * ├─────┼─────┼─────┼─────┼─────┼─────┤     │   │     ├─────┼─────┼─────┼─────┼─────┼─────┤
-         * │SHFT │  Z  │  X  │  C  │  V  │  B  │     │   │     │  N  │  M  │  ,  │  .  │  /  │SHFT │
-         * ├─────┼─────┼─────┼─────┼─────┼─────┘     │   │     └─────┼─────┼─────┼─────┼─────┼─────┤
-         * │  `  │ INS │ LFT │ RGT │                  │   │                 │  UP │  DN │  [  │  ]  │
-         * └─────┴─────┴─────┴─────┘                  │   │                 └─────┴─────┴─────┴─────┘
-         *                          ┌─────┬─────┐     │   │     ┌─────┬─────┐
-         *                          │CTRL │ ALT │     │   │     │ ALT │CTRL │
-         *                          ├─────┼─────┤     │   │     ├─────┼─────┤
-         *                          │SUPER│SPACE│     │   │     │ENTER│SUPER│
-         *                          ├─────┼─────┤     │   │     ├─────┼─────┤
-         *                          │SHIFT│ DEL │     │   │     │BKSP │SHIFT│
-         *                          └─────┴─────┘     │   │     └─────┴─────┘
+         * Left thumb:  Ctrl, Alt, Bksp, Home, Del, End
+         * Right thumb: GUI, Ctrl, PgUp, Enter, Space, PgDn
          */
         default_layer {
             bindings = <
-                // Row 0 (number row)
-                &kp ESC   &kp N1   &kp N2    &kp N3    &kp N4   &kp N5   &none         &none    &kp N6   &kp N7   &kp N8    &kp N9    &kp N0    &none
-                // Row 1
-                &kp TAB   &kp Q    &kp W     &kp E     &kp R    &kp T    &none         &none    &kp Y    &kp U    &kp I     &kp O     &kp P     &kp BSLH
-                // Row 2
-                &kp CAPS  &kp A    &kp S     &kp D     &kp F    &kp G                           &kp H    &kp J    &kp K     &kp L     &kp SEMI  &kp SQT
-                // Row 3
-                &kp LSHFT &kp Z    &kp X     &kp C     &kp V    &kp B    &none         &none    &kp N    &kp M    &kp COMMA &kp DOT   &kp FSLH  &kp RSHFT
-                // Row 4 (bottom row)
-                &kp GRAVE &kp INS  &kp LEFT  &kp RIGHT                                                   &kp UP   &kp DOWN  &kp LBKT  &kp RBKT
-                // Thumb cluster (left)                                   // Thumb cluster (right)
-                                              &kp LCTRL &kp LALT                       &kp RALT &kp RCTRL
-                                              &kp LGUI  &kp SPACE                      &kp RET  &kp RGUI
-                                              &kp LSHFT &kp DEL                        &kp BSPC &kp RSHFT
+ &kp EQUAL     &kp N1    &kp N2    &kp N3     &kp N4  &kp N5              &tog 1                                                                 &mo 3  &kp N6  &kp N7     &kp N8    &kp N9    &kp N0  &kp MINUS
+   &kp TAB      &kp Q     &kp W     &kp E      &kp R   &kp T               &none                                                                 &none   &kp Y   &kp U      &kp I     &kp O     &kp P   &kp BSLH
+   &kp ESC      &kp A     &kp S     &kp D      &kp F   &kp G               &none  &kp LCTRL  &kp LALT                   &kp LGUI  &kp RCTRL      &none   &kp H   &kp J      &kp K     &kp L  &kp SEMI    &kp SQT
+ &kp LSHFT      &kp Z     &kp X     &kp C      &kp V   &kp B                                 &kp HOME                  &kp PG_UP                         &kp N   &kp M  &kp COMMA   &kp DOT  &kp FSLH  &kp RSHFT
+     &mo 2  &kp GRAVE  &kp CAPS  &kp LEFT  &kp RIGHT                    &kp BSPC    &kp DEL   &kp END                  &kp PG_DN  &kp ENTER  &kp SPACE          &kp UP   &kp DOWN  &kp LBKT  &kp RBKT      &mo 2
             >;
         };
 
-        /*
-         * ╔═══════════════════════════════════════════════════════════╗
-         * ║  LAYER 1 — macOS                                         ║
-         * ╠═══════════════════════════════════════════════════════════╣
-         * ║  Ctrl ↔ Cmd swap on thumb keys.                          ║
-         * ║  Physical Ctrl position → Cmd (for OS shortcuts)         ║
-         * ║  Physical Super position → Ctrl (for terminal shortcuts) ║
-         * ║  Everything else is transparent (same as Layer 0).       ║
-         * ╚═══════════════════════════════════════════════════════════╝
-         *
-         * Thumb cluster changes only:
-         *
-         *                          ┌─────┬─────┐         ┌─────┬─────┐
-         *                          │ CMD │ ALT │         │ ALT │ CMD │
-         *                          ├─────┼─────┤         ├─────┼─────┤
-         *                          │CTRL │SPACE│         │ENTER│CTRL │
-         *                          ├─────┼─────┤         ├─────┼─────┤
-         *                          │SHIFT│ DEL │         │BKSP │SHIFT│
-         *                          └─────┴─────┘         └─────┴─────┘
-         */
-        mac_layer {
+        /* ============================================================
+         * LAYER 1 — KEYPAD (stock)
+         * ============================================================ */
+        layer_keypad {
             bindings = <
-                // All alpha/number keys pass through
-                &trans    &trans   &trans    &trans    &trans   &trans   &trans        &trans   &trans   &trans   &trans    &trans    &trans    &trans
-                &trans    &trans   &trans    &trans    &trans   &trans   &trans        &trans   &trans   &trans   &trans    &trans    &trans    &trans
-                &trans    &trans   &trans    &trans    &trans   &trans                          &trans   &trans   &trans    &trans    &trans    &trans
-                &trans    &trans   &trans    &trans    &trans   &trans   &trans        &trans   &trans   &trans   &trans    &trans    &trans    &trans
-                &trans    &trans   &trans    &trans                                                      &trans   &trans    &trans    &trans
-                // Thumb cluster — THE ONLY CHANGES
-                //        Ctrl pos → Cmd           Alt stays            Alt stays          Ctrl pos → Cmd
-                                              &kp LGUI  &kp LALT                       &kp RALT &kp RGUI
-                //        Super pos → Ctrl                                                       Super pos → Ctrl
-                                              &kp LCTRL &kp SPACE                      &kp RET  &kp RCTRL
-                                              &kp LSHFT &kp DEL                        &kp BSPC &kp RSHFT
+ &kp EQUAL     &kp N1    &kp N2    &kp N3     &kp N4  &kp N5              &trans                                                                 &mo 3  &kp N6  &kp KP_NUM  &kp KP_EQUAL  &kp KP_DIVIDE  &kp KP_MULTIPLY  &kp MINUS
+   &kp TAB      &kp Q     &kp W     &kp E      &kp R   &kp T               &none                                                                 &none   &kp Y   &kp KP_N7     &kp KP_N8      &kp KP_N9     &kp KP_MINUS   &kp BSLH
+   &kp ESC      &kp A     &kp S     &kp D      &kp F   &kp G               &none  &kp LCTRL  &kp LALT                   &kp LGUI  &kp RCTRL      &none   &kp H   &kp KP_N4     &kp KP_N5      &kp KP_N6      &kp KP_PLUS    &kp SQT
+ &kp LSHFT      &kp Z     &kp X     &kp C      &kp V   &kp B                                 &kp HOME                  &kp PG_UP                         &kp N   &kp KP_N1     &kp KP_N2      &kp KP_N3     &kp KP_ENTER  &kp RSHFT
+     &mo 2  &kp GRAVE  &kp CAPS  &kp LEFT  &kp RIGHT                    &kp BSPC    &kp DEL   &kp END                  &kp PG_DN  &kp ENTER  &kp KP_N0              &kp UP      &kp DOWN     &kp KP_DOT         &kp RBKT      &mo 2
             >;
         };
+
+        /* ============================================================
+         * LAYER 2 — FUNCTION KEYS (stock + custom macros)
+         * ============================================================ */
+        layer_fn {
+            bindings = <
+ &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6            &tog 1                                                   &mo 3  &kp F7  &kp F8  &kp F9          &kp F10        &kp F11         &kp F12
+ &trans  &trans  &trans  &trans  &trans  &trans             &none                                                   &none  &trans  &trans  &trans           &trans         &trans  &macro_dquotes
+ &trans  &trans  &trans  &trans  &trans  &trans             &none  &trans  &trans                  &trans  &trans   &none  &trans  &trans  &trans           &trans         &trans   &macro_quotes
+ &trans  &trans  &trans  &trans  &trans  &trans                            &trans                  &trans                  &trans  &trans  &trans           &trans         &trans          &trans
+ &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans                  &trans  &trans  &trans          &trans  &trans  &macro_brackets  &macro_braces          &trans
+            >;
+        };
+
+        /* ============================================================
+         * LAYER 3 — MOD (BT, bootloader, LED)
+         * ============================================================
+         * Added: &tog 4 on M key position to toggle Mac layer
+         */
+        layer_mod {
+            bindings = <
+  &none  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                  &none                                                                          &trans   &none       &none       &none   &none   &none   &none
+  &none         &none         &none         &none         &none         &none            &bootloader                                                                     &bootloader   &none       &none       &none   &none   &none   &none
+  &none         &none         &none         &none         &none         &none                  &none   &none   &none                  &bt BT_CLR       &none  &rgb_ug RGB_MEFS_CMD 5   &none       &none       &none   &none   &none   &none
+  &none         &none         &none         &none         &none         &none                                  &none                       &none                                       &none      &tog 4       &none   &none   &none   &none
+  &none         &none         &none         &none         &none                                &none   &none   &none                       &none  &bl BL_TOG         &rgb_ug RGB_TOG          &bl BL_INC  &bl BL_DEC   &none   &none   &none
+            >;
+        };
+
+        /* ============================================================
+         * LAYER 4 — macOS
+         * ============================================================
+         * Ctrl <-> Cmd swap on thumb clusters:
+         *   Left Ctrl  → Cmd (LGUI)  — OS shortcuts
+         *   Right GUI  → Ctrl (RCTRL) — terminal control
+         *   Right Ctrl → Cmd (RGUI)  — OS shortcuts
+         *
+         * Home → Cmd+Left (beginning of line on Mac)
+         * End  → Cmd+Right (end of line on Mac)
+         *
+         * Everything else passes through from Layer 0.
+         */
+        layer_mac {
+            bindings = <
+ &trans  &trans  &trans  &trans  &trans  &trans              &trans                                                                       &trans  &trans  &trans  &trans  &trans  &trans  &trans
+ &trans  &trans  &trans  &trans  &trans  &trans              &trans                                                                       &trans  &trans  &trans  &trans  &trans  &trans  &trans
+ &trans  &trans  &trans  &trans  &trans  &trans              &trans  &kp LGUI  &kp LALT                   &kp RCTRL  &kp RGUI            &trans  &trans  &trans  &trans  &trans  &trans  &trans
+ &trans  &trans  &trans  &trans  &trans  &trans                                &mac_home                  &kp PG_UP                              &trans  &trans  &trans  &trans  &trans  &trans
+ &trans  &trans  &trans  &trans  &trans                     &trans    &trans   &mac_end                   &kp PG_DN    &trans    &trans           &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
     };
 };
 
 /*
- * LAYER TOGGLE
+ * SUMMARY OF CHANGES FROM STOCK:
  *
- * To wire up the Fn+M toggle, add this to the Adv360's function layer
- * (which is activated by the Kinesis Fn key — sometimes called "Mod" layer):
+ * Layer 3 (Mod):
+ *   - Added &tog 4 on M key position (row 3, right side) to toggle Mac layer
  *
- *   &tog MAC    // on the M key position in the function layer
+ * Layer 4 (Mac) — NEW:
+ *   - Left Ctrl  → LGUI (Cmd)    — same finger does copy/paste/save
+ *   - Right GUI  → RCTRL         — terminal Ctrl (Ctrl+C, Ctrl+R, etc.)
+ *   - Right Ctrl → RGUI (Cmd)    — right-hand OS shortcuts
+ *   - Home       → Cmd+Left      — beginning of line (Mac behavior)
+ *   - End        → Cmd+Right     — end of line (Mac behavior)
+ *   - PgUp/PgDn  → unchanged     — works fine on Mac as-is
+ *   - All other keys → transparent (pass through to Layer 0)
  *
- * This makes Fn+M toggle between Layer 0 (Linux) and Layer 1 (Mac).
+ * GHOSTTY CONFIG (add on Mac only):
+ *   keybind = cmd+b=text:\x02
+ *   This translates Cmd+b → Ctrl+b for tmux prefix, since left Ctrl
+ *   now sends Cmd on the Mac layer.
  *
- * Alternatively, use the Kinesis 360's built-in profile system:
- * - Profile 1: Layer 0 active (Linux)
- * - Profile 2: Layer 1 active (Mac)
- * - Switch profiles with the hardware button on the keyboard
+ * TOGGLE: Hold Mod key (right top) + press M to toggle Mac layer on/off.
  *
- * BEFORE FLASHING:
- * 1. Fork https://github.com/KinesisCorporation/Adv360-Pro-ZMK
- * 2. Replace config/adv360.keymap with this file (adjusted for exact matrix)
- * 3. Push to trigger GitHub Actions firmware build
- * 4. Download the UF2 artifacts
- * 5. Flash each half via USB (hold boot button, plug in, drag UF2)
+ * FLASHING:
+ *   1. Sync rynsy/Adv360-Pro-ZMK fork with upstream
+ *   2. Replace config/adv360.keymap with this file
+ *   3. Push → GitHub Actions builds firmware
+ *   4. Download firmware artifact
+ *   5. Flash left: Mod+Hotkey1 → USB → drag left.uf2
+ *   6. Flash right: Mod+Hotkey3 → USB → drag right.uf2
  */
