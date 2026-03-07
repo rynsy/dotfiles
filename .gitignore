@@ -1,0 +1,9 @@
+.DS_Store
+*.swp
+*.swo
+*~
+**/config.d/secrets
+!**/secrets.encrypted
+**/.zcompdump*
+**/.zcompcache/
+**/lazy-lock.json

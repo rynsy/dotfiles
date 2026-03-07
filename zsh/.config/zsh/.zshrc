@@ -40,8 +40,8 @@ autoload -Uz compinit && compinit
 
 zinit cdreplay -q
 
-# To customize prompt, run 'p10k configure' or edit ~/.p10k.zsh
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# To customize prompt, run 'p10k configure' or edit ~/.config/zsh/.p10k.zsh
+[[ ! -f ${ZDOTDIR:-$HOME}/.p10k.zsh ]] || source ${ZDOTDIR:-$HOME}/.p10k.zsh
 
 # Keybindings
 bindkey '\e[A' history-search-backward
@@ -77,9 +77,3 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
-
-
-# Created by `pipx` on 2024-09-24 00:45:46
-export PATH="$PATH:/home/ryan/.local/bin"
-
-
