@@ -17,6 +17,10 @@ cursor-style = "block"
 cursor-style-blink = false
 shell-integration-features = no-cursor
 
+# Platform-specific config (silently ignored if missing)
+config-file = ?"~/.config/ghostty/macos.conf"
+config-file = ?"~/.config/ghostty/linux.conf"
+
 # Keyboard bindings
 keybind = f11=toggle_fullscreen
 keybind = shift+insert=paste_from_clipboard
