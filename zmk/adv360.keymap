@@ -1,0 +1,133 @@
+/*
+ * Kinesis Advantage 360 — ZMK Keymap
+ *
+ * Layer 0: Default (Linux/Windows) — standard QWERTY, no modifier changes
+ * Layer 1: macOS — Ctrl↔Cmd swap (Ctrl position sends Cmd, Super position sends Ctrl)
+ *
+ * Toggle: Fn+M switches between Linux and Mac mode
+ *
+ * NOTE: This is a SKETCH — adapt to match the actual Adv360-Pro-ZMK repo
+ * structure (https://github.com/KinesisCorporation/Adv360-Pro-ZMK).
+ * The real keymap uses the Adv360 shield and its specific key positions.
+ * Key position numbers below are approximate — verify against the repo's
+ * matrix transform before flashing.
+ */
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+
+#define DEFAULT 0
+#define MAC     1
+
+/ {
+    keymap {
+        compatible = "zmk,keymap";
+
+        /*
+         * ╔═══════════════════════════════════════════════════════════╗
+         * ║  LAYER 0 — DEFAULT (Linux / Windows)                     ║
+         * ╠═══════════════════════════════════════════════════════════╣
+         * ║  All modifiers are standard.                             ║
+         * ║  Ctrl = Ctrl, Super = Super, Alt = Alt                   ║
+         * ╚═══════════════════════════════════════════════════════════╝
+         *
+         * ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┐   ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┐
+         * │ ESC │  1  │  2  │  3  │  4  │  5  │     │   │     │  6  │  7  │  8  │  9  │  0  │     │
+         * ├─────┼─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┼─────┤
+         * │ TAB │  Q  │  W  │  E  │  R  │  T  │     │   │     │  Y  │  U  │  I  │  O  │  P  │  \  │
+         * ├─────┼─────┼─────┼─────┼─────┼─────┤     │   │     ├─────┼─────┼─────┼─────┼─────┼─────┤
+         * │CAPS │  A  │  S  │  D  │  F  │  G  ├─────┤   ├─────┤  H  │  J  │  K  │  L  │  ;  │  '  │
+         * ├─────┼─────┼─────┼─────┼─────┼─────┤     │   │     ├─────┼─────┼─────┼─────┼─────┼─────┤
+         * │SHFT │  Z  │  X  │  C  │  V  │  B  │     │   │     │  N  │  M  │  ,  │  .  │  /  │SHFT │
+         * ├─────┼─────┼─────┼─────┼─────┼─────┘     │   │     └─────┼─────┼─────┼─────┼─────┼─────┤
+         * │  `  │ INS │ LFT │ RGT │                  │   │                 │  UP │  DN │  [  │  ]  │
+         * └─────┴─────┴─────┴─────┘                  │   │                 └─────┴─────┴─────┴─────┘
+         *                          ┌─────┬─────┐     │   │     ┌─────┬─────┐
+         *                          │CTRL │ ALT │     │   │     │ ALT │CTRL │
+         *                          ├─────┼─────┤     │   │     ├─────┼─────┤
+         *                          │SUPER│SPACE│     │   │     │ENTER│SUPER│
+         *                          ├─────┼─────┤     │   │     ├─────┼─────┤
+         *                          │SHIFT│ DEL │     │   │     │BKSP │SHIFT│
+         *                          └─────┴─────┘     │   │     └─────┴─────┘
+         */
+        default_layer {
+            bindings = <
+                // Row 0 (number row)
+                &kp ESC   &kp N1   &kp N2    &kp N3    &kp N4   &kp N5   &none         &none    &kp N6   &kp N7   &kp N8    &kp N9    &kp N0    &none
+                // Row 1
+                &kp TAB   &kp Q    &kp W     &kp E     &kp R    &kp T    &none         &none    &kp Y    &kp U    &kp I     &kp O     &kp P     &kp BSLH
+                // Row 2
+                &kp CAPS  &kp A    &kp S     &kp D     &kp F    &kp G                           &kp H    &kp J    &kp K     &kp L     &kp SEMI  &kp SQT
+                // Row 3
+                &kp LSHFT &kp Z    &kp X     &kp C     &kp V    &kp B    &none         &none    &kp N    &kp M    &kp COMMA &kp DOT   &kp FSLH  &kp RSHFT
+                // Row 4 (bottom row)
+                &kp GRAVE &kp INS  &kp LEFT  &kp RIGHT                                                   &kp UP   &kp DOWN  &kp LBKT  &kp RBKT
+                // Thumb cluster (left)                                   // Thumb cluster (right)
+                                              &kp LCTRL &kp LALT                       &kp RALT &kp RCTRL
+                                              &kp LGUI  &kp SPACE                      &kp RET  &kp RGUI
+                                              &kp LSHFT &kp DEL                        &kp BSPC &kp RSHFT
+            >;
+        };
+
+        /*
+         * ╔═══════════════════════════════════════════════════════════╗
+         * ║  LAYER 1 — macOS                                         ║
+         * ╠═══════════════════════════════════════════════════════════╣
+         * ║  Ctrl ↔ Cmd swap on thumb keys.                          ║
+         * ║  Physical Ctrl position → Cmd (for OS shortcuts)         ║
+         * ║  Physical Super position → Ctrl (for terminal shortcuts) ║
+         * ║  Everything else is transparent (same as Layer 0).       ║
+         * ╚═══════════════════════════════════════════════════════════╝
+         *
+         * Thumb cluster changes only:
+         *
+         *                          ┌─────┬─────┐         ┌─────┬─────┐
+         *                          │ CMD │ ALT │         │ ALT │ CMD │
+         *                          ├─────┼─────┤         ├─────┼─────┤
+         *                          │CTRL │SPACE│         │ENTER│CTRL │
+         *                          ├─────┼─────┤         ├─────┼─────┤
+         *                          │SHIFT│ DEL │         │BKSP │SHIFT│
+         *                          └─────┴─────┘         └─────┴─────┘
+         */
+        mac_layer {
+            bindings = <
+                // All alpha/number keys pass through
+                &trans    &trans   &trans    &trans    &trans   &trans   &trans        &trans   &trans   &trans   &trans    &trans    &trans    &trans
+                &trans    &trans   &trans    &trans    &trans   &trans   &trans        &trans   &trans   &trans   &trans    &trans    &trans    &trans
+                &trans    &trans   &trans    &trans    &trans   &trans                          &trans   &trans   &trans    &trans    &trans    &trans
+                &trans    &trans   &trans    &trans    &trans   &trans   &trans        &trans   &trans   &trans   &trans    &trans    &trans    &trans
+                &trans    &trans   &trans    &trans                                                      &trans   &trans    &trans    &trans
+                // Thumb cluster — THE ONLY CHANGES
+                //        Ctrl pos → Cmd           Alt stays            Alt stays          Ctrl pos → Cmd
+                                              &kp LGUI  &kp LALT                       &kp RALT &kp RGUI
+                //        Super pos → Ctrl                                                       Super pos → Ctrl
+                                              &kp LCTRL &kp SPACE                      &kp RET  &kp RCTRL
+                                              &kp LSHFT &kp DEL                        &kp BSPC &kp RSHFT
+            >;
+        };
+    };
+};
+
+/*
+ * LAYER TOGGLE
+ *
+ * To wire up the Fn+M toggle, add this to the Adv360's function layer
+ * (which is activated by the Kinesis Fn key — sometimes called "Mod" layer):
+ *
+ *   &tog MAC    // on the M key position in the function layer
+ *
+ * This makes Fn+M toggle between Layer 0 (Linux) and Layer 1 (Mac).
+ *
+ * Alternatively, use the Kinesis 360's built-in profile system:
+ * - Profile 1: Layer 0 active (Linux)
+ * - Profile 2: Layer 1 active (Mac)
+ * - Switch profiles with the hardware button on the keyboard
+ *
+ * BEFORE FLASHING:
+ * 1. Fork https://github.com/KinesisCorporation/Adv360-Pro-ZMK
+ * 2. Replace config/adv360.keymap with this file (adjusted for exact matrix)
+ * 3. Push to trigger GitHub Actions firmware build
+ * 4. Download the UF2 artifacts
+ * 5. Flash each half via USB (hold boot button, plug in, drag UF2)
+ */
