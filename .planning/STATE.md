@@ -3,101 +3,94 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 02-zmk-firmware/02-02-PLAN.md
-last_updated: "2026-03-08T07:42:34.795Z"
-last_activity: 2026-03-08 — Roadmap created
+stopped_at: Phase 3 context gathered
+last_updated: "2026-03-08T21:29:58.880Z"
+last_activity: 2026-03-08 — Phase 3 scoped with shell/ shared config and install script strategy
 progress:
   total_phases: 4
-  completed_phases: 3
-  total_plans: 7
-  completed_plans: 7
-  percent: 25
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 2
+  percent: 75
 ---
 
 # Project State
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-03-08)
+See: .planning/REQUIREMENTS.md and .planning/ROADMAP.md
 
-**Core value:** A consistent, reliable development environment that works correctly across all devices — especially the Linux server accessed via Termux on Android.
-**Current focus:** Phase 1 - Environment Fixes
+**Core value:** A consistent, reliable development environment that works correctly across all devices — Linux and macOS as first-class citizens, Windows best-effort.
+**Current focus:** Phase 3 - Cross-Platform Provisioning (long-term, not yet started)
 
 ## Current Position
 
-Phase: 1 of 2 (Environment Fixes)
+Phase: 3 of 3 (Cross-Platform Provisioning)
 Plan: 0 of TBD in current phase
-Status: Ready to plan
-Last activity: 2026-03-08 — Roadmap created
+Status: Architecture decided, ready to plan
+Last activity: 2026-03-08 — Phase 3 scoped with shell/ shared config and install script strategy
 
-Progress: [███░░░░░░░] 25%
+Progress: [███████░░░] 75%
+
+## Completed Phases
+
+| Phase | Status | Completed |
+|-------|--------|-----------|
+| 1. Environment Fixes | Complete (4/4 plans) | 2026-03-08 |
+| 1.1. Bash Config | Complete (1/1 plans) | 2026-03-08 |
+| 2. ZMK Firmware | Complete (2/2 plans) | 2026-03-08 |
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 0
-- Average duration: -
-- Total execution time: -
+- Total plans completed: 7
+- Total execution time: ~15 min across all plans
 
 **By Phase:**
 
-| Phase | Plans | Total | Avg/Plan |
-|-------|-------|-------|----------|
-| - | - | - | - |
-
-**Recent Trend:**
-- Last 5 plans: -
-- Trend: -
-
-*Updated after each plan completion*
-| Phase 01-environment-fixes P01 | 5 | 3 tasks | 4 files |
-| Phase 01-environment-fixes P02 | 1min | 2 tasks | 3 files |
-| Phase 01-environment-fixes P03 | 3 | 1 tasks | 1 files |
-| Phase 01-environment-fixes P04 | 1 | 1 tasks | 0 files |
-| Phase 01.1-bash-config-and-shell-parity P01 | 1min | 2 tasks | 3 files |
-| Phase 02-zmk-firmware PP01 | 2min | 2 tasks | 1 files |
-| Phase 02-zmk-firmware P02 | 5min | 1 tasks | 1 files |
+| Phase | Plans | Duration | Notes |
+|-------|-------|----------|-------|
+| 01-environment-fixes P01 | 3 tasks | 5 min | zsh cleanup |
+| 01-environment-fixes P02 | 2 tasks | 1 min | nvim/tmux fixes |
+| 01-environment-fixes P03 | 1 task | 3 min | ghostty stow |
+| 01-environment-fixes P04 | 1 task | 1 min | OSC 52 verification |
+| 01.1-bash-config P01 | 2 tasks | 1 min | bash sources shared config |
+| 02-zmk-firmware P01 | 2 tasks | 2 min | keymap edits |
+| 02-zmk-firmware P02 | 1 task | 5 min | push + submodule update |
 
 ## Accumulated Context
 
 ### Roadmap Evolution
 
-- Phase 01.1 inserted after Phase 1: Bash Config and Shell Parity — user defaults to bash on primary machine (Omarchy scripts are bash); need bash config that sources shared aliases so both shells feel the same
+- Phase 01.1 inserted after Phase 1: Bash Config and Shell Parity
+- Phase 2 completed with media keys relocated from left-hand QWE/ASD (upstream) to right-hand HJKL (user preference), merge conflict resolved
+- Phase 3 architecture decided: shell/ stow package for shared config, extend install.sh (not replace), standalone install.ps1
 
-### Decisions
+### Key Architecture Decisions (Phase 3)
 
-Decisions are logged in PROJECT.md Key Decisions table.
-Recent decisions affecting current work:
+- **Shared config location:** `shell/.config/shell/config.d/` stows to `~/.config/shell/config.d/` — neutral path, no shell owns another's config
+- **Platform path files:** `path.linux` and `path.darwin` sourced conditionally via `uname`; base `path` has only universal entries
+- **Install scripts:** One `install.sh` for Mac+Linux (pacman vs brew, --minimal flag), one `install.ps1` for Windows (standalone, no shared code)
+- **Windows is best-effort:** Mac and Linux are first-class. install.ps1 is simple and may drift from install.sh. That's OK.
+- **No over-engineering:** No Makefile, no YAML config, no task runner. Two scripts.
 
-- Ghostty config ownership must be verified before stowing (Omarchy may own it)
-- OSC 52 clipboard path is already configured; Phase 1 is verification, not setup
-- ZMK changes isolated to Phase 2 due to push → build → flash cycle
-- [Phase 01-environment-fixes]: Remove DOTNET_ROOT from env file since path file always wins at runtime (dead code removal)
-- [Phase 01-environment-fixes]: GEM_HOME must not include /bin suffix; gem binaries accessed via PATH entry using $GEM_HOME/bin
-- [Phase 01-environment-fixes]: killemall function retained; only the alias shadowing /usr/bin/killall was removed
-- [Phase 01-environment-fixes]: plugins.lua rewritten to just four plugins: better-escape, nvim-autopairs, gruvbox, avante — all boilerplate removed
-- [Phase 01-environment-fixes]: tmux-yank handles y in copy-mode-vi exclusively; manual if-shell copy-pipe block removed
-- [Phase 01-environment-fixes]: Sessionizer uses display-popup with plain fzf to avoid nested popup issue
-- [Phase 01-environment-fixes]: Used stow --no-folding to match existing package convention; DOTS-02 already complete (no action needed)
-- [Phase 01-environment-fixes]: OSC 52 clipboard config confirmed present; live Termux SSH end-to-end verification deferred to next Android session
-- [Phase 01.1-bash-config-and-shell-parity]: Bash sources zsh config.d files directly — single source of truth, no duplication
-- [Phase 01.1-bash-config-and-shell-parity]: No PS1, fzf, or zoxide in bash config — out of scope per user decisions
-- [Phase 02-zmk-firmware]: layer_android has 76 bindings consistent with all other layers (plan's stated 79 was incorrect metadata)
-- [Phase 02-zmk-firmware]: Media keys use &kp with consumer codes (C_PREV etc.) — not &cp syntax which would be a compile error
-- [Phase 02-zmk-firmware]: Detached HEAD commits from plan 02-01 required cherry-pick onto V3.0 before push — git checkout V3.0 alone left them behind
-- [Phase 02-zmk-firmware]: GitHub Actions build verification deferred to user (YOLO mode) — cannot be automated
+### Older Decisions
+
+- Ghostty config ownership verified — stowed from dotfiles
+- OSC 52 clipboard configured; live Termux verification deferred
+- ZMK submodule workflow: edit in zmk/ → commit → push → update parent pointer
+- Bash sources zsh config.d files directly (to be refactored to shell/ in Phase 3)
 
 ### Pending Todos
 
-None yet.
+None — Phase 3 plans not yet written.
 
 ### Blockers/Concerns
 
-- DOTS-01 (Ghostty stow): Outcome unknown until inspected — could be no-op if Omarchy owns it
-- TMUX-02 (OSC 52): Requires live Termux SSH session to verify; can't be tested locally
+None active. Phase 3 is long-term with no fixed timeline.
 
 ## Session Continuity
 
-Last session: 2026-03-08T07:42:34.793Z
-Stopped at: Completed 02-zmk-firmware/02-02-PLAN.md
-Resume file: None
+Last session: 2026-03-08T21:29:58.878Z
+Stopped at: Phase 3 context gathered
+Resume file: .planning/phases/03-cross-platform-provisioning/03-CONTEXT.md
