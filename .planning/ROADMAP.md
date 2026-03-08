@@ -13,8 +13,8 @@ Three phases: fix environment inconsistencies (Phase 1), extend ZMK keyboard fir
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Environment Fixes** - Fix all shell/editor/tmux bugs and clean up zsh config (completed 2026-03-08)
-- [ ] **Phase 2: ZMK Firmware** - Add media keys and Android layer to keyboard firmware
-- [ ] **Phase 3: Cross-Platform Provisioning** - PowerShell config, alacritty package, and full/minimal install scripts for Arch/Mac/Windows (long-term)
+- [x] **Phase 2: ZMK Firmware** - Add media keys and Android layer to keyboard firmware (completed 2026-03-08)
+- [ ] **Phase 3: Cross-Platform Provisioning** - Shared shell config, PowerShell profile, and full/minimal install scripts for Arch/Mac/Windows (long-term)
 
 ## Phase Details
 
@@ -46,32 +46,42 @@ Plans:
 Plans:
 - [ ] 01.1-01-PLAN.md — Create bash/ stow package (.bashrc + .bash_profile) sourcing shared config.d files; update install.sh
 
-### Phase 2: ZMK Firmware
+### Phase 2: ZMK Firmware (Complete)
 **Goal**: The keyboard firmware has media/volume keys on the Fn layer and a working Android BT layer, built and flashed successfully
 **Depends on**: Phase 1
 **Requirements**: ZMK-01, ZMK-02, ZMK-03, ZMK-04, ZMK-05
-**Success Criteria** (what must be TRUE):
-  1. Pressing Fn layer keys controls media playback (prev/play-pause/next) and volume (up/down/mute) on connected devices
-  2. Mod+A toggles the Android layer on and off
-  3. The Android layer connects to BT slot 3 (the phone) when toggled on
-  4. Firmware builds successfully via GitHub Actions with no errors
-**Plans**: 2 plans
+**Completed**: 2026-03-08
+**Notes**: Media keys were initially placed on left hand (QWE/ASD) by upstream, then relocated to right-hand HJKL cluster (Fn+HJKL=prev/vol/next, Fn+;=play, Fn+M=mute). Merge conflict resolved in favor of HJKL layout.
 
 Plans:
-- [ ] 02-01-PLAN.md — Edit adv360.keymap: add media/volume keys to Fn layer, append Android layer (Layer 5), add Mod+A toggle
-- [ ] 02-02-PLAN.md — Commit and push via submodule git workflow; verify GitHub Actions firmware build succeeds
+- [x] 02-01-PLAN.md — Edit adv360.keymap: add media/volume keys to Fn layer, append Android layer (Layer 5), add Mod+A toggle
+- [x] 02-02-PLAN.md — Commit and push via submodule git workflow; verify GitHub Actions firmware build succeeds
 
 ### Phase 3: Cross-Platform Provisioning
 **Goal**: The repo can provision a full or minimal dev environment on Arch Linux, macOS, and Windows from a single source of truth
 **Depends on**: Phase 2
-**Requirements**: PROV-01, PROV-02, PROV-03, PROV-04, PSH-01, PSH-02, PSH-03, APP-01, APP-02, XPLAT-01, XPLAT-02
+**Requirements**: SHELL-01, SHELL-02, PROV-01, PROV-02, PROV-03, PROV-04, PSH-01, PSH-02, PSH-03, APP-01, APP-02, XPLAT-01, XPLAT-02
 **Success Criteria** (what must be TRUE):
-  1. Running install.sh with --minimal on a fresh Arch or Mac box installs zsh, tmux, nvim and stows their configs
-  2. Running install.ps1 on Windows creates correct symlinks and installs packages via winget
-  3. PowerShell profile provides equivalent aliases to zsh (git shortcuts, directory jumps, tmux attach)
-  4. Alacritty config is stowed and platform-specific overrides work on Linux and Mac
-  5. README clearly documents how to provision each platform
-**Plans**: TBD (long-term — plan when ready to execute)
+  1. Shared shell config lives in `shell/.config/shell/config.d/` — zsh, bash, and pwsh all source from `~/.config/shell/config.d/`
+  2. Platform-specific paths are gated by `uname` (path.linux, path.darwin)
+  3. Running `install.sh --minimal` on a fresh Arch or Mac box installs zsh, tmux, nvim and stows their configs
+  4. Running `install.ps1` on Windows creates correct symlinks and installs packages via winget (best-effort)
+  5. PowerShell profile provides equivalent aliases to zsh (git shortcuts, directory jumps, tmux attach)
+  6. README clearly documents how to provision each platform
+
+**Architecture decisions:**
+- `shell/` stow package owns shared config (alias, env, path, path.linux, path.darwin) — no shell "hosts" another shell's config
+- `install.sh` handles both Arch (pacman) and macOS (brew) with a `--minimal` flag; PACKAGES split into CORE and EXTRA
+- `install.ps1` is a standalone PowerShell script for Windows — no shared code with install.sh, intentionally simple
+- Mac and Linux are first-class citizens; Windows is best-effort
+
+**Plans**: 4 plans
+
+Plans:
+- [ ] 03-01-PLAN.md — Extract shared shell config into shell/ stow package; split platform files; update zsh/bash sourcing
+- [ ] 03-02-PLAN.md — Extend install.sh with platform detection (pacman/brew), CORE/EXTRA split, --minimal flag
+- [ ] 03-03-PLAN.md — Create powershell/ profile and alacritty/ config stow packages
+- [ ] 03-04-PLAN.md — Create install.ps1 for Windows; update README.md and CLAUDE.md
 
 ## Progress
 
@@ -82,5 +92,5 @@ Phases execute in numeric order: 1 → 2 → 3
 |-------|----------------|--------|-----------|
 | 1. Environment Fixes | 3/4 | Complete    | 2026-03-08 |
 | 01.1. Bash Config | 1/1 | Complete    | 2026-03-08 |
-| 2. ZMK Firmware | 1/2 | In Progress|  |
-| 3. Cross-Platform Provisioning | 0/TBD | Not started (long-term) | - |
+| 2. ZMK Firmware | 2/2 | Complete | 2026-03-08 |
+| 3. Cross-Platform Provisioning | 0/4 | Planning complete | - |
