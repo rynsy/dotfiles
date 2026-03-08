@@ -2,7 +2,7 @@
 set -euo pipefail
 
 DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
-PACKAGES=(nvim zsh claude git ssh tmux ghostty)
+PACKAGES=(nvim zsh claude git ssh tmux ghostty bash)
 BACKUP_DIR="/tmp/dotfiles-backup/$(date +%Y%m%d-%H%M%S)"
 
 echo "=== Dotfiles Bootstrap ==="
@@ -51,6 +51,9 @@ done
 for f in alias env path secrets.encrypted .gitignore; do
   check_conflict "$HOME/.config/zsh/config.d/$f"
 done
+
+check_conflict "$HOME/.bashrc"
+check_conflict "$HOME/.bash_profile"
 
 check_conflict "$HOME/.config/tmux/tmux.conf"
 check_conflict "$HOME/.config/tmux/scripts/sessionizer.sh"
