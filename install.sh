@@ -133,8 +133,6 @@ check_conflict "$HOME/.config/powershell/profile.ps1"
 
 # alacritty/ package conflicts
 check_conflict "$HOME/.config/alacritty/alacritty.toml"
-check_conflict "$HOME/.config/alacritty/linux.toml"
-check_conflict "$HOME/.config/alacritty/macos.toml"
 
 if [ ${#conflicts[@]} -gt 0 ]; then
   echo "Backing up ${#conflicts[@]} conflicting files to $BACKUP_DIR"
@@ -156,6 +154,22 @@ for pkg in "${PACKAGES[@]}"; do
   echo "  stow --no-folding $pkg"
   stow --no-folding "$pkg"
 done
+
+# Step 4.5: Place platform-specific Alacritty config
+if [ -d "$DOTFILES_DIR/alacritty/platform" ]; then
+  echo "--- Placing platform Alacritty config ---"
+  mkdir -p "$HOME/.config/alacritty"
+  case "$OS" in
+    Linux)
+      ln -sf "$DOTFILES_DIR/alacritty/platform/linux.toml" "$HOME/.config/alacritty/linux.toml"
+      echo "  linked: linux.toml"
+      ;;
+    Darwin)
+      ln -sf "$DOTFILES_DIR/alacritty/platform/macos.toml" "$HOME/.config/alacritty/macos.toml"
+      echo "  linked: macos.toml"
+      ;;
+  esac
+fi
 
 # Step 5: Prompt to change shell
 if [ "$SHELL" != "$(which zsh)" ]; then
