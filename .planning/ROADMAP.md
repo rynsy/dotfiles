@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Environment Fixes** - Fix all shell/editor/tmux bugs and clean up zsh config (completed 2026-03-08)
 - [x] **Phase 2: ZMK Firmware** - Add media keys and Android layer to keyboard firmware (completed 2026-03-08)
 - [x] **Phase 3: Cross-Platform Provisioning** - Shared shell config, PowerShell profile, and full/minimal install scripts for Arch/Mac/Windows (completed 2026-03-08)
-- [ ] **Phase 4: Retroactive Verification** - Produce VERIFICATION.md for Phases 01 and 02 by inspecting existing codebase
+- [x] **Phase 4: Retroactive Verification** - Produce VERIFICATION.md for Phases 01 and 02 by inspecting existing codebase (completed 2026-03-08)
 - [ ] **Phase 5: Alacritty Platform Config Fix** - Fix font.size cross-platform override bug and clean up PATH duplication
 
 ## Phase Details
@@ -96,8 +96,8 @@ Plans:
   3. All requirement statuses are backed by codebase evidence (file paths, line numbers)
 
 Plans:
-- [ ] 04-01-PLAN.md — Verify Phase 01 (Environment Fixes) requirements against codebase; produce 01-VERIFICATION.md
-- [ ] 04-02-PLAN.md — Verify Phase 02 (ZMK Firmware) requirements against codebase; produce 02-VERIFICATION.md
+- [x] 04-01-PLAN.md — Verify Phase 01 (Environment Fixes) requirements against codebase; produce 01-VERIFICATION.md
+- [x] 04-02-PLAN.md — Verify Phase 02 (ZMK Firmware) requirements against codebase; produce 02-VERIFICATION.md
 
 ### Phase 5: Alacritty Platform Config Fix
 **Goal**: Alacritty displays correct font size on all platforms and PATH has no duplicates
