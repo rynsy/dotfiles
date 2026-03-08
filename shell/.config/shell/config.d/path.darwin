@@ -1,0 +1,2 @@
+# macOS-specific paths (Homebrew)
+eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null)" || true

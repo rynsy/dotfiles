@@ -1,0 +1,5 @@
+# Linux-specific aliases
+alias ls='ls --color'
+alias wifi="nmcli dev wifi connect"
+alias navicat='QT_QPA_PLATFORM="wayland;xcb" /opt/navicat16-premium-en/AppRun'
+alias zig-wasm="zig build -Dtarget=wasm32-emscripten --sysroot '\$EMSDK/upstream/emscripten'"

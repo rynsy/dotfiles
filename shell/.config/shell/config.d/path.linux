@@ -1,0 +1,5 @@
+# Linux-specific paths
+export PATH="$PATH:/lib64/emscripten"
+
+# Factorio
+export PATH="/usr/local/games/factorio/bin/x64:$PATH"
