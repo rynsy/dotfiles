@@ -12,7 +12,7 @@ Three phases: fix environment inconsistencies (Phase 1), extend ZMK keyboard fir
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Environment Fixes** - Fix all shell/editor/tmux bugs and clean up zsh config
+- [x] **Phase 1: Environment Fixes** - Fix all shell/editor/tmux bugs and clean up zsh config (completed 2026-03-08)
 - [ ] **Phase 2: ZMK Firmware** - Add media keys and Android layer to keyboard firmware
 - [ ] **Phase 3: Cross-Platform Provisioning** - PowerShell config, alacritty package, and full/minimal install scripts for Arch/Mac/Windows (long-term)
 
@@ -38,13 +38,13 @@ Plans:
 
 ### Phase 01.1: Bash Config and Shell Parity (INSERTED)
 
-**Goal:** [Urgent work - to be planned]
-**Requirements**: TBD
+**Goal:** Bash sessions have the same aliases and env vars as zsh — t, n, gcm, EDITOR, and full PATH all work out of the box
+**Requirements**: BASH-01, BASH-02, BASH-03, BASH-04, BASH-05
 **Depends on:** Phase 1
-**Plans:** 4/4 plans complete
+**Plans:** 1 plan
 
 Plans:
-- [ ] TBD (run /gsd:plan-phase 01.1 to break down)
+- [ ] 01.1-01-PLAN.md — Create bash/ stow package (.bashrc + .bash_profile) sourcing shared config.d files; update install.sh
 
 ### Phase 2: ZMK Firmware
 **Goal**: The keyboard firmware has media/volume keys on the Fn layer and a working Android BT layer, built and flashed successfully
@@ -76,6 +76,7 @@ Phases execute in numeric order: 1 → 2 → 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Environment Fixes | 3/4 | In Progress|  |
+| 1. Environment Fixes | 3/4 | Complete    | 2026-03-08 |
+| 01.1. Bash Config | 0/1 | Not started | - |
 | 2. ZMK Firmware | 0/TBD | Not started | - |
 | 3. Cross-Platform Provisioning | 0/TBD | Not started (long-term) | - |
