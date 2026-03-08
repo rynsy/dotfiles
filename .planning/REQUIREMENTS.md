@@ -79,18 +79,18 @@
 
 ### PowerShell
 
-- **PSH-01**: `powershell/` stow package with cross-platform `profile.ps1`
-- **PSH-02**: PowerShell profile has equivalent aliases to zsh config (git shortcuts, directory jumps, docker-compose, tmux attach)
-- **PSH-03**: PowerShell profile works on Windows, Mac, and Linux (pwsh)
+- [x] **PSH-01**: `powershell/` stow package with cross-platform `profile.ps1`
+- [x] **PSH-02**: PowerShell profile has equivalent aliases to zsh config (git shortcuts, directory jumps, docker-compose, tmux attach)
+- [x] **PSH-03**: PowerShell profile works on Windows, Mac, and Linux (pwsh)
 
 ### Additional App Configs
 
-- **APP-01**: `alacritty/` stow package with platform-specific config includes (mirrors ghostty pattern)
-- **APP-02**: Alacritty config is cross-platform (Linux/Mac/Windows paths handled)
+- [x] **APP-01**: `alacritty/` stow package with platform-specific config includes (mirrors ghostty pattern)
+- [x] **APP-02**: Alacritty config is cross-platform (Linux/Mac/Windows paths handled)
 
 ### Cross-Platform Structure
 
-- **XPLAT-01**: Each app config follows the platform-include pattern (base config + optional platform overrides)
+- [x] **XPLAT-01**: Each app config follows the platform-include pattern (base config + optional platform overrides)
 - **XPLAT-02**: README documents what each provisioning script installs and how to use it
 
 ## Out of Scope
@@ -131,12 +131,18 @@
 | PROV-01 | Phase 3 | Complete |
 | PROV-02 | Phase 3 | Complete |
 | PROV-04 | Phase 3 | Complete |
+| PSH-01 | Phase 3 | Complete |
+| PSH-02 | Phase 3 | Complete |
+| PSH-03 | Phase 3 | Complete |
+| APP-01 | Phase 3 | Complete |
+| APP-02 | Phase 3 | Complete |
+| XPLAT-01 | Phase 3 | Complete |
 
 **Coverage:**
-- v1 requirements: 18 total — all complete (phases 1–2) ✓
-- v1.5 requirements: 5 total — all complete (phase 1.1) ✓
+- v1 requirements: 18 total — all complete (phases 1-2)
+- v1.5 requirements: 5 total — all complete (phase 1.1)
 - v2 requirements: 3 total — deferred
-- v3 requirements: 12 total — deferred (Phase 3, long-term)
+- v3 requirements: 12 total — 11 complete, 1 remaining (XPLAT-02: README)
 
 ---
 *Requirements defined: 2026-03-08*
