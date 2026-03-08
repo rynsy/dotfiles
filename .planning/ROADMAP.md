@@ -108,9 +108,10 @@ Plans:
   1. Alacritty on Linux uses base font size (not macOS 13pt override)
   2. Platform-specific Alacritty settings only apply on their target OS
   3. PATH entries (.local/bin, .cargo/bin) are defined once, not duplicated between zshenv and shell/path
+**Plans**: 1 plan
 
 Plans:
-- [ ] 05-01-PLAN.md — Restructure Alacritty platform configs; remove PATH duplication from zsh/.zshenv
+- [ ] 05-01-PLAN.md — Restructure Alacritty platform configs and update install.sh; remove PATH duplication from zsh/.zshenv
 
 ## Progress
 
