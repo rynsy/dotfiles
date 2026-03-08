@@ -74,7 +74,7 @@
 
 - [x] **PROV-01**: `install.sh` supports Arch Linux full mode (existing) and minimal mode (zsh, tmux, nvim only — no GUI tools)
 - [x] **PROV-02**: `install.sh` supports macOS via Homebrew (full and minimal modes)
-- **PROV-03**: `install.ps1` standalone Windows setup script — creates symlinks manually (no Stow), installs packages via winget (best-effort, independent from install.sh)
+- [x] **PROV-03**: `install.ps1` standalone Windows setup script — creates symlinks manually (no Stow), installs packages via winget (best-effort, independent from install.sh)
 - [x] **PROV-04**: install.sh PACKAGES split into CORE (shell, nvim, tmux, git) and EXTRA (ghostty, aerospace, etc.); `--minimal` installs only CORE
 
 ### PowerShell
@@ -91,7 +91,7 @@
 ### Cross-Platform Structure
 
 - [x] **XPLAT-01**: Each app config follows the platform-include pattern (base config + optional platform overrides)
-- **XPLAT-02**: README documents what each provisioning script installs and how to use it
+- [x] **XPLAT-02**: README documents what each provisioning script installs and how to use it
 
 ## Out of Scope
 
@@ -137,12 +137,14 @@
 | APP-01 | Phase 3 | Complete |
 | APP-02 | Phase 3 | Complete |
 | XPLAT-01 | Phase 3 | Complete |
+| PROV-03 | Phase 3 | Complete |
+| XPLAT-02 | Phase 3 | Complete |
 
 **Coverage:**
 - v1 requirements: 18 total — all complete (phases 1-2)
 - v1.5 requirements: 5 total — all complete (phase 1.1)
 - v2 requirements: 3 total — deferred
-- v3 requirements: 12 total — 11 complete, 1 remaining (XPLAT-02: README)
+- v3 requirements: 12 total — all complete
 
 ---
 *Requirements defined: 2026-03-08*

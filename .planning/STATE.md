@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: executing
-stopped_at: Completed 03-03-PLAN.md
-last_updated: "2026-03-08T21:56:00Z"
-last_activity: 2026-03-08 — PowerShell profile and Alacritty config stow packages
+status: complete
+stopped_at: Completed 03-04-PLAN.md (all phases complete)
+last_updated: "2026-03-08T22:03:00Z"
+last_activity: 2026-03-08 — Windows install.ps1, README, and CLAUDE.md updates
 progress:
   total_phases: 4
-  completed_phases: 0
+  completed_phases: 4
   total_plans: 4
-  completed_plans: 3
-  percent: 75
+  completed_plans: 4
+  percent: 100
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/REQUIREMENTS.md and .planning/ROADMAP.md
 
 **Core value:** A consistent, reliable development environment that works correctly across all devices — Linux and macOS as first-class citizens, Windows best-effort.
-**Current focus:** Phase 3 - Cross-Platform Provisioning (executing)
+**Current focus:** All phases complete
 
 ## Current Position
 
 Phase: 3 of 3 (Cross-Platform Provisioning)
-Plan: 4 of 4 in current phase
-Status: Plan 03-03 complete, continuing phase
-Last activity: 2026-03-08 — PowerShell profile and Alacritty config stow packages
+Plan: 4 of 4 in current phase (complete)
+Status: All plans and phases complete
+Last activity: 2026-03-08 — Windows install.ps1, README, and CLAUDE.md updates
 
-Progress: [████████░░] 75%
+Progress: [██████████] 100%
 
 ## Completed Phases
 
@@ -39,12 +39,13 @@ Progress: [████████░░] 75%
 | 1. Environment Fixes | Complete (4/4 plans) | 2026-03-08 |
 | 1.1. Bash Config | Complete (1/1 plans) | 2026-03-08 |
 | 2. ZMK Firmware | Complete (2/2 plans) | 2026-03-08 |
+| 3. Cross-Platform Provisioning | Complete (4/4 plans) | 2026-03-08 |
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 10
-- Total execution time: ~20 min across all plans
+- Total plans completed: 11
+- Total execution time: ~23 min across all plans
 
 **By Phase:**
 
@@ -60,6 +61,7 @@ Progress: [████████░░] 75%
 | 03-cross-platform P01 | 2 tasks | 2 min | shared shell config split |
 | 03-cross-platform P02 | 1 task | 1 min | cross-platform install.sh |
 | 03-cross-platform P03 | 2 tasks | 2 min | powershell + alacritty packages |
+| 03-cross-platform P04 | 2 tasks | 3 min | install.ps1 + README + CLAUDE.md |
 
 ## Accumulated Context
 
@@ -80,6 +82,9 @@ Progress: [████████░░] 75%
 - **PowerShell profile standalone:** mirrors zsh aliases independently, drift acceptable
 - **Alacritty platform includes:** follows Ghostty pattern — base config imports platform TOMLs, silently skipped if missing
 
+- **install.ps1 standalone:** No shared code with install.sh; winget for packages, manual symlinks with backup; Developer Mode check before proceeding
+- **README cross-platform docs:** Organized by platform quick-start, then shared package table and post-install steps
+
 ### Older Decisions
 
 - Ghostty config ownership verified — stowed from dotfiles
@@ -94,10 +99,10 @@ None.
 
 ### Blockers/Concerns
 
-None active. Phase 3 is long-term with no fixed timeline.
+None. All phases complete.
 
 ## Session Continuity
 
-Last session: 2026-03-08T21:56:00Z
-Stopped at: Completed 03-03-PLAN.md
+Last session: 2026-03-08T22:03:00Z
+Stopped at: Completed 03-04-PLAN.md (all phases complete)
 Resume file: None

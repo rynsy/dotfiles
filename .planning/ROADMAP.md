@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Environment Fixes** - Fix all shell/editor/tmux bugs and clean up zsh config (completed 2026-03-08)
 - [x] **Phase 2: ZMK Firmware** - Add media keys and Android layer to keyboard firmware (completed 2026-03-08)
-- [ ] **Phase 3: Cross-Platform Provisioning** - Shared shell config, PowerShell profile, and full/minimal install scripts for Arch/Mac/Windows (long-term)
+- [x] **Phase 3: Cross-Platform Provisioning** - Shared shell config, PowerShell profile, and full/minimal install scripts for Arch/Mac/Windows (completed 2026-03-08)
 
 ## Phase Details
 
@@ -81,7 +81,7 @@ Plans:
 - [x] 03-01-PLAN.md — Extract shared shell config into shell/ stow package; split platform files; update zsh/bash sourcing
 - [x] 03-02-PLAN.md — Extend install.sh with platform detection (pacman/brew), CORE/EXTRA split, --minimal flag
 - [x] 03-03-PLAN.md — Create powershell/ profile and alacritty/ config stow packages
-- [ ] 03-04-PLAN.md — Create install.ps1 for Windows; update README.md and CLAUDE.md
+- [x] 03-04-PLAN.md — Create install.ps1 for Windows; update README.md and CLAUDE.md
 
 ## Progress
 
@@ -93,4 +93,4 @@ Phases execute in numeric order: 1 → 2 → 3
 | 1. Environment Fixes | 3/4 | Complete    | 2026-03-08 |
 | 01.1. Bash Config | 1/1 | Complete    | 2026-03-08 |
 | 2. ZMK Firmware | 2/2 | Complete | 2026-03-08 |
-| 3. Cross-Platform Provisioning | 3/4 | In Progress | - |
+| 3. Cross-Platform Provisioning | 4/4 | Complete | 2026-03-08 |
