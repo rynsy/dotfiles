@@ -1,0 +1,4 @@
+[submodule "zmk"]
+	path = zmk
+	url = https://github.com/rynsy/Adv360-Pro-ZMK.git
+	branch = V3.0
