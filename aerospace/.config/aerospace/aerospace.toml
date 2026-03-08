@@ -118,6 +118,9 @@ cmd-ctrl-l = 'focus-monitor right'
 cmd-ctrl-k = 'focus-monitor up'
 cmd-ctrl-j = 'focus-monitor down'
 
+# -- Bluetooth (Cmd+Ctrl + b) — matches Omarchy Super+Ctrl+B --
+cmd-ctrl-b = 'exec-and-forget open x-apple.systempreferences:com.apple.BluetoothSettings'
+
 # -- Resize mode (Cmd + r) --
 cmd-r = 'mode resize'
 
