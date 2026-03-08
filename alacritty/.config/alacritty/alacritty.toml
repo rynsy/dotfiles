@@ -1,0 +1,16 @@
+# Base Alacritty config
+# Platform-specific overrides (silently skipped if missing)
+import = [
+  "~/.config/alacritty/linux.toml",
+  "~/.config/alacritty/macos.toml",
+]
+
+[font]
+normal = { family = "CaskaydiaMono Nerd Font", style = "Regular" }
+size = 9.0
+
+[window]
+padding = { x = 14, y = 14 }
+
+[cursor]
+style = { shape = "Block", blinking = "Off" }

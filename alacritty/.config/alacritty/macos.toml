@@ -1,0 +1,7 @@
+# macOS-specific Alacritty settings
+
+[font]
+size = 13.0
+
+[window]
+option_as_alt = "Both"
