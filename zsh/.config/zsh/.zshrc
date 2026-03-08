@@ -68,11 +68,17 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
-# Aliases
-[[ ! -f "$HOME/.config/zsh/config.d/alias" ]] || source "$HOME/.config/zsh/config.d/alias"
-[[ ! -f "$HOME/.config/zsh/config.d/env" ]] || source "$HOME/.config/zsh/config.d/env"
-[[ ! -f "$HOME/.config/zsh/config.d/path" ]] || source "$HOME/.config/zsh/config.d/path"
-[[ ! -f "$HOME/.config/zsh/config.d/secrets" ]] || source "$HOME/.config/zsh/config.d/secrets"
+# Source shared shell config (shared with bash)
+_shell_config="$HOME/.config/shell/config.d"
+for f in env path alias; do
+  [[ -f "$_shell_config/$f" ]] && source "$_shell_config/$f"
+done
+case "$(uname -s)" in
+  Linux)  for f in env.linux path.linux alias.linux; do [[ -f "$_shell_config/$f" ]] && source "$_shell_config/$f"; done ;;
+  Darwin) for f in env.darwin path.darwin alias.darwin; do [[ -f "$_shell_config/$f" ]] && source "$_shell_config/$f"; done ;;
+esac
+[[ -f "$_shell_config/secrets" ]] && source "$_shell_config/secrets"
+unset _shell_config
 
 # Shell integrations
 eval "$(fzf --zsh)"

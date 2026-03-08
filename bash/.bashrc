@@ -10,6 +10,13 @@ HISTFILESIZE=100000
 HISTCONTROL=ignoreboth
 
 # Source shared config (single source of truth; also used by zsh)
-[[ -f "$HOME/.config/zsh/config.d/env"   ]] && . "$HOME/.config/zsh/config.d/env"
-[[ -f "$HOME/.config/zsh/config.d/path"  ]] && . "$HOME/.config/zsh/config.d/path"
-[[ -f "$HOME/.config/zsh/config.d/alias" ]] && . "$HOME/.config/zsh/config.d/alias"
+_shell_config="$HOME/.config/shell/config.d"
+[[ -f "$_shell_config/env"   ]] && . "$_shell_config/env"
+[[ -f "$_shell_config/path"  ]] && . "$_shell_config/path"
+[[ -f "$_shell_config/alias" ]] && . "$_shell_config/alias"
+case "$(uname -s)" in
+  Linux)  for f in env.linux path.linux alias.linux; do [[ -f "$_shell_config/$f" ]] && . "$_shell_config/$f"; done ;;
+  Darwin) for f in env.darwin path.darwin alias.darwin; do [[ -f "$_shell_config/$f" ]] && . "$_shell_config/$f"; done ;;
+esac
+[[ -f "$_shell_config/secrets" ]] && . "$_shell_config/secrets"
+unset _shell_config
