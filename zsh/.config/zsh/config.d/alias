@@ -13,7 +13,8 @@ alias sail=./vendor/bin/sail
 killemall(){
   kill -9 $(ps aux | rg -i $1 | tr -s ' ' | cut -d ' ' -f 2)
 }
-alias t='tmux new -As main'
+alias t='tmux new -As workspace'
+alias ta='tmux attach -t workspace'
 
 # Shortcuts
 alias lab="cd ~/code/lab/"
