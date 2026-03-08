@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 02-zmk-firmware/02-01-PLAN.md
-last_updated: "2026-03-08T07:39:44.226Z"
+stopped_at: Completed 02-zmk-firmware/02-02-PLAN.md
+last_updated: "2026-03-08T07:42:34.795Z"
 last_activity: 2026-03-08 — Roadmap created
 progress:
   total_phases: 4
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 7
-  completed_plans: 6
+  completed_plans: 7
   percent: 25
 ---
 
@@ -56,6 +56,7 @@ Progress: [███░░░░░░░] 25%
 | Phase 01-environment-fixes P04 | 1 | 1 tasks | 0 files |
 | Phase 01.1-bash-config-and-shell-parity P01 | 1min | 2 tasks | 3 files |
 | Phase 02-zmk-firmware PP01 | 2min | 2 tasks | 1 files |
+| Phase 02-zmk-firmware P02 | 5min | 1 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -83,6 +84,8 @@ Recent decisions affecting current work:
 - [Phase 01.1-bash-config-and-shell-parity]: No PS1, fzf, or zoxide in bash config — out of scope per user decisions
 - [Phase 02-zmk-firmware]: layer_android has 76 bindings consistent with all other layers (plan's stated 79 was incorrect metadata)
 - [Phase 02-zmk-firmware]: Media keys use &kp with consumer codes (C_PREV etc.) — not &cp syntax which would be a compile error
+- [Phase 02-zmk-firmware]: Detached HEAD commits from plan 02-01 required cherry-pick onto V3.0 before push — git checkout V3.0 alone left them behind
+- [Phase 02-zmk-firmware]: GitHub Actions build verification deferred to user (YOLO mode) — cannot be automated
 
 ### Pending Todos
 
@@ -95,6 +98,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-08T07:39:44.225Z
-Stopped at: Completed 02-zmk-firmware/02-01-PLAN.md
+Last session: 2026-03-08T07:42:34.793Z
+Stopped at: Completed 02-zmk-firmware/02-02-PLAN.md
 Resume file: None

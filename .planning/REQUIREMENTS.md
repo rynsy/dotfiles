@@ -31,7 +31,7 @@
 - [x] **ZMK-02**: Volume keys (up/down/mute) added to Fn layer (Layer 2)
 - [x] **ZMK-03**: Layer 5 (Android) added — transparent base, BT slot 3
 - [x] **ZMK-04**: Mod+A toggles Layer 5 (Android) on/off
-- [ ] **ZMK-05**: Firmware builds successfully via GitHub Actions after changes
+- [x] **ZMK-05**: Firmware builds successfully via GitHub Actions after changes
 
 ### Dotfiles Management
 
@@ -120,7 +120,7 @@
 | ZMK-02 | Phase 2 | Complete |
 | ZMK-03 | Phase 2 | Complete |
 | ZMK-04 | Phase 2 | Complete |
-| ZMK-05 | Phase 2 | Pending |
+| ZMK-05 | Phase 2 | Complete |
 
 **Coverage:**
 - v1 requirements: 18 total — mapped to phases 1–2 ✓
