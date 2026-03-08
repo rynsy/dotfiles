@@ -3,7 +3,7 @@
 # Bound to prefix+f
 
 # Find project directories and select with fzf
-selected=$(find ~/code -mindepth 1 -maxdepth 1 -type d | fzf-tmux -p --reverse --prompt="session> ")
+selected=$(find ~/code -mindepth 1 -maxdepth 1 -type d | fzf --reverse --prompt="session> ")
 
 # Exit if nothing selected
 if [[ -z "$selected" ]]; then
