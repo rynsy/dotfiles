@@ -123,5 +123,5 @@ Phases execute in numeric order: 1 → 2 → 3
 | 01.1. Bash Config | 1/1 | Complete    | 2026-03-08 |
 | 2. ZMK Firmware | 2/2 | Complete | 2026-03-08 |
 | 3. Cross-Platform Provisioning | 4/4 | Complete | 2026-03-08 |
-| 4. Retroactive Verification | 0/2 | Pending | — |
+| 4. Retroactive Verification | 2/2 | Complete | 2026-03-08 |
 | 5. Alacritty Platform Config Fix | 0/1 | Pending | — |

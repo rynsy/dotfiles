@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: completed
-stopped_at: Completed 03-04-PLAN.md (all phases complete)
-last_updated: "2026-03-08T22:09:18.013Z"
-last_activity: 2026-03-08 — Windows install.ps1, README, and CLAUDE.md updates
+status: verifying
+stopped_at: Completed 04-01-PLAN.md
+last_updated: "2026-03-08T23:11:00.452Z"
+last_activity: 2026-03-08 -- Phase 02 ZMK firmware retroactive verification
 progress:
-  total_phases: 4
-  completed_phases: 1
-  total_plans: 4
-  completed_plans: 6
+  total_phases: 6
+  completed_phases: 2
+  total_plans: 6
+  completed_plans: 8
   percent: 100
 ---
 
@@ -21,14 +21,14 @@ progress:
 See: .planning/REQUIREMENTS.md and .planning/ROADMAP.md
 
 **Core value:** A consistent, reliable development environment that works correctly across all devices — Linux and macOS as first-class citizens, Windows best-effort.
-**Current focus:** All phases complete
+**Current focus:** Phase 4 retroactive verification
 
 ## Current Position
 
-Phase: 3 of 3 (Cross-Platform Provisioning)
-Plan: 4 of 4 in current phase (complete)
-Status: All plans and phases complete
-Last activity: 2026-03-08 — Windows install.ps1, README, and CLAUDE.md updates
+Phase: 4 of 5 (Retroactive Verification)
+Plan: 2 of 2 in current phase (complete)
+Status: Phase 4 complete -- retroactive verification for Phases 01 and 02
+Last activity: 2026-03-08 -- Phase 02 ZMK firmware retroactive verification
 
 Progress: [██████████] 100%
 
@@ -40,6 +40,7 @@ Progress: [██████████] 100%
 | 1.1. Bash Config | Complete (1/1 plans) | 2026-03-08 |
 | 2. ZMK Firmware | Complete (2/2 plans) | 2026-03-08 |
 | 3. Cross-Platform Provisioning | Complete (4/4 plans) | 2026-03-08 |
+| 4. Retroactive Verification | Complete (2/2 plans) | 2026-03-08 |
 
 ## Performance Metrics
 
@@ -62,6 +63,8 @@ Progress: [██████████] 100%
 | 03-cross-platform P02 | 1 task | 1 min | cross-platform install.sh |
 | 03-cross-platform P03 | 2 tasks | 2 min | powershell + alacritty packages |
 | 03-cross-platform P04 | 2 tasks | 3 min | install.ps1 + README + CLAUDE.md |
+| 04-retroactive-verification P02 | 2 tasks | 2 min | Phase 02 ZMK verification |
+| 04-retroactive-verification P01 | 2 tasks | 3 min | Phase 01 environment fixes verification |
 
 ## Accumulated Context
 
@@ -85,6 +88,15 @@ Progress: [██████████] 100%
 - **install.ps1 standalone:** No shared code with install.sh; winget for packages, manual symlinks with backup; Developer Mode check before proceeding
 - **README cross-platform docs:** Organized by platform quick-start, then shared package table and post-install steps
 
+### Key Findings (Phase 4 Verification)
+
+- ZMK-03/ZMK-04 marked FAIL: Android layer was pushed but lost during merge conflict resolution with upstream -- candidates for descope or deferral to v2
+- ZMK-05 upgraded from DEFERRED to PASS: `gh run list` confirmed latest V3.0 build green
+- Phase 01 and Phase 02 now have retroactive VERIFICATION.md files with evidence-backed pass/fail for all requirements
+- Phase 01: DOTS-02 marked PASS -- .planning/ intentionally tracked per GSD workflow, not excluded from .gitignore
+- Phase 01: TMUX-02 marked PASS with deferred human verification for live Termux clipboard test
+- Phase 01: ZSH-03 marked PASS -- session name 'workspace' vs 'main' is implementation detail, functional intent satisfied
+
 ### Older Decisions
 
 - Ghostty config ownership verified — stowed from dotfiles
@@ -103,6 +115,6 @@ None. All phases complete.
 
 ## Session Continuity
 
-Last session: 2026-03-08T22:03:00Z
-Stopped at: Completed 03-04-PLAN.md (all phases complete)
+Last session: 2026-03-08T23:11:00.448Z
+Stopped at: Completed 04-01-PLAN.md
 Resume file: None
