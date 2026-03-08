@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: verifying
-stopped_at: Completed 04-01-PLAN.md
-last_updated: "2026-03-08T23:16:34.721Z"
+stopped_at: Completed 05-01-PLAN.md
+last_updated: "2026-03-08T23:43:53.603Z"
 last_activity: 2026-03-08 -- Phase 02 ZMK firmware retroactive verification
 progress:
   total_phases: 6
-  completed_phases: 2
-  total_plans: 6
-  completed_plans: 8
+  completed_phases: 3
+  total_plans: 7
+  completed_plans: 9
   percent: 100
 ---
 
@@ -21,14 +21,14 @@ progress:
 See: .planning/REQUIREMENTS.md and .planning/ROADMAP.md
 
 **Core value:** A consistent, reliable development environment that works correctly across all devices — Linux and macOS as first-class citizens, Windows best-effort.
-**Current focus:** Phase 4 retroactive verification
+**Current focus:** Phase 5 Alacritty platform fix (complete)
 
 ## Current Position
 
-Phase: 4 of 5 (Retroactive Verification)
-Plan: 2 of 2 in current phase (complete)
-Status: Phase 4 complete -- retroactive verification for Phases 01 and 02
-Last activity: 2026-03-08 -- Phase 02 ZMK firmware retroactive verification
+Phase: 5 of 5 (Alacritty Platform Fix)
+Plan: 1 of 1 in current phase (complete)
+Status: Phase 5 complete -- Alacritty cross-platform config restructured, PATH duplication fixed
+Last activity: 2026-03-08 -- Phase 05 Alacritty platform fix
 
 Progress: [██████████] 100%
 
@@ -41,6 +41,7 @@ Progress: [██████████] 100%
 | 2. ZMK Firmware | Complete (2/2 plans) | 2026-03-08 |
 | 3. Cross-Platform Provisioning | Complete (4/4 plans) | 2026-03-08 |
 | 4. Retroactive Verification | Complete (2/2 plans) | 2026-03-08 |
+| 5. Alacritty Platform Fix | Complete (1/1 plans) | 2026-03-08 |
 
 ## Performance Metrics
 
@@ -65,6 +66,7 @@ Progress: [██████████] 100%
 | 03-cross-platform P04 | 2 tasks | 3 min | install.ps1 + README + CLAUDE.md |
 | 04-retroactive-verification P02 | 2 tasks | 2 min | Phase 02 ZMK verification |
 | 04-retroactive-verification P01 | 2 tasks | 3 min | Phase 01 environment fixes verification |
+| Phase 05-alacritty-platform-fix P01 | 7m | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -73,6 +75,13 @@ Progress: [██████████] 100%
 - Phase 01.1 inserted after Phase 1: Bash Config and Shell Parity
 - Phase 2 completed with media keys relocated from left-hand QWE/ASD (upstream) to right-hand HJKL (user preference), merge conflict resolved
 - Phase 3 architecture decided: shell/ stow package for shared config, extend install.sh (not replace), standalone install.ps1
+
+### Key Architecture Decisions (Phase 5)
+
+- **Alacritty platform file placement:** `alacritty/platform/` is outside the stow tree; `install.sh` symlinks the correct platform TOML via `ln -sf` after the stow loop — only one platform file lands on any given machine
+- **font.size ownership:** Removed from base `alacritty.toml` entirely; platform files are the single source of truth (base config is loaded last and would override imports if it set font.size)
+- **Alacritty [general] import:** Moved from deprecated root-level `import` to `[general]` section per current TOML spec
+- **.zshenv minimal:** Reduced to `ZDOTDIR` export only; PATH manipulation belongs in `shell/config.d/path` as the single source of truth
 
 ### Key Architecture Decisions (Phase 3)
 
@@ -115,6 +124,6 @@ None. All phases complete.
 
 ## Session Continuity
 
-Last session: 2026-03-08T23:11:00.448Z
-Stopped at: Completed 04-01-PLAN.md
+Last session: 2026-03-08T23:43:53.597Z
+Stopped at: Completed 05-01-PLAN.md
 Resume file: None
