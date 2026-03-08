@@ -27,10 +27,10 @@
 
 ### ZMK
 
-- [ ] **ZMK-01**: Media keys (prev/play-pause/next) added to Fn layer (Layer 2)
-- [ ] **ZMK-02**: Volume keys (up/down/mute) added to Fn layer (Layer 2)
-- [ ] **ZMK-03**: Layer 5 (Android) added — transparent base, BT slot 3
-- [ ] **ZMK-04**: Mod+A toggles Layer 5 (Android) on/off
+- [x] **ZMK-01**: Media keys (prev/play-pause/next) added to Fn layer (Layer 2)
+- [x] **ZMK-02**: Volume keys (up/down/mute) added to Fn layer (Layer 2)
+- [x] **ZMK-03**: Layer 5 (Android) added — transparent base, BT slot 3
+- [x] **ZMK-04**: Mod+A toggles Layer 5 (Android) on/off
 - [ ] **ZMK-05**: Firmware builds successfully via GitHub Actions after changes
 
 ### Dotfiles Management
@@ -42,11 +42,11 @@
 
 ### Bash
 
-- [ ] **BASH-01**: `bash/` stow package exists with `.bashrc` that sources shared aliases
-- [ ] **BASH-02**: Shared `config.d/alias` file is bash-compatible (no zsh-only syntax)
-- [ ] **BASH-03**: `t` alias available in bash sessions (tmux attach)
-- [ ] **BASH-04**: EDITOR, PATH, and core env vars set in bash sessions
-- [ ] **BASH-05**: bash config added to `install.sh` PACKAGES list
+- [x] **BASH-01**: `bash/` stow package exists with `.bashrc` that sources shared aliases
+- [x] **BASH-02**: Shared `config.d/alias` file is bash-compatible (no zsh-only syntax)
+- [x] **BASH-03**: `t` alias available in bash sessions (tmux attach)
+- [x] **BASH-04**: EDITOR, PATH, and core env vars set in bash sessions
+- [x] **BASH-05**: bash config added to `install.sh` PACKAGES list
 
 ## v2 Requirements
 
@@ -116,10 +116,10 @@
 | TMUX-02 | Phase 1 | Complete |
 | DOTS-01 | Phase 1 | Complete |
 | DOTS-02 | Phase 1 | Complete |
-| ZMK-01 | Phase 2 | Pending |
-| ZMK-02 | Phase 2 | Pending |
-| ZMK-03 | Phase 2 | Pending |
-| ZMK-04 | Phase 2 | Pending |
+| ZMK-01 | Phase 2 | Complete |
+| ZMK-02 | Phase 2 | Complete |
+| ZMK-03 | Phase 2 | Complete |
+| ZMK-04 | Phase 2 | Complete |
 | ZMK-05 | Phase 2 | Pending |
 
 **Coverage:**

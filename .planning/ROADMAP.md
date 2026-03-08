@@ -41,7 +41,7 @@ Plans:
 **Goal:** Bash sessions have the same aliases and env vars as zsh — t, n, gcm, EDITOR, and full PATH all work out of the box
 **Requirements**: BASH-01, BASH-02, BASH-03, BASH-04, BASH-05
 **Depends on:** Phase 1
-**Plans:** 1 plan
+**Plans:** 1/1 plans complete
 
 Plans:
 - [ ] 01.1-01-PLAN.md — Create bash/ stow package (.bashrc + .bash_profile) sourcing shared config.d files; update install.sh
@@ -55,7 +55,11 @@ Plans:
   2. Mod+A toggles the Android layer on and off
   3. The Android layer connects to BT slot 3 (the phone) when toggled on
   4. Firmware builds successfully via GitHub Actions with no errors
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 02-01-PLAN.md — Edit adv360.keymap: add media/volume keys to Fn layer, append Android layer (Layer 5), add Mod+A toggle
+- [ ] 02-02-PLAN.md — Commit and push via submodule git workflow; verify GitHub Actions firmware build succeeds
 
 ### Phase 3: Cross-Platform Provisioning
 **Goal**: The repo can provision a full or minimal dev environment on Arch Linux, macOS, and Windows from a single source of truth
@@ -77,6 +81,6 @@ Phases execute in numeric order: 1 → 2 → 3
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Environment Fixes | 3/4 | Complete    | 2026-03-08 |
-| 01.1. Bash Config | 0/1 | Not started | - |
-| 2. ZMK Firmware | 0/TBD | Not started | - |
+| 01.1. Bash Config | 1/1 | Complete    | 2026-03-08 |
+| 2. ZMK Firmware | 1/2 | In Progress|  |
 | 3. Cross-Platform Provisioning | 0/TBD | Not started (long-term) | - |
