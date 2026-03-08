@@ -1,5 +1,6 @@
 # Base Alacritty config
-# Platform-specific overrides (silently skipped if missing)
+# Platform-specific overrides imported below (missing files silently skipped)
+[general]
 import = [
   "~/.config/alacritty/linux.toml",
   "~/.config/alacritty/macos.toml",
@@ -7,7 +8,7 @@ import = [
 
 [font]
 normal = { family = "CaskaydiaMono Nerd Font", style = "Regular" }
-size = 9.0
+# NOTE: font.size is set in platform files, NOT here (base loads last and would override)
 
 [window]
 padding = { x = 14, y = 14 }

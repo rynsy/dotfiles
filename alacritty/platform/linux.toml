@@ -1,0 +1,5 @@
+# Linux-specific Alacritty settings
+# Placed by install.sh -- not stowed directly
+
+[font]
+size = 9.0
