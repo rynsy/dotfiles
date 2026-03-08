@@ -7,36 +7,36 @@
 
 ### Bug Fixes
 
-- [x] **BUG-01**: nvim plugins.lua early return removed so all plugin config loads correctly
-- [x] **BUG-02**: DOTNET_ROOT defined exactly once with the correct value
-- [x] **BUG-03**: GEM_HOME points to gem root directory, not bin directory
-- [x] **BUG-04**: tmux-yank plugin and manual copy-pipe binding no longer conflict
-- [x] **BUG-05**: killemall function does not shadow system killall command
+- [ ] **BUG-01**: nvim plugins.lua early return removed so all plugin config loads correctly
+- [ ] **BUG-02**: DOTNET_ROOT defined exactly once with the correct value
+- [ ] **BUG-03**: GEM_HOME points to gem root directory, not bin directory
+- [ ] **BUG-04**: tmux-yank plugin and manual copy-pipe binding no longer conflict
+- [ ] **BUG-05**: killemall function does not shadow system killall command
 
 ### Zsh
 
-- [x] **ZSH-01**: EDITOR=nvim set so git, crontab, and other tools use nvim
-- [x] **ZSH-02**: Stale aliases removed (zellij, alacritty-light, alacritty-dark)
-- [x] **ZSH-03**: Quick tmux attach alias available (t → tmux new -As main)
-- [x] **ZSH-04**: HISTSIZE increased to 50000
+- [ ] **ZSH-01**: EDITOR=nvim set so git, crontab, and other tools use nvim
+- [ ] **ZSH-02**: Stale aliases removed (zellij, alacritty-light, alacritty-dark)
+- [ ] **ZSH-03**: Quick tmux attach alias available (t → tmux new -As main)
+- [ ] **ZSH-04**: HISTSIZE increased to 50000
 
 ### tmux
 
-- [x] **TMUX-01**: Sessionizer uses popup (display-popup) instead of new window
-- [x] **TMUX-02**: OSC 52 clipboard works end-to-end (verified from Termux SSH session)
+- [ ] **TMUX-01**: Sessionizer uses popup (display-popup) instead of new window
+- [ ] **TMUX-02**: OSC 52 clipboard works end-to-end (verified from Termux SSH session)
 
 ### ZMK
 
-- [x] **ZMK-01**: Media keys (prev/play-pause/next) added to Fn layer (Layer 2)
-- [x] **ZMK-02**: Volume keys (up/down/mute) added to Fn layer (Layer 2)
-- [x] **ZMK-03**: Layer 5 (Android) added — transparent base, BT slot 3
-- [x] **ZMK-04**: Mod+A toggles Layer 5 (Android) on/off
-- [x] **ZMK-05**: Firmware builds successfully via GitHub Actions after changes
+- [ ] **ZMK-01**: Media keys (prev/play-pause/next) added to Fn layer (Layer 2)
+- [ ] **ZMK-02**: Volume keys (up/down/mute) added to Fn layer (Layer 2)
+- [ ] **ZMK-03**: Layer 5 (Android) added — transparent base, BT slot 3
+- [ ] **ZMK-04**: Mod+A toggles Layer 5 (Android) on/off
+- [ ] **ZMK-05**: Firmware builds successfully via GitHub Actions after changes
 
 ### Dotfiles Management
 
-- [x] **DOTS-01**: Ghostty stow situation clarified — either stowed from dotfiles or documented as Omarchy-managed
-- [x] **DOTS-02**: .gitignore updated to exclude .planning/
+- [ ] **DOTS-01**: Ghostty stow situation clarified — either stowed from dotfiles or documented as Omarchy-managed
+- [ ] **DOTS-02**: .gitignore updated to exclude .planning/
 
 ## v1.5 Requirements — Bash Config and Shell Parity (Phase 01.1)
 
@@ -108,24 +108,24 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| BUG-01 | Phase 1 | Complete |
-| BUG-02 | Phase 1 | Complete |
-| BUG-03 | Phase 1 | Complete |
-| BUG-04 | Phase 1 | Complete |
-| BUG-05 | Phase 1 | Complete |
-| ZSH-01 | Phase 1 | Complete |
-| ZSH-02 | Phase 1 | Complete |
-| ZSH-03 | Phase 1 | Complete |
-| ZSH-04 | Phase 1 | Complete |
-| TMUX-01 | Phase 1 | Complete |
-| TMUX-02 | Phase 1 | Complete |
-| DOTS-01 | Phase 1 | Complete |
-| DOTS-02 | Phase 1 | Complete |
-| ZMK-01 | Phase 2 | Complete |
-| ZMK-02 | Phase 2 | Complete |
-| ZMK-03 | Phase 2 | Complete |
-| ZMK-04 | Phase 2 | Complete |
-| ZMK-05 | Phase 2 | Complete |
+| BUG-01 | Phase 4 (verify Phase 1) | Pending |
+| BUG-02 | Phase 4 (verify Phase 1) | Pending |
+| BUG-03 | Phase 4 (verify Phase 1) | Pending |
+| BUG-04 | Phase 4 (verify Phase 1) | Pending |
+| BUG-05 | Phase 4 (verify Phase 1) | Pending |
+| ZSH-01 | Phase 4 (verify Phase 1) | Pending |
+| ZSH-02 | Phase 4 (verify Phase 1) | Pending |
+| ZSH-03 | Phase 4 (verify Phase 1) | Pending |
+| ZSH-04 | Phase 4 (verify Phase 1) | Pending |
+| TMUX-01 | Phase 4 (verify Phase 1) | Pending |
+| TMUX-02 | Phase 4 (verify Phase 1) | Pending |
+| DOTS-01 | Phase 4 (verify Phase 1) | Pending |
+| DOTS-02 | Phase 4 (verify Phase 1) | Pending |
+| ZMK-01 | Phase 4 (verify Phase 2) | Pending |
+| ZMK-02 | Phase 4 (verify Phase 2) | Pending |
+| ZMK-03 | Phase 4 (verify Phase 2) | Pending |
+| ZMK-04 | Phase 4 (verify Phase 2) | Pending |
+| ZMK-05 | Phase 4 (verify Phase 2) | Pending |
 | SHELL-01 | Phase 3 | Complete |
 | SHELL-02 | Phase 3 | Complete |
 | PROV-01 | Phase 3 | Complete |
@@ -141,11 +141,11 @@
 | XPLAT-02 | Phase 3 | Complete |
 
 **Coverage:**
-- v1 requirements: 18 total — all complete (phases 1-2)
+- v1 requirements: 18 total — 18 pending verification (Phase 4)
 - v1.5 requirements: 5 total — all complete (phase 1.1)
 - v2 requirements: 3 total — deferred
-- v3 requirements: 12 total — all complete
+- v3 requirements: 13 total — all complete (Phase 3)
 
 ---
 *Requirements defined: 2026-03-08*
-*Last updated: 2026-03-08 after roadmap creation*
+*Last updated: 2026-03-08 after gap closure planning*

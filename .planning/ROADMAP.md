@@ -15,6 +15,8 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Environment Fixes** - Fix all shell/editor/tmux bugs and clean up zsh config (completed 2026-03-08)
 - [x] **Phase 2: ZMK Firmware** - Add media keys and Android layer to keyboard firmware (completed 2026-03-08)
 - [x] **Phase 3: Cross-Platform Provisioning** - Shared shell config, PowerShell profile, and full/minimal install scripts for Arch/Mac/Windows (completed 2026-03-08)
+- [ ] **Phase 4: Retroactive Verification** - Produce VERIFICATION.md for Phases 01 and 02 by inspecting existing codebase
+- [ ] **Phase 5: Alacritty Platform Config Fix** - Fix font.size cross-platform override bug and clean up PATH duplication
 
 ## Phase Details
 
@@ -83,6 +85,33 @@ Plans:
 - [x] 03-03-PLAN.md — Create powershell/ profile and alacritty/ config stow packages
 - [x] 03-04-PLAN.md — Create install.ps1 for Windows; update README.md and CLAUDE.md
 
+### Phase 4: Retroactive Verification
+**Goal**: Phases 01 and 02 have VERIFICATION.md files confirming all requirements are satisfied against the actual codebase
+**Depends on**: Phase 3
+**Requirements**: BUG-01, BUG-02, BUG-03, BUG-04, BUG-05, ZSH-01, ZSH-02, ZSH-03, ZSH-04, TMUX-01, TMUX-02, DOTS-01, DOTS-02, ZMK-01, ZMK-02, ZMK-03, ZMK-04, ZMK-05
+**Gap Closure:** Closes verification gaps from v1.0 audit — phases executed before GSD verification workflow
+**Success Criteria** (what must be TRUE):
+  1. Phase 01 has a VERIFICATION.md with pass/fail for each of its 13 requirements
+  2. Phase 02 has a VERIFICATION.md with pass/fail for each of its 5 requirements
+  3. All requirement statuses are backed by codebase evidence (file paths, line numbers)
+
+Plans:
+- [ ] 04-01-PLAN.md — Verify Phase 01 (Environment Fixes) requirements against codebase; produce 01-VERIFICATION.md
+- [ ] 04-02-PLAN.md — Verify Phase 02 (ZMK Firmware) requirements against codebase; produce 02-VERIFICATION.md
+
+### Phase 5: Alacritty Platform Config Fix
+**Goal**: Alacritty displays correct font size on all platforms and PATH has no duplicates
+**Depends on**: Phase 3
+**Requirements**: APP-01, APP-02, XPLAT-01
+**Gap Closure:** Closes integration bug and flow defect from v1.0 audit
+**Success Criteria** (what must be TRUE):
+  1. Alacritty on Linux uses base font size (not macOS 13pt override)
+  2. Platform-specific Alacritty settings only apply on their target OS
+  3. PATH entries (.local/bin, .cargo/bin) are defined once, not duplicated between zshenv and shell/path
+
+Plans:
+- [ ] 05-01-PLAN.md — Restructure Alacritty platform configs; remove PATH duplication from zsh/.zshenv
+
 ## Progress
 
 **Execution Order:**
@@ -94,3 +123,5 @@ Phases execute in numeric order: 1 → 2 → 3
 | 01.1. Bash Config | 1/1 | Complete    | 2026-03-08 |
 | 2. ZMK Firmware | 2/2 | Complete | 2026-03-08 |
 | 3. Cross-Platform Provisioning | 4/4 | Complete | 2026-03-08 |
+| 4. Retroactive Verification | 0/2 | Pending | — |
+| 5. Alacritty Platform Config Fix | 0/1 | Pending | — |
