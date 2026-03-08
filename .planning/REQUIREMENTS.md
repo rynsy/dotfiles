@@ -65,12 +65,17 @@
 
 ## v3 Requirements — Cross-Platform Provisioning (Long-term)
 
+### Shared Shell Config
+
+- [x] **SHELL-01**: Extract shared config from `zsh/.config/zsh/config.d/` into `shell/.config/shell/config.d/` stow package; update zsh, bash to source from new location
+- [x] **SHELL-02**: Platform-specific path files (`path.linux`, `path.darwin`) sourced conditionally via `uname`; remove hardcoded Linux-only paths from base `path` file
+
 ### Provisioning Scripts
 
 - **PROV-01**: `install.sh` supports Arch Linux full mode (existing) and minimal mode (zsh, tmux, nvim only — no GUI tools)
 - **PROV-02**: `install.sh` supports macOS via Homebrew (full and minimal modes)
-- **PROV-03**: `install.ps1` Windows setup script — creates symlinks manually (no Stow), installs packages via winget
-- **PROV-04**: All provisioning scripts share a common "minimal" package set definition
+- **PROV-03**: `install.ps1` standalone Windows setup script — creates symlinks manually (no Stow), installs packages via winget (best-effort, independent from install.sh)
+- **PROV-04**: install.sh PACKAGES split into CORE (shell, nvim, tmux, git) and EXTRA (ghostty, aerospace, etc.); `--minimal` installs only CORE
 
 ### PowerShell
 
@@ -123,9 +128,10 @@
 | ZMK-05 | Phase 2 | Complete |
 
 **Coverage:**
-- v1 requirements: 18 total — mapped to phases 1–2 ✓
+- v1 requirements: 18 total — all complete (phases 1–2) ✓
+- v1.5 requirements: 5 total — all complete (phase 1.1) ✓
 - v2 requirements: 3 total — deferred
-- v3 requirements: 10 total — deferred (Phase 3, long-term)
+- v3 requirements: 12 total — deferred (Phase 3, long-term)
 
 ---
 *Requirements defined: 2026-03-08*
