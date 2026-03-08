@@ -2,7 +2,7 @@
 set -euo pipefail
 
 DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
-PACKAGES=(nvim zsh claude git ssh tmux)
+PACKAGES=(nvim zsh claude git ssh tmux ghostty)
 BACKUP_DIR="/tmp/dotfiles-backup/$(date +%Y%m%d-%H%M%S)"
 
 echo "=== Dotfiles Bootstrap ==="
