@@ -48,7 +48,7 @@ bindkey '\e[A' history-search-backward
 bindkey '\e[B' history-search-forward
 
 # History
-HISTSIZE=5000
+HISTSIZE=50000
 HISTFILE=~/.local/state/zsh_history
 SAVEHIST=$HISTSIZE
 HISTDUP=erase
