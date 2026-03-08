@@ -78,8 +78,8 @@ Plans:
 **Plans**: 4 plans
 
 Plans:
-- [ ] 03-01-PLAN.md — Extract shared shell config into shell/ stow package; split platform files; update zsh/bash sourcing
-- [ ] 03-02-PLAN.md — Extend install.sh with platform detection (pacman/brew), CORE/EXTRA split, --minimal flag
+- [x] 03-01-PLAN.md — Extract shared shell config into shell/ stow package; split platform files; update zsh/bash sourcing
+- [x] 03-02-PLAN.md — Extend install.sh with platform detection (pacman/brew), CORE/EXTRA split, --minimal flag
 - [ ] 03-03-PLAN.md — Create powershell/ profile and alacritty/ config stow packages
 - [ ] 03-04-PLAN.md — Create install.ps1 for Windows; update README.md and CLAUDE.md
 

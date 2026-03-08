@@ -72,10 +72,10 @@
 
 ### Provisioning Scripts
 
-- **PROV-01**: `install.sh` supports Arch Linux full mode (existing) and minimal mode (zsh, tmux, nvim only — no GUI tools)
-- **PROV-02**: `install.sh` supports macOS via Homebrew (full and minimal modes)
+- [x] **PROV-01**: `install.sh` supports Arch Linux full mode (existing) and minimal mode (zsh, tmux, nvim only — no GUI tools)
+- [x] **PROV-02**: `install.sh` supports macOS via Homebrew (full and minimal modes)
 - **PROV-03**: `install.ps1` standalone Windows setup script — creates symlinks manually (no Stow), installs packages via winget (best-effort, independent from install.sh)
-- **PROV-04**: install.sh PACKAGES split into CORE (shell, nvim, tmux, git) and EXTRA (ghostty, aerospace, etc.); `--minimal` installs only CORE
+- [x] **PROV-04**: install.sh PACKAGES split into CORE (shell, nvim, tmux, git) and EXTRA (ghostty, aerospace, etc.); `--minimal` installs only CORE
 
 ### PowerShell
 
@@ -126,6 +126,11 @@
 | ZMK-03 | Phase 2 | Complete |
 | ZMK-04 | Phase 2 | Complete |
 | ZMK-05 | Phase 2 | Complete |
+| SHELL-01 | Phase 3 | Complete |
+| SHELL-02 | Phase 3 | Complete |
+| PROV-01 | Phase 3 | Complete |
+| PROV-02 | Phase 3 | Complete |
+| PROV-04 | Phase 3 | Complete |
 
 **Coverage:**
 - v1 requirements: 18 total — all complete (phases 1–2) ✓

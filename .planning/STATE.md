@@ -3,9 +3,9 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 03-01-PLAN.md
-last_updated: "2026-03-08T21:52:47.830Z"
-last_activity: 2026-03-08 — Extracted shared shell config to shell/ stow package
+stopped_at: Completed 03-03-PLAN.md
+last_updated: "2026-03-08T21:56:00Z"
+last_activity: 2026-03-08 — PowerShell profile and Alacritty config stow packages
 progress:
   total_phases: 4
   completed_phases: 0
@@ -26,9 +26,9 @@ See: .planning/REQUIREMENTS.md and .planning/ROADMAP.md
 ## Current Position
 
 Phase: 3 of 3 (Cross-Platform Provisioning)
-Plan: 2 of 4 in current phase
-Status: Plan 03-01 complete, continuing phase
-Last activity: 2026-03-08 — Extracted shared shell config to shell/ stow package
+Plan: 4 of 4 in current phase
+Status: Plan 03-03 complete, continuing phase
+Last activity: 2026-03-08 — PowerShell profile and Alacritty config stow packages
 
 Progress: [████████░░] 75%
 
@@ -43,8 +43,8 @@ Progress: [████████░░] 75%
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 8
-- Total execution time: ~17 min across all plans
+- Total plans completed: 10
+- Total execution time: ~20 min across all plans
 
 **By Phase:**
 
@@ -58,6 +58,8 @@ Progress: [████████░░] 75%
 | 02-zmk-firmware P01 | 2 tasks | 2 min | keymap edits |
 | 02-zmk-firmware P02 | 1 task | 5 min | push + submodule update |
 | 03-cross-platform P01 | 2 tasks | 2 min | shared shell config split |
+| 03-cross-platform P02 | 1 task | 1 min | cross-platform install.sh |
+| 03-cross-platform P03 | 2 tasks | 2 min | powershell + alacritty packages |
 
 ## Accumulated Context
 
@@ -74,6 +76,9 @@ Progress: [████████░░] 75%
 - **Install scripts:** One `install.sh` for Mac+Linux (pacman vs brew, --minimal flag), one `install.ps1` for Windows (standalone, no shared code)
 - **Windows is best-effort:** Mac and Linux are first-class. install.ps1 is simple and may drift from install.sh. That's OK.
 - **No over-engineering:** No Makefile, no YAML config, no task runner. Two scripts.
+- **Cask fault tolerance:** Cask installs use `|| true` with warning so script continues if a cask name is unavailable
+- **PowerShell profile standalone:** mirrors zsh aliases independently, drift acceptable
+- **Alacritty platform includes:** follows Ghostty pattern — base config imports platform TOMLs, silently skipped if missing
 
 ### Older Decisions
 
@@ -93,6 +98,6 @@ None active. Phase 3 is long-term with no fixed timeline.
 
 ## Session Continuity
 
-Last session: 2026-03-08T21:52:47.828Z
-Stopped at: Completed 03-01-PLAN.md
+Last session: 2026-03-08T21:56:00Z
+Stopped at: Completed 03-03-PLAN.md
 Resume file: None
