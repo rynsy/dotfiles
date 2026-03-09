@@ -1,2 +1,7 @@
 # macOS-specific paths (Homebrew)
-eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null)" || true
+# Apple Silicon (/opt/homebrew) first; Intel Mac fallback (/usr/local)
+if [ -f /opt/homebrew/bin/brew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [ -f /usr/local/bin/brew ]; then
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
