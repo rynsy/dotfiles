@@ -29,8 +29,6 @@
 
 - [x] **ZMK-01**: Media keys (prev/play-pause/next) added to Fn layer (Layer 2)
 - [x] **ZMK-02**: Volume keys (up/down/mute) added to Fn layer (Layer 2)
-- [x] **ZMK-03**: Layer 5 (Android) added — transparent base, BT slot 3
-- [x] **ZMK-04**: Mod+A toggles Layer 5 (Android) on/off
 - [x] **ZMK-05**: Firmware builds successfully via GitHub Actions after changes
 
 ### Dotfiles Management
@@ -57,6 +55,8 @@
 
 ### ZMK
 
+- **ZMK-03**: Layer 5 (Android) added — transparent base, BT slot 3 *(descoped from v1; lost in Phase 02 merge conflict)*
+- **ZMK-04**: Mod+A toggles Layer 5 (Android) on/off *(descoped from v1; depends on ZMK-03)*
 - **ZMK-06**: Android layer updated with any remaps discovered through actual use
 
 ### Zsh
@@ -123,8 +123,8 @@
 | DOTS-02 | Phase 4 (verify Phase 1) | Complete |
 | ZMK-01 | Phase 4 (verify Phase 2) | Complete |
 | ZMK-02 | Phase 4 (verify Phase 2) | Complete |
-| ZMK-03 | Phase 4 (verify Phase 2) | Complete |
-| ZMK-04 | Phase 4 (verify Phase 2) | Complete |
+| ZMK-03 | Phase 6 (descoped to v2) | Deferred |
+| ZMK-04 | Phase 6 (descoped to v2) | Deferred |
 | ZMK-05 | Phase 4 (verify Phase 2) | Complete |
 | SHELL-01 | Phase 3 | Complete |
 | SHELL-02 | Phase 3 | Complete |
@@ -141,9 +141,9 @@
 | XPLAT-02 | Phase 3 | Complete |
 
 **Coverage:**
-- v1 requirements: 18 total — 18 pending verification (Phase 4)
+- v1 requirements: 16 total — all complete (ZMK-03/ZMK-04 descoped to v2)
 - v1.5 requirements: 5 total — all complete (phase 1.1)
-- v2 requirements: 3 total — deferred
+- v2 requirements: 5 total — deferred (includes ZMK-03/ZMK-04)
 - v3 requirements: 13 total — all complete (Phase 3)
 
 ---

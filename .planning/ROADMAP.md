@@ -16,7 +16,8 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 2: ZMK Firmware** - Add media keys and Android layer to keyboard firmware (completed 2026-03-08)
 - [x] **Phase 3: Cross-Platform Provisioning** - Shared shell config, PowerShell profile, and full/minimal install scripts for Arch/Mac/Windows (completed 2026-03-08)
 - [x] **Phase 4: Retroactive Verification** - Produce VERIFICATION.md for Phases 01 and 02 by inspecting existing codebase (completed 2026-03-08)
-- [ ] **Phase 5: Alacritty Platform Config Fix** - Fix font.size cross-platform override bug and clean up PATH duplication
+- [x] **Phase 5: Alacritty Platform Config Fix** - Fix font.size cross-platform override bug and clean up PATH duplication (completed 2026-03-09)
+- [ ] **Phase 6: Gap Corrections + Intel macOS PATH Fix** - Descope ZMK-03/04 to v2, fix Intel Mac brew PATH
 
 ## Phase Details
 
@@ -104,6 +105,7 @@ Plans:
 **Depends on**: Phase 3
 **Requirements**: APP-01, APP-02, XPLAT-01
 **Gap Closure:** Closes integration bug and flow defect from v1.0 audit
+**Completed**: 2026-03-09
 **Success Criteria** (what must be TRUE):
   1. Alacritty on Linux uses base font size (not macOS 13pt override)
   2. Platform-specific Alacritty settings only apply on their target OS
@@ -111,7 +113,22 @@ Plans:
 **Plans**: 1 plan
 
 Plans:
-- [ ] 05-01-PLAN.md — Restructure Alacritty platform configs and update install.sh; remove PATH duplication from zsh/.zshenv
+- [x] 05-01-PLAN.md — Restructure Alacritty platform configs and update install.sh; remove PATH duplication from zsh/.zshenv
+
+### Phase 6: Gap Corrections + Intel macOS PATH Fix
+**Goal**: REQUIREMENTS.md accurately reflects v1.0 reality and Intel Mac users get brew in PATH after provisioning
+**Depends on**: Phase 5
+**Requirements**: ZMK-03, ZMK-04 (descoped to v2), PROV-02 (complete)
+**Gap Closure:** Closes documentation mismatch and Intel macOS PATH flow gap from v1.0 audit
+
+**Success Criteria** (what must be TRUE):
+  1. ZMK-03 and ZMK-04 unchecked in REQUIREMENTS.md and moved to v2
+  2. Traceability table reflects deferred status
+  3. `path.darwin` includes `/usr/local` fallback so Intel Mac users have brew in PATH after install.sh
+**Plans**: 1 plan
+
+Plans:
+- [ ] 06-01-PLAN.md — Correct ZMK-03/04 in REQUIREMENTS.md; add /usr/local fallback to path.darwin
 
 ## Progress
 
@@ -125,4 +142,5 @@ Phases execute in numeric order: 1 → 2 → 3
 | 2. ZMK Firmware | 2/2 | Complete | 2026-03-08 |
 | 3. Cross-Platform Provisioning | 4/4 | Complete | 2026-03-08 |
 | 4. Retroactive Verification | 2/2 | Complete | 2026-03-08 |
-| 5. Alacritty Platform Config Fix | 0/1 | Pending | — |
+| 5. Alacritty Platform Config Fix | 1/1 | Complete | 2026-03-09 |
+| 6. Gap Corrections + Intel macOS PATH Fix | 0/1 | Pending | — |
