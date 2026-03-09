@@ -141,11 +141,11 @@
 | XPLAT-02 | Phase 3 | Complete |
 
 **Coverage:**
-- v1 requirements: 16 total — all complete (ZMK-03/ZMK-04 descoped to v2)
+- v1 requirements: 16 total — 14 complete, 2 descoped to v2 (ZMK-03, ZMK-04)
 - v1.5 requirements: 5 total — all complete (phase 1.1)
 - v2 requirements: 5 total — deferred (includes ZMK-03/ZMK-04)
 - v3 requirements: 13 total — all complete (Phase 3)
 
 ---
 *Requirements defined: 2026-03-08*
-*Last updated: 2026-03-08 after gap closure planning*
+*Last updated: 2026-03-09*
