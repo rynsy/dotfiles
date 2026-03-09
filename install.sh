@@ -81,6 +81,14 @@ if [ ! -d "$ZINIT_HOME" ]; then
   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
+# Step 2b: Install TPM if missing
+TPM_HOME="$HOME/.tmux/plugins/tpm"
+if [ ! -d "$TPM_HOME" ]; then
+  echo "--- Installing TPM ---"
+  mkdir -p "$HOME/.tmux/plugins"
+  git clone https://github.com/tmux-plugins/tpm "$TPM_HOME"
+fi
+
 # Step 3: Back up conflicting real files
 echo "--- Checking for conflicts ---"
 conflicts=()
@@ -186,7 +194,7 @@ echo "=== Done! ==="
 echo ""
 echo "Post-install steps:"
 echo "  1. Decrypt secrets: cd $DOTFILES_DIR/shell/.config/shell/config.d && ansible-vault decrypt secrets.encrypted --output secrets"
-echo "  2. Install TPM plugins: ~/.tmux/plugins/tpm/bin/install_plugins"
+echo "  2. Install tmux plugins: start tmux, then press prefix+I (or run: ~/.tmux/plugins/tpm/bin/install_plugins)"
 echo "  3. Launch nvim to install plugins (first run may take a moment)"
 echo "  4. Open a new zsh shell to install zinit plugins and p10k prompt"
 echo ""
