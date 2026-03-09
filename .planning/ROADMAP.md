@@ -17,7 +17,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 3: Cross-Platform Provisioning** - Shared shell config, PowerShell profile, and full/minimal install scripts for Arch/Mac/Windows (completed 2026-03-08)
 - [x] **Phase 4: Retroactive Verification** - Produce VERIFICATION.md for Phases 01 and 02 by inspecting existing codebase (completed 2026-03-08)
 - [x] **Phase 5: Alacritty Platform Config Fix** - Fix font.size cross-platform override bug and clean up PATH duplication (completed 2026-03-09)
-- [ ] **Phase 6: Gap Corrections + Intel macOS PATH Fix** - Descope ZMK-03/04 to v2, fix Intel Mac brew PATH
+- [x] **Phase 6: Gap Corrections + Intel macOS PATH Fix** - Descope ZMK-03/04 to v2, fix Intel Mac brew PATH (completed 2026-03-09)
 
 ## Phase Details
 
@@ -143,4 +143,4 @@ Phases execute in numeric order: 1 → 2 → 3
 | 3. Cross-Platform Provisioning | 4/4 | Complete | 2026-03-08 |
 | 4. Retroactive Verification | 2/2 | Complete | 2026-03-08 |
 | 5. Alacritty Platform Config Fix | 1/1 | Complete | 2026-03-09 |
-| 6. Gap Corrections + Intel macOS PATH Fix | 0/1 | Pending | — |
+| 6. Gap Corrections + Intel macOS PATH Fix | 1/1 | Complete   | 2026-03-09 |

@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: completed
-stopped_at: Completed 05-01-PLAN.md
-last_updated: "2026-03-09T14:42:42.174Z"
+stopped_at: Completed 06-01-PLAN.md
+last_updated: "2026-03-09T20:36:46.560Z"
 last_activity: 2026-03-08 -- Phase 05 Alacritty platform fix
 progress:
-  total_phases: 6
-  completed_phases: 3
-  total_plans: 7
-  completed_plans: 9
+  total_phases: 7
+  completed_phases: 4
+  total_plans: 8
+  completed_plans: 10
   percent: 100
 ---
 
@@ -21,14 +21,14 @@ progress:
 See: .planning/REQUIREMENTS.md and .planning/ROADMAP.md
 
 **Core value:** A consistent, reliable development environment that works correctly across all devices — Linux and macOS as first-class citizens, Windows best-effort.
-**Current focus:** Phase 5 Alacritty platform fix (complete)
+**Current focus:** Phase 6 Gap Corrections (complete)
 
 ## Current Position
 
-Phase: 5 of 5 (Alacritty Platform Fix)
+Phase: 6 of 6 (Gap Corrections)
 Plan: 1 of 1 in current phase (complete)
-Status: Phase 5 complete -- Alacritty cross-platform config restructured, PATH duplication fixed
-Last activity: 2026-03-08 -- Phase 05 Alacritty platform fix
+Status: Phase 6 complete -- Intel Mac brew PATH fixed, REQUIREMENTS.md coverage count corrected
+Last activity: 2026-03-09 -- Phase 06 gap corrections
 
 Progress: [██████████] 100%
 
@@ -42,6 +42,7 @@ Progress: [██████████] 100%
 | 3. Cross-Platform Provisioning | Complete (4/4 plans) | 2026-03-08 |
 | 4. Retroactive Verification | Complete (2/2 plans) | 2026-03-08 |
 | 5. Alacritty Platform Fix | Complete (1/1 plans) | 2026-03-08 |
+| 6. Gap Corrections | Complete (1/1 plans) | 2026-03-09 |
 
 ## Performance Metrics
 
@@ -67,6 +68,7 @@ Progress: [██████████] 100%
 | 04-retroactive-verification P02 | 2 tasks | 2 min | Phase 02 ZMK verification |
 | 04-retroactive-verification P01 | 2 tasks | 3 min | Phase 01 environment fixes verification |
 | Phase 05-alacritty-platform-fix P01 | 7m | 2 tasks | 5 files |
+| Phase 06-gap-corrections P01 | 2min | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -75,6 +77,11 @@ Progress: [██████████] 100%
 - Phase 01.1 inserted after Phase 1: Bash Config and Shell Parity
 - Phase 2 completed with media keys relocated from left-hand QWE/ASD (upstream) to right-hand HJKL (user preference), merge conflict resolved
 - Phase 3 architecture decided: shell/ stow package for shared config, extend install.sh (not replace), standalone install.ps1
+
+### Key Architecture Decisions (Phase 6)
+
+- **path.darwin arch detection:** Use file existence check (`[ -f /opt/homebrew/bin/brew ]`) not `uname -m` — tests the binary directly, same pattern as install.sh
+- **ZMK-03/04 coverage:** Corrected to "14 complete, 2 descoped" — requirements that were never delivered should not be counted as complete
 
 ### Key Architecture Decisions (Phase 5)
 
@@ -124,6 +131,6 @@ None. All phases complete.
 
 ## Session Continuity
 
-Last session: 2026-03-08T23:43:53.597Z
-Stopped at: Completed 05-01-PLAN.md
+Last session: 2026-03-09T20:36:46.558Z
+Stopped at: Completed 06-01-PLAN.md
 Resume file: None
