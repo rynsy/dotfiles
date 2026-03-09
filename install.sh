@@ -17,7 +17,13 @@ done
 # --- OS detection ---
 OS="$(uname -s)"
 case "$OS" in
-  Linux)  PKG_MGR="pacman" ;;
+  Linux)
+    if command -v apt-get &>/dev/null || [ -f /etc/debian_version ]; then
+      PKG_MGR="apt"
+    else
+      PKG_MGR="pacman"
+    fi
+    ;;
   Darwin) PKG_MGR="brew" ;;
   *)      echo "Unsupported OS: $OS" >&2; exit 1 ;;
 esac
@@ -40,9 +46,23 @@ CORE_BREW=(stow zsh fzf zoxide tmux neovim git)
 EXTRA_BREW=(bash)
 EXTRA_CASKS=(ghostty alacritty)
 
+# Ubuntu/Debian — neovim and zoxide may be old/absent in older releases
+CORE_APT=(stow zsh fzf tmux git curl ncurses-term)
+EXTRA_APT=(neovim zoxide)
+
 # Step 1: Install packages
 echo "--- Installing packages ---"
-if [ "$PKG_MGR" = "pacman" ]; then
+if [ "$PKG_MGR" = "apt" ]; then
+  echo "Installing core packages via apt..."
+  sudo apt-get update -q
+  sudo apt-get install -y "${CORE_APT[@]}"
+  if [ "$MINIMAL" = false ]; then
+    echo "Installing extra packages via apt (best-effort)..."
+    for pkg in "${EXTRA_APT[@]}"; do
+      sudo apt-get install -y "$pkg" || echo "  Warning: could not install '$pkg' — install manually if needed"
+    done
+  fi
+elif [ "$PKG_MGR" = "pacman" ]; then
   echo "Installing core packages via pacman..."
   sudo pacman -S --needed "${CORE_PACMAN[@]}"
   if [ "$MINIMAL" = false ]; then
@@ -163,7 +183,14 @@ for pkg in "${PACKAGES[@]}"; do
   stow --no-folding "$pkg"
 done
 
-# Step 4.5: Place platform-specific Alacritty config
+# Step 4.5: Install TPM plugins non-interactively
+if [ -f "$HOME/.tmux/plugins/tpm/bin/install_plugins" ]; then
+  echo "--- Installing TPM plugins ---"
+  TMUX_PLUGIN_MANAGER_PATH="$HOME/.tmux/plugins/" \
+    "$HOME/.tmux/plugins/tpm/bin/install_plugins" 2>&1 | grep -E "(Installing|Already|Error)" || true
+fi
+
+# Step 4.7: Place platform-specific Alacritty config
 if [ -d "$DOTFILES_DIR/alacritty/platform" ]; then
   echo "--- Placing platform Alacritty config ---"
   mkdir -p "$HOME/.config/alacritty"
@@ -194,9 +221,19 @@ echo "=== Done! ==="
 echo ""
 echo "Post-install steps:"
 echo "  1. Decrypt secrets: cd $DOTFILES_DIR/shell/.config/shell/config.d && ansible-vault decrypt secrets.encrypted --output secrets"
-echo "  2. Install tmux plugins: start tmux, then press prefix+I (or run: ~/.tmux/plugins/tpm/bin/install_plugins)"
-echo "  3. Launch nvim to install plugins (first run may take a moment)"
-echo "  4. Open a new zsh shell to install zinit plugins and p10k prompt"
+echo "  2. Launch nvim to install plugins (first run may take a moment)"
+echo "  3. Open a new zsh shell to install zinit plugins and p10k prompt"
+echo ""
+echo "  Note: TPM plugins were installed automatically. If catppuccin theme is"
+echo "  missing in tmux, run: ~/.tmux/plugins/tpm/bin/install_plugins"
+if [ "$PKG_MGR" = "apt" ]; then
+  echo ""
+  echo "  Ubuntu notes:"
+  echo "  - If neovim is too old, install latest from: https://github.com/neovim/neovim/releases"
+  echo "  - If zoxide is missing, install from: https://github.com/ajeetdsouza/zoxide#installation"
+  echo "  - F12 tmux passthrough requires ncurses-term (installed). If F12 doesn't work,"
+  echo "    check your SSH client terminal supports sending F12."
+fi
 echo ""
 if [ ${#conflicts[@]} -gt 0 ]; then
   echo "Backups saved to: $BACKUP_DIR"
