@@ -183,16 +183,25 @@ for pkg in "${PACKAGES[@]}"; do
   stow --no-folding "$pkg" || echo "  Warning: stow $pkg had conflicts — resolve manually then re-run stow"
 done
 
-# Step 4.5: Install TPM plugins non-interactively (skip if inside a running tmux session)
-if [ -f "$HOME/.tmux/plugins/tpm/bin/install_plugins" ]; then
-  if [ -n "${TMUX:-}" ]; then
-    echo "--- Skipping TPM plugin install (inside tmux — use prefix+I instead) ---"
+# Step 4.5: Clone TPM plugins directly (reliable, no tmux session required)
+echo "--- Installing TPM plugins ---"
+PLUGIN_DIR="$HOME/.tmux/plugins"
+mkdir -p "$PLUGIN_DIR"
+clone_plugin() {
+  local repo="$1" dest="$2"
+  if [ ! -d "$PLUGIN_DIR/$dest" ]; then
+    echo "  cloning $repo"
+    git clone --depth=1 "https://github.com/$repo" "$PLUGIN_DIR/$dest"
   else
-    echo "--- Installing TPM plugins ---"
-    TMUX_PLUGIN_MANAGER_PATH="$HOME/.tmux/plugins/" \
-      "$HOME/.tmux/plugins/tpm/bin/install_plugins" 2>&1 | grep -E "(Installing|Already|Error)" || true
+    echo "  already installed: $dest"
   fi
-fi
+}
+clone_plugin "tmux-plugins/tmux-sensible"         "tmux-sensible"
+clone_plugin "catppuccin/tmux"                    "tmux"
+clone_plugin "tmux-plugins/tmux-yank"             "tmux-yank"
+clone_plugin "tmux-plugins/tmux-resurrect"        "tmux-resurrect"
+clone_plugin "tmux-plugins/tmux-continuum"        "tmux-continuum"
+clone_plugin "alexwforsythe/tmux-which-key"       "tmux-which-key"
 
 # Step 4.7: Place platform-specific Alacritty config
 if [ -d "$DOTFILES_DIR/alacritty/platform" ]; then
@@ -228,8 +237,8 @@ echo "  1. Decrypt secrets: cd $DOTFILES_DIR/shell/.config/shell/config.d && ans
 echo "  2. Launch nvim to install plugins (first run may take a moment)"
 echo "  3. Open a new zsh shell to install zinit plugins and p10k prompt"
 echo ""
-echo "  Note: TPM plugins were installed automatically. If catppuccin theme is"
-echo "  missing in tmux, run: ~/.tmux/plugins/tpm/bin/install_plugins"
+echo "  Note: TMux plugins were cloned directly. If a plugin is missing,"
+echo "  re-run install.sh or clone it to ~/.tmux/plugins/<name> manually."
 if [ "$PKG_MGR" = "apt" ]; then
   echo ""
   echo "  Ubuntu notes:"
