@@ -143,6 +143,7 @@ done
 check_conflict "$HOME/.bashrc"
 check_conflict "$HOME/.bash_profile"
 
+check_conflict "$HOME/.tmux.conf"
 check_conflict "$HOME/.config/tmux/tmux.conf"
 check_conflict "$HOME/.config/tmux/scripts/sessionizer.sh"
 
