@@ -201,7 +201,6 @@ clone_plugin "catppuccin/tmux"                    "tmux"
 clone_plugin "tmux-plugins/tmux-yank"             "tmux-yank"
 clone_plugin "tmux-plugins/tmux-resurrect"        "tmux-resurrect"
 clone_plugin "tmux-plugins/tmux-continuum"        "tmux-continuum"
-clone_plugin "alexwforsythe/tmux-which-key"       "tmux-which-key"
 
 # Step 4.7: Place platform-specific Alacritty config
 if [ -d "$DOTFILES_DIR/alacritty/platform" ]; then
