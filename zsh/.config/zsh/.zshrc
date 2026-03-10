@@ -43,9 +43,29 @@ zinit cdreplay -q
 # To customize prompt, run 'p10k configure' or edit ~/.config/zsh/.p10k.zsh
 [[ ! -f ${ZDOTDIR:-$HOME}/.p10k.zsh ]] || source ${ZDOTDIR:-$HOME}/.p10k.zsh
 
-# Keybindings
+# Keybindings — history search
 bindkey '\e[A' history-search-backward
 bindkey '\e[B' history-search-forward
+
+# Keybindings — Home/End (multiple sequences for xterm, application mode, linux console)
+bindkey '\e[H'  beginning-of-line
+bindkey '\eOH'  beginning-of-line
+bindkey '\e[1~' beginning-of-line
+bindkey '\e[F'  end-of-line
+bindkey '\eOF'  end-of-line
+bindkey '\e[4~' end-of-line
+
+# Keybindings — Delete/Insert
+bindkey '\e[3~' delete-char
+bindkey '\e[2~' overwrite-mode
+
+# Keybindings — Ctrl+Left/Right for word navigation
+bindkey '\e[1;5C' forward-word
+bindkey '\e[1;5D' backward-word
+bindkey '\e[5C'   forward-word
+bindkey '\e[5D'   backward-word
+bindkey '\eOc'    forward-word
+bindkey '\eOd'    backward-word
 
 # History
 HISTSIZE=50000
