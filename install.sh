@@ -180,14 +180,18 @@ echo "--- Stowing packages ---"
 cd "$DOTFILES_DIR"
 for pkg in "${PACKAGES[@]}"; do
   echo "  stow --no-folding $pkg"
-  stow --no-folding "$pkg"
+  stow --no-folding "$pkg" || echo "  Warning: stow $pkg had conflicts — resolve manually then re-run stow"
 done
 
-# Step 4.5: Install TPM plugins non-interactively
+# Step 4.5: Install TPM plugins non-interactively (skip if inside a running tmux session)
 if [ -f "$HOME/.tmux/plugins/tpm/bin/install_plugins" ]; then
-  echo "--- Installing TPM plugins ---"
-  TMUX_PLUGIN_MANAGER_PATH="$HOME/.tmux/plugins/" \
-    "$HOME/.tmux/plugins/tpm/bin/install_plugins" 2>&1 | grep -E "(Installing|Already|Error)" || true
+  if [ -n "${TMUX:-}" ]; then
+    echo "--- Skipping TPM plugin install (inside tmux — use prefix+I instead) ---"
+  else
+    echo "--- Installing TPM plugins ---"
+    TMUX_PLUGIN_MANAGER_PATH="$HOME/.tmux/plugins/" \
+      "$HOME/.tmux/plugins/tpm/bin/install_plugins" 2>&1 | grep -E "(Installing|Already|Error)" || true
+  fi
 fi
 
 # Step 4.7: Place platform-specific Alacritty config
