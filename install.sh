@@ -40,15 +40,15 @@ echo ""
 
 # --- Package arrays ---
 CORE_PACMAN=(stow zsh fzf zoxide tmux neovim git)
-EXTRA_PACMAN=(bash ghostty alacritty)
+EXTRA_PACMAN=(bash ghostty alacritty starship)
 
 CORE_BREW=(stow zsh fzf zoxide tmux neovim git)
-EXTRA_BREW=(bash)
+EXTRA_BREW=(bash starship)
 EXTRA_CASKS=(ghostty alacritty)
 
 # Ubuntu/Debian — neovim and zoxide may be old/absent in older releases
 CORE_APT=(stow zsh fzf tmux git curl ncurses-term)
-EXTRA_APT=(neovim zoxide)
+EXTRA_APT=(neovim zoxide starship)
 
 # Step 1: Install packages
 echo "--- Installing packages ---"
@@ -142,6 +142,7 @@ done
 
 check_conflict "$HOME/.bashrc"
 check_conflict "$HOME/.bash_profile"
+check_conflict "$HOME/.inputrc"
 
 check_conflict "$HOME/.tmux.conf"
 check_conflict "$HOME/.config/tmux/tmux.conf"
