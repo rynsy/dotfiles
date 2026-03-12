@@ -115,9 +115,17 @@ conflicts=()
 
 check_conflict() {
   local target="$1"
-  if [ -e "$target" ] && [ ! -L "$target" ]; then
-    conflicts+=("$target")
-  fi
+  # Skip symlinks (already managed by stow)
+  [ -L "$target" ] && return
+  # Skip if file doesn't exist
+  [ ! -e "$target" ] && return
+  # Skip files that resolve into the dotfiles directory (stow folder-folding)
+  local resolved
+  resolved="$(cd "$(dirname "$target")" 2>/dev/null && pwd -P)/$(basename "$target")"
+  case "$resolved" in
+    "$DOTFILES_DIR"/*) return ;;
+  esac
+  conflicts+=("$target")
 }
 
 # nvim: only check our managed files, leave omarchy symlinks alone

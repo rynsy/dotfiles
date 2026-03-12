@@ -11,7 +11,7 @@ HISTFILESIZE=100000
 HISTCONTROL=ignoreboth
 
 # Bash completion
-if [[ ! -v BASH_COMPLETION_VERSINFO && -f /usr/share/bash-completion/bash_completion ]]; then
+if [[ -z "${BASH_COMPLETION_VERSINFO+set}" && -f /usr/share/bash-completion/bash_completion ]]; then
   . /usr/share/bash-completion/bash_completion
 fi
 
