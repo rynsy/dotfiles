@@ -1,0 +1,117 @@
+;; ============================================================================
+;; Kanata — Home row mods for Colemak-DH
+;; ============================================================================
+;;
+;; Miryoku-inspired home row mods (GACS pattern: GUI/Alt/Ctrl/Shift).
+;; Kanata intercepts keys AFTER the ZMK firmware, so this config assumes
+;; the Kinesis is in Colemak-DH mode (Mod+C on the keyboard).
+;;
+;; If Colemak is OFF on the keyboard, the home row mods will apply to the
+;; QWERTY home row (a s d f | j k l ;) instead — still works, just not
+;; what you probably want. Always match hardware and software layout.
+;;
+;; ----------------------------------------------------------------------------
+;; Prerequisites
+;; ----------------------------------------------------------------------------
+;;   Linux (Arch):
+;;     sudo pacman -S kanata        # or: yay -S kanata-bin
+;;     sudo usermod -aG input $USER # logout/login after this
+;;
+;;   macOS:
+;;     brew install kanata
+;;     Install Karabiner VirtualHIDDevice driver:
+;;       https://karabiner-elements.pqrs.org/
+;;     Grant Accessibility + Input Monitoring permissions to kanata
+;;     (System Settings → Privacy & Security)
+;;
+;; ----------------------------------------------------------------------------
+;; Running
+;; ----------------------------------------------------------------------------
+;;   Linux (systemd user service — see systemd/user/kanata.service):
+;;     systemctl --user daemon-reload
+;;     systemctl --user enable --now kanata
+;;     systemctl --user status kanata       # verify
+;;     journalctl --user -u kanata -f       # tail logs
+;;
+;;   macOS (launchd agent — see com.jtroo.kanata.plist):
+;;     cp ~/.config/kanata/com.jtroo.kanata.plist ~/Library/LaunchAgents/
+;;     launchctl load ~/Library/LaunchAgents/com.jtroo.kanata.plist
+;;     tail -f /tmp/kanata.err              # tail logs
+;;
+;;   Quick test (no service):
+;;     kanata --cfg ~/.config/kanata/kanata.kbd
+;;
+;; ----------------------------------------------------------------------------
+;; Tuning
+;; ----------------------------------------------------------------------------
+;; If you get accidental mods when typing fast, raise tap-time / hold-time.
+;; If mods feel sluggish, lower them. Miryoku ships 200ms as default.
+;; Edit the defvar block below and kanata auto-reloads on file change (if
+;; configured) or restart the service.
+;; ============================================================================
+
+(defcfg
+  ;; Keys not listed in defsrc pass through unchanged.
+  process-unmapped-keys yes
+
+  ;; ----- Linux -----
+  ;; Auto-detect keyboard devices by default. If this misbehaves (e.g.,
+  ;; Kanata grabs the wrong device), uncomment and point at a specific one:
+  ;; linux-dev /dev/input/by-id/usb-Kinesis_Adv360_Pro-event-kbd
+
+  ;; ----- macOS -----
+  ;; Match all devices via Karabiner VirtualHIDDevice. Harmless on Linux
+  ;; (kanata ignores unknown directives by platform), but you can comment
+  ;; it out on Linux if you prefer:
+  ;; macos-dev-names-include (".*")
+)
+
+;; Only the home row keys we want to modify. All other keys pass through
+;; via process-unmapped-keys yes above.
+(defsrc
+  a  r  s  t   n  e  i  o
+)
+
+(defvar
+  ;; Tap-vs-hold timing (ms).
+  ;;   tap-time:  max duration counted as a tap (still sends the letter)
+  ;;   hold-time: min duration counted as a hold (sends the modifier)
+  ;; Miryoku default: 200ms. Adjust to taste.
+  tap-time   200
+  hold-time  200
+)
+
+(defalias
+  ;; ==========================================================================
+  ;; Home row mods — GACS pattern
+  ;; ==========================================================================
+  ;; Tap = letter (normal typing), hold = modifier.
+  ;;
+  ;;   Pinky  → GUI    (Super on Linux, Cmd on Mac)
+  ;;   Ring   → Alt    (Option on Mac)
+  ;;   Middle → Ctrl
+  ;;   Index  → Shift
+  ;;
+  ;; Mirrored across both hands so you can always mod with the opposite
+  ;; hand from the key you're pressing.
+  ;;
+  ;; tap-hold-release: hold action fires only if another key is pressed AND
+  ;; released while this one is still held. More forgiving than tap-hold-press
+  ;; (pure Miryoku), which fires the mod the instant another key is pressed.
+
+  ;; Left hand (Colemak-DH home row: a r s t)
+  hma (tap-hold-release $tap-time $hold-time a lmet)  ;; pinky  → GUI
+  hmr (tap-hold-release $tap-time $hold-time r lalt)  ;; ring   → Alt
+  hms (tap-hold-release $tap-time $hold-time s lctl)  ;; middle → Ctrl
+  hmt (tap-hold-release $tap-time $hold-time t lsft)  ;; index  → Shift
+
+  ;; Right hand (Colemak-DH home row: n e i o)
+  hmn (tap-hold-release $tap-time $hold-time n rsft)  ;; index  → Shift
+  hme (tap-hold-release $tap-time $hold-time e rctl)  ;; middle → Ctrl
+  hmi (tap-hold-release $tap-time $hold-time i lalt)  ;; ring   → Alt
+  hmo (tap-hold-release $tap-time $hold-time o rmet)  ;; pinky  → GUI
+)
+
+(deflayer base
+  @hma  @hmr  @hms  @hmt    @hmn  @hme  @hmi  @hmo
+)

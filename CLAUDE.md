@@ -22,7 +22,7 @@ stow -R <package>              # restow (remove + create)
 
 Stowed packages (defined in `install.sh`): `nvim`, `zsh`, `claude`, `git`, `ssh`, `tmux`, `ghostty`, `bash`, `shell`, `powershell`, `alacritty`
 
-Additional packages not in install.sh: `aerospace` (macOS only), `zmk` (git submodule -> `Adv360-Pro-ZMK`)
+Additional packages not in install.sh: `aerospace` (macOS only), `kanata` (cross-platform key remapper, for home row mod experiments), `zmk` (git submodule -> `Adv360-Pro-ZMK`)
 
 Each package directory mirrors the target home directory structure (e.g., `nvim/.config/nvim/` → `~/.config/nvim/`).
 

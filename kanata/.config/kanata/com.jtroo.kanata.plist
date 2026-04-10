@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  macOS launchd agent for Kanata.
+
+  Setup:
+    cp ~/.config/kanata/com.jtroo.kanata.plist ~/Library/LaunchAgents/
+    launchctl load ~/Library/LaunchAgents/com.jtroo.kanata.plist
+
+  Stop / unload:
+    launchctl unload ~/Library/LaunchAgents/com.jtroo.kanata.plist
+
+  Logs:
+    tail -f /tmp/kanata.err
+    tail -f /tmp/kanata.out
+
+  Notes:
+    - Apple Silicon: kanata lives at /opt/homebrew/bin/kanata
+    - Intel Macs:    kanata lives at /usr/local/bin/kanata
+    - Adjust ProgramArguments[0] below if needed.
+    - Requires Accessibility + Input Monitoring permissions granted in
+      System Settings → Privacy & Security.
+    - Requires Karabiner VirtualHIDDevice driver installed.
+-->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.jtroo.kanata</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/opt/homebrew/bin/kanata</string>
+    <string>--cfg</string>
+    <string>/Users/ryan/.config/kanata/kanata.kbd</string>
+  </array>
+
+  <key>RunAtLoad</key>
+  <true/>
+
+  <key>KeepAlive</key>
+  <true/>
+
+  <key>StandardErrorPath</key>
+  <string>/tmp/kanata.err</string>
+
+  <key>StandardOutPath</key>
+  <string>/tmp/kanata.out</string>
+</dict>
+</plist>
