@@ -1,74 +1,120 @@
 # =============================================================================
 # Aerospace — Tiling WM for macOS
-# Keybindings mirror Hyprland/Omarchy setup (Cmd as modifier)
+# Mirrors Hyprland/Omarchy keybindings where possible
 #
-# With ZMK Mac layer: physical Left Ctrl sends Cmd, so the same finger
-# that hits Super on Linux (right thumb GUI) now... wait, no:
-# On Linux, Super is right thumb. On Mac, Cmd is left thumb (physical Ctrl).
-# The WM modifier is a DIFFERENT physical key per OS, but the muscle memory
-# for the RIGHT HAND patterns (hjkl, 1-9) is identical.
+# Modifier mapping (via ZMK Mac layer):
+#   Linux: right thumb upper-inner = Super (LGUI) = WM modifier
+#   Mac:   right thumb upper-inner = Cmd (LGUI, unchanged) = WM modifier
+#   Same physical key, same hand, same right-hand patterns (hjkl, 1-9).
+#   Left thumb upper-inner also sends Cmd (LCTRL→LGUI) for OS shortcuts.
+#
+# macOS trade-offs (Aerospace intercepts before apps see the key):
+#   Cmd+H       → focus left (overrides macOS "hide app")
+#   Cmd+F       → fullscreen (overrides in-app Find)
+#   Cmd+T       → toggle float (overrides new tab)
+#   Cmd+R       → resize mode (overrides refresh)
+#   Cmd+1-9     → workspaces (overrides browser tab switching)
+#
+# NOT intercepted (preserved for macOS / apps):
+#   Cmd+B       → tmux prefix (Ghostty remaps to Ctrl+B)
+#   Cmd+W       → close tab/window (app-level)
+#   Cmd+Q       → quit app
+#   Cmd+S       → save
+#   Cmd+Tab     → macOS app switcher
+#   Cmd+Space   → Spotlight / Raycast
+#   Cmd+C/V/X/Z → copy / paste / cut / undo
 # =============================================================================
 
-# Start at login
 start-at-login = true
 
-# Normalizations
+# -----------------------------------------------------------------------------
+# Core Settings
+# -----------------------------------------------------------------------------
+
+# Normalizations (keep tree sane, like Hyprland's dwindle preserve_split)
 enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true
 
-# Mouse follows focus
+# Cmd+H is focus-left, so defeat macOS "hide app" behavior
+automatically-unhide-macos-hidden-apps = true
+
+# Mouse follows focus (matches Hyprland on-focus-changed)
 on-focus-changed = ['move-mouse window-lazy-center']
 
-# Layout settings
+# Layout (tiles = BSP, closest to Hyprland's dwindle)
 default-root-container-layout = 'tiles'
 default-root-container-orientation = 'auto'
 
-# Gaps (match Hyprland looknfeel)
+# Accordion peek padding (visible sliver of stacked windows)
+accordion-padding = 30
+
+# Gaps (match Hyprland: gaps_in=5, gaps_out=10)
 [gaps]
-inner.horizontal = 8
-inner.vertical = 8
-outer.left = 8
-outer.right = 8
-outer.top = 8
-outer.bottom = 8
+inner.horizontal = 5
+inner.vertical = 5
+outer.left = 10
+outer.right = 10
+outer.top = 10
+outer.bottom = 10
+
+# =============================================================================
+# Window Rules
+# =============================================================================
+# Equivalent to Hyprland's windowrule floating-window tag.
+# Use `aerospace list-apps` to find bundle IDs.
+
+[[on-window-detected]]
+if.app-id = 'com.apple.systempreferences'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.SystemPreferences'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.calculator'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.1password.1password'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Signal'
+run = 'layout floating'
 
 # =============================================================================
 # Keybindings — Main mode
 # =============================================================================
 #
-# Using Cmd as modifier. On ZMK Mac layer, physical Left Ctrl = Cmd.
-#
-# NOTE: Cmd+h is macOS "hide app" — Aerospace overrides it.
-# NOTE: Cmd+t/f/r/1-9 conflict with macOS/app defaults, but Aerospace
-# intercepts at the WM level before apps see them. This is the same
-# tradeoff as Hyprland intercepting Super+key on Linux.
-#
-# Known trade-offs vs stock macOS:
-#   Cmd+Tab   → NOT intercepted (kept for macOS app switcher)
-#   Cmd+H     → focus left (overrides macOS "hide app")
-#   Cmd+F     → fullscreen (overrides in-app Find)
-#   Cmd+T     → toggle float (overrides new tab in browsers)
-#   Cmd+R     → resize mode (overrides browser refresh)
-#   Cmd+1-9   → workspaces (overrides browser tab switching)
-#   Cmd+W     → NOT intercepted (kept for macOS close tab/window)
-#   Cmd+S     → NOT intercepted (kept for macOS save)
-#   Cmd+C/V/X → NOT intercepted (kept for copy/paste/cut)
+# Pattern mirrors Hyprland:
+#   Cmd         = basic actions (focus, workspaces, fullscreen)
+#   Cmd+Shift   = movement (move window, move to workspace, app launchers)
+#   Cmd+Ctrl    = system utilities (left-hand keys only: b, w, a)
+#   Service mode = monitor/workspace management, layout changes
 
 [mode.main.binding]
 
-# -- Focus (Cmd + h/j/k/l) — matches Hyprland Super+Arrow --
-cmd-h = 'focus left'
-cmd-j = 'focus down'
-cmd-k = 'focus up'
-cmd-l = 'focus right'
+# -- Focus (Cmd+hjkl) — seamless cross-monitor --
+# Matches Hyprland Super+{Left,Down,Up,Right}. The || fallback means:
+# if at the workspace edge, jump to the adjacent monitor instead.
+cmd-h = 'focus left || focus-monitor left'
+cmd-j = 'focus down || focus-monitor down'
+cmd-k = 'focus up || focus-monitor up'
+cmd-l = 'focus right || focus-monitor right'
 
-# -- Move window (Cmd+Shift + h/j/k/l) — matches Hyprland Super+Shift+Arrow --
-cmd-shift-h = 'move left'
-cmd-shift-j = 'move down'
-cmd-shift-k = 'move up'
-cmd-shift-l = 'move right'
+# -- Move window (Cmd+Shift+hjkl) — seamless cross-monitor --
+# Matches Hyprland Super+Shift+{Left,Down,Up,Right}
+cmd-shift-h = 'move left || move-node-to-monitor --focus-follows-window left'
+cmd-shift-j = 'move down || move-node-to-monitor --focus-follows-window down'
+cmd-shift-k = 'move up || move-node-to-monitor --focus-follows-window up'
+cmd-shift-l = 'move right || move-node-to-monitor --focus-follows-window right'
 
-# -- Switch workspace (Cmd + 1-9) — matches Hyprland Super+1-9 --
+# -- Switch workspace (Cmd+1-0) — matches Hyprland Super+1-0 --
 cmd-1 = 'workspace 1'
 cmd-2 = 'workspace 2'
 cmd-3 = 'workspace 3'
@@ -78,8 +124,9 @@ cmd-6 = 'workspace 6'
 cmd-7 = 'workspace 7'
 cmd-8 = 'workspace 8'
 cmd-9 = 'workspace 9'
+cmd-0 = 'workspace 10'
 
-# -- Move window to workspace (Cmd+Shift + 1-9) — matches Hyprland Super+Shift+1-9 --
+# -- Move window to workspace (Cmd+Shift+1-0) — matches Hyprland Super+Shift+1-0 --
 cmd-shift-1 = 'move-node-to-workspace 1'
 cmd-shift-2 = 'move-node-to-workspace 2'
 cmd-shift-3 = 'move-node-to-workspace 3'
@@ -89,46 +136,88 @@ cmd-shift-6 = 'move-node-to-workspace 6'
 cmd-shift-7 = 'move-node-to-workspace 7'
 cmd-shift-8 = 'move-node-to-workspace 8'
 cmd-shift-9 = 'move-node-to-workspace 9'
+cmd-shift-0 = 'move-node-to-workspace 10'
 
-# -- Cycle workspaces (Alt + Tab) --
-# NOT Cmd+Tab — that's the macOS app switcher and too ingrained to override.
-# On Hyprland, Super+Tab = next workspace, Alt+Tab = cycle windows.
-# Here Alt+Tab = next workspace, Cmd+Tab = macOS app switcher.
-alt-tab = 'workspace next'
-alt-shift-tab = 'workspace prev'
+# -- Cycle workspaces --
+# Hyprland: Super+Tab = next workspace. On Mac, Cmd+Tab is the app switcher
+# and too ingrained to override. Alt+Tab cycles workspaces instead.
+alt-tab = 'workspace next --wrap-around'
+alt-shift-tab = 'workspace prev --wrap-around'
 
-# -- Fullscreen (Cmd + f) — matches Hyprland Super+F --
+# -- Workspace back-and-forth — Hyprland uses Super+Ctrl+Tab, but on Mac
+# Cmd+Ctrl requires both right thumb keys which is awkward. Cmd+` is natural
+# and the macOS "cycle windows within app" it overrides is redundant in a tiling WM.
+cmd-backtick = 'workspace-back-and-forth'
+
+# -- Fullscreen (Cmd+f) — matches Hyprland Super+F --
 cmd-f = 'fullscreen'
 
-# -- Toggle floating (Cmd + t) — matches Hyprland Super+T --
+# -- Toggle floating (Cmd+t) — matches Hyprland Super+T (omarchy default) --
 cmd-t = 'layout floating tiling'
 
-# -- Toggle split direction --
+# -- Toggle split direction (Cmd+/) --
 cmd-slash = 'layout tiles horizontal vertical'
 
-# -- Move window to monitor (Cmd+Ctrl+Shift + h/j/k/l) — matches Hyprland --
-cmd-ctrl-shift-h = ['move-node-to-monitor left', 'focus-monitor left']
-cmd-ctrl-shift-l = ['move-node-to-monitor right', 'focus-monitor right']
-cmd-ctrl-shift-k = ['move-node-to-monitor up', 'focus-monitor up']
-cmd-ctrl-shift-j = ['move-node-to-monitor down', 'focus-monitor down']
+# -- Balance window sizes (Cmd+=) — matches Hyprland Super+= --
+cmd-equal = 'balance-sizes'
 
-# -- Focus monitor (Cmd+Ctrl + h/l) --
-cmd-ctrl-h = 'focus-monitor left'
-cmd-ctrl-l = 'focus-monitor right'
-cmd-ctrl-k = 'focus-monitor up'
-cmd-ctrl-j = 'focus-monitor down'
+# -- Monitor navigation --
+# Hyprland uses Super+Ctrl+hjkl for explicit monitor focus, but on the Kinesis
+# Cmd+Ctrl+{right-hand} requires both right thumb keys + right fingers = awkward.
+# The || fallback on Cmd+hjkl above handles cross-monitor focus seamlessly.
+# For explicit monitor jump (skip workspace edge check), use Cmd+Ctrl with
+# LEFT-hand keys only (b/w/a below work because b/w/a are left-hand keys).
 
-# -- Bluetooth (Cmd+Ctrl + b) — matches Omarchy Super+Ctrl+B --
+# -- Move workspace to monitor (service mode) --
+# Moved to service mode to avoid 3-modifier combos. Press Cmd+Shift+; then
+# h/l to move workspace left/right.
+
+# -----------------------------------------------------------------------------
+# App Launchers — matches Hyprland Super+{Return,Shift+Return,...}
+# -----------------------------------------------------------------------------
+
+# Terminal — matches Hyprland Super+Return
+cmd-enter = 'exec-and-forget open -n /Applications/Ghostty.app'
+
+# Browser — matches Hyprland Super+Shift+Return / Super+Shift+B
+cmd-shift-enter = 'exec-and-forget open -a "Google Chrome"'
+
+# 1Password — matches Hyprland Super+Shift+/
+cmd-shift-slash = 'exec-and-forget open -a "1Password"'
+
+# Obsidian — matches Hyprland Super+Shift+O
+cmd-shift-o = 'exec-and-forget open -a "Obsidian"'
+
+# Signal — matches Hyprland Super+Shift+S
+cmd-shift-s = 'exec-and-forget open -a "Signal"'
+
+# Music — matches Hyprland Super+Shift+M
+cmd-shift-m = 'exec-and-forget open -a "Spotify"'
+
+# File manager — matches Hyprland Super+Shift+F
+cmd-shift-f = 'exec-and-forget open -a "Finder"'
+
+# -----------------------------------------------------------------------------
+# System Utilities — matches Hyprland Super+Ctrl+{B,W,A}
+# -----------------------------------------------------------------------------
+
+# Bluetooth — matches Hyprland/Omarchy Super+Ctrl+B
 cmd-ctrl-b = 'exec-and-forget open x-apple.systempreferences:com.apple.BluetoothSettings'
 
-# -- Resize mode (Cmd + r) --
+# WiFi — matches Omarchy Super+Ctrl+W
+cmd-ctrl-w = 'exec-and-forget open x-apple.systempreferences:com.apple.wifi-settings-extension'
+
+# Audio — matches Omarchy Super+Ctrl+A
+cmd-ctrl-a = 'exec-and-forget open x-apple.systempreferences:com.apple.Sound-Settings.extension'
+
+# -- Resize mode (Cmd+r) — matches Hyprland resize submap --
 cmd-r = 'mode resize'
 
-# -- Service mode (Cmd + Shift + semicolon) --
+# -- Service mode (Cmd+Shift+;) — for less frequent actions --
 cmd-shift-semicolon = 'mode service'
 
 # =============================================================================
-# Resize mode
+# Resize mode — matches Hyprland Super+{minus,equal,Shift+minus,Shift+equal}
 # =============================================================================
 
 [mode.resize.binding]
@@ -136,25 +225,42 @@ h = 'resize width -50'
 j = 'resize height +50'
 k = 'resize height -50'
 l = 'resize width +50'
+minus = 'resize smart -50'
+equal = 'resize smart +50'
 enter = 'mode main'
 escape = 'mode main'
 
 # =============================================================================
-# Service mode — for less frequent actions
+# Service mode — for less frequent / destructive actions
 # =============================================================================
 
 [mode.service.binding]
-r = ['flatten-workspace-tree', 'mode main']    # Reset layout
-f = ['layout floating tiling', 'mode main']
+r = ['flatten-workspace-tree', 'mode main']    # Reset layout tree
+b = ['balance-sizes', 'mode main']             # Balance all window sizes
+f = ['layout floating tiling', 'mode main']    # Toggle float
+a = ['layout accordion', 'mode main']          # Switch to accordion layout
+t = ['layout tiles', 'mode main']              # Switch to tiles layout
+
+# Move workspace to monitor — matches Hyprland Super+Shift+Alt+arrows
+h = ['move-workspace-to-monitor --wrap-around prev', 'mode main']
+l = ['move-workspace-to-monitor --wrap-around next', 'mode main']
+
+# Join with (create container — similar to Hyprland grouping)
+shift-h = ['join-with left', 'mode main']
+shift-j = ['join-with down', 'mode main']
+shift-k = ['join-with up', 'mode main']
+shift-l = ['join-with right', 'mode main']
+
 backspace = ['close-all-windows-but-current', 'mode main']
 enter = 'mode main'
 escape = 'mode main'
 
 # =============================================================================
-# Workspace-to-monitor assignment (adjust for your Mac setup)
+# Workspace-to-monitor assignment
 # =============================================================================
-
-# Uncomment and adjust when you know your monitor setup:
+# Uncomment and adjust for your Mac monitor setup.
+# Use `aerospace list-monitors` to see monitor names.
+#
 # [workspace-to-monitor-force-assignment]
 # 1 = 'main'
 # 2 = 'main'
