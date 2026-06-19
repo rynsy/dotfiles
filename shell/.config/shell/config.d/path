@@ -8,9 +8,10 @@ export PATH="$PATH:$GEM_HOME/bin"
 # Composer setup
 export PATH="$HOME/.composer/vendor/bin:$PATH"
 
-# Dotnet config
-export DOTNET_ROOT="$HOME/.dotnet"
-export PATH="$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools"
+# Dotnet config — SDK/runtime installed via pacman (dotnet-sdk) to /usr/share/dotnet;
+# global tools (e.g. ilspycmd) live in ~/.dotnet/tools.
+export DOTNET_ROOT="/usr/share/dotnet"
+export PATH="$PATH:$HOME/.dotnet/tools"
 
 # Pulumi
 export PATH="$PATH:$HOME/.pulumi/bin"
