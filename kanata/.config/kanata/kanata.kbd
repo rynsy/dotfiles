@@ -55,9 +55,9 @@
   process-unmapped-keys yes
 
   ;; ----- Linux -----
-  ;; Auto-detect keyboard devices by default. If this misbehaves (e.g.,
-  ;; Kanata grabs the wrong device), uncomment and point at a specific one:
-  ;; linux-dev /dev/input/by-id/usb-Kinesis_Adv360_Pro-event-kbd
+  ;; The Kinesis Adv360 Pro connects via Bluetooth (uhid), so Kanata's
+  ;; auto-detection doesn't find it. Match by device name instead.
+  linux-dev-names-include ("Adv360 Pro Keyboard")
 
   ;; ----- macOS -----
   ;; Match all devices via Karabiner VirtualHIDDevice. Harmless on Linux
