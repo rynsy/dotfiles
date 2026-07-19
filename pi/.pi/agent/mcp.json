@@ -1,0 +1,15 @@
+{
+  "settings": { "toolPrefix": "hl", "requestTimeoutMs": 45000 },
+  "mcpServers": {
+    "db": {
+      "transport": "streamable-http",
+      "url": "http://localhost:5000/mcp",
+      "lifecycle": "eager"
+    },
+    "k8s": {
+      "transport": "streamable-http",
+      "url": "http://localhost:8080/mcp",
+      "lifecycle": "eager"
+    }
+  }
+}

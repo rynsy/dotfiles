@@ -29,7 +29,7 @@ case "$OS" in
 esac
 
 DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
-PACKAGES=(nvim zsh claude git ssh tmux ghostty bash shell powershell alacritty)
+PACKAGES=(nvim zsh claude pi git ssh tmux ghostty bash shell powershell alacritty)
 BACKUP_DIR="/tmp/dotfiles-backup/$(date +%Y%m%d-%H%M%S)"
 
 echo "=== Dotfiles Bootstrap ==="
