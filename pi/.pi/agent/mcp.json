@@ -1,14 +1,67 @@
 {
-  "settings": { "toolPrefix": "hl", "requestTimeoutMs": 45000 },
+  "settings": {
+    "toolPrefix": "hl",
+    "requestTimeoutMs": 45000
+  },
   "mcpServers": {
     "db": {
       "transport": "streamable-http",
-      "url": "http://localhost:5000/mcp",
+      "url": "https://db-mcp.home.rynsy.com/mcp",
       "lifecycle": "eager"
     },
     "k8s": {
       "transport": "streamable-http",
-      "url": "http://localhost:8080/mcp",
+      "url": "https://k8s-mcp.home.rynsy.com/mcp",
+      "lifecycle": "eager"
+    },
+    "obsidian": {
+      "transport": "streamable-http",
+      "url": "https://obsidian-mcp.home.rynsy.com/mcp",
+      "lifecycle": "eager"
+    },
+    "media": {
+      "transport": "streamable-http",
+      "url": "https://media-mcp.home.rynsy.com/mcp",
+      "lifecycle": "eager"
+    },
+    "ntfy": {
+      "transport": "streamable-http",
+      "url": "https://ntfy-mcp.home.rynsy.com/mcp",
+      "lifecycle": "eager"
+    },
+    "redis": {
+      "transport": "streamable-http",
+      "url": "https://redis-mcp.home.rynsy.com/mcp",
+      "lifecycle": "eager"
+    },
+    "wiki": {
+      "transport": "streamable-http",
+      "url": "https://wiki-mcp.home.rynsy.com/mcp",
+      "lifecycle": "eager"
+    },
+    "rabbitmq": {
+      "transport": "streamable-http",
+      "url": "https://rabbitmq-mcp.home.rynsy.com/mcp",
+      "lifecycle": "eager"
+    },
+    "grafana": {
+      "transport": "streamable-http",
+      "url": "https://grafana-mcp.home.rynsy.com/mcp",
+      "lifecycle": "eager"
+    },
+    "admin": {
+      "transport": "streamable-http",
+      "url": "https://admin-mcp.home.rynsy.com/mcp",
+      "lifecycle": "eager"
+    },
+    "temporal": {
+      "transport": "streamable-http",
+      "url": "https://temporal-mcp.home.rynsy.com/mcp",
+      "lifecycle": "eager"
+    },
+    "browser": {
+      "transport": "streamable-http",
+      "url": "https://playwright-mcp.home.rynsy.com/mcp",
       "lifecycle": "eager"
     }
   }

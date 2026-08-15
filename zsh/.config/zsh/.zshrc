@@ -103,3 +103,6 @@ unset _shell_config
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
+
+# opencode
+export PATH=/home/ryan/.opencode/bin:$PATH

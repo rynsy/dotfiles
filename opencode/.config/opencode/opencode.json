@@ -1,0 +1,153 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "cluster": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Cluster Headroom (compress -> LiteLLM -> OpenRouter)",
+      "options": {
+        "baseURL": "https://headroom.home.rynsy.com/v1",
+        "apiKey": "{env:LITELLM_API_KEY}"
+      },
+      "models": {
+        "deepseek-v4-flash-latest": {
+          "name": "DeepSeek V4 Flash Latest (OpenRouter)",
+          "limit": {
+            "context": 200000,
+            "output": 65536
+          }
+        },
+        "deepseek-v4-flash": {
+          "name": "DeepSeek V4 Flash 0731 (OpenRouter, pinned)",
+          "limit": {
+            "context": 200000,
+            "output": 65536
+          }
+        },
+        "qwen3-14b": {
+          "name": "Qwen3 14B (local via headroom)",
+          "limit": {
+            "context": 40000,
+            "output": 8192
+          }
+        }
+      }
+    },
+    "litellm": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Homelab LiteLLM (direct, no headroom)",
+      "options": {
+        "baseURL": "https://llm.home.rynsy.com/v1",
+        "apiKey": "{env:LITELLM_API_KEY}"
+      },
+      "models": {
+        "deepseek-v4-flash-latest": {
+          "name": "DeepSeek V4 Flash Latest (direct)",
+          "limit": {
+            "context": 200000,
+            "output": 65536
+          }
+        },
+        "qwen3-14b": {
+          "name": "Qwen3 14B (local)"
+        },
+        "qwen3-8b": {
+          "name": "Qwen3 8B (local)"
+        },
+        "claude-sonnet-5": {
+          "name": "Claude Sonnet 5 (cloud $)"
+        },
+        "claude-haiku-4.5": {
+          "name": "Claude Haiku 4.5 (cloud $)"
+        }
+      }
+    }
+  },
+  "model": "cluster/deepseek-v4-flash-latest",
+  "mcp": {
+    "headroom": {
+      "type": "local",
+      "command": [
+        "headroom",
+        "mcp",
+        "serve"
+      ],
+      "enabled": true
+    },
+    "serena": {
+      "type": "local",
+      "command": [
+        "uvx",
+        "--from",
+        "git+https://github.com/oraios/serena",
+        "serena",
+        "start-mcp-server",
+        "--project-from-cwd",
+        "--context",
+        "agent",
+        "--open-web-dashboard",
+        "False"
+      ],
+      "enabled": true
+    },
+    "cluster-db": {
+      "type": "remote",
+      "url": "https://db-mcp.home.rynsy.com/mcp",
+      "enabled": true
+    },
+    "cluster-k8s": {
+      "type": "remote",
+      "url": "https://k8s-mcp.home.rynsy.com/mcp",
+      "enabled": true
+    },
+    "cluster-obsidian": {
+      "type": "remote",
+      "url": "https://obsidian-mcp.home.rynsy.com/mcp",
+      "enabled": true
+    },
+    "cluster-media": {
+      "type": "remote",
+      "url": "https://media-mcp.home.rynsy.com/mcp",
+      "enabled": true
+    },
+    "cluster-ntfy": {
+      "type": "remote",
+      "url": "https://ntfy-mcp.home.rynsy.com/mcp",
+      "enabled": true
+    },
+    "cluster-redis": {
+      "type": "remote",
+      "url": "https://redis-mcp.home.rynsy.com/mcp",
+      "enabled": true
+    },
+    "cluster-wiki": {
+      "type": "remote",
+      "url": "https://wiki-mcp.home.rynsy.com/mcp",
+      "enabled": true
+    },
+    "cluster-rabbitmq": {
+      "type": "remote",
+      "url": "https://rabbitmq-mcp.home.rynsy.com/mcp",
+      "enabled": true
+    },
+    "cluster-grafana": {
+      "type": "remote",
+      "url": "https://grafana-mcp.home.rynsy.com/mcp",
+      "enabled": true
+    },
+    "cluster-admin": {
+      "type": "remote",
+      "url": "https://admin-mcp.home.rynsy.com/mcp",
+      "enabled": true
+    },
+    "cluster-temporal": {
+      "type": "remote",
+      "url": "https://temporal-mcp.home.rynsy.com/mcp",
+      "enabled": true
+    },
+    "cluster-browser": {
+      "type": "remote",
+      "url": "https://playwright-mcp.home.rynsy.com/mcp",
+      "enabled": true
+    }
+  }
+}

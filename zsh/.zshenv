@@ -5,3 +5,5 @@ export ZDOTDIR=~/.config/zsh
 # stored, so key-based hosts and passphrases are unaffected. Helper: ~/.ssh/keyring-askpass
 export SSH_ASKPASS="$HOME/.ssh/keyring-askpass"
 export SSH_ASKPASS_REQUIRE=force
+
+export PATH="$HOME/.opencode/bin:$PATH"

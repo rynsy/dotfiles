@@ -1,12 +1,17 @@
 {
   "providers": {
-    "ollama": {
-      "baseUrl": "http://localhost:21434/v1",
+    "homelab": {
+      "baseUrl": "https://headroom.home.rynsy.com/v1",
       "api": "openai-completions",
-      "apiKey": "ollama",
+      "apiKey": "OVERRIDE_WITH_--api-key_FLAG",
       "compat": { "supportsDeveloperRole": false, "supportsReasoningEffort": false },
       "models": [
-        { "id": "qwen3:8b", "name": "Qwen3 8B (local)", "reasoning": true, "contextWindow": 40960, "maxTokens": 8192 }
+        { "id": "deepseek-v4-flash-latest", "name": "DeepSeek V4 Flash Latest (OpenRouter via cluster)", "reasoning": true,
+          "contextWindow": 200000, "maxTokens": 65536,
+          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 } },
+        { "id": "qwen3-8b", "name": "Qwen3 8B (homelab, local fallback)", "reasoning": true,
+          "contextWindow": 128000, "maxTokens": 8192,
+          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 } }
       ]
     }
   }
