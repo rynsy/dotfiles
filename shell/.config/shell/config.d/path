@@ -21,3 +21,6 @@ export PATH="$HOME/.cargo/bin:$PATH"
 
 # Go binaries
 export PATH="$HOME/go/bin:$PATH"
+
+# rtk (installed by headroom)
+[ -d "$HOME/.headroom/bin" ] && export PATH="$HOME/.headroom/bin:$PATH"

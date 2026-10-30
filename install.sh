@@ -39,15 +39,15 @@ echo "Minimal: $MINIMAL"
 echo ""
 
 # --- Package arrays ---
-CORE_PACMAN=(stow zsh fzf zoxide tmux neovim git)
+CORE_PACMAN=(stow zsh fzf zoxide tmux neovim git jq github-cli)
 EXTRA_PACMAN=(bash ghostty alacritty starship)
 
-CORE_BREW=(stow zsh fzf zoxide tmux neovim git)
+CORE_BREW=(stow zsh fzf zoxide tmux neovim git jq gh)
 EXTRA_BREW=(bash starship)
 EXTRA_CASKS=(ghostty alacritty)
 
 # Ubuntu/Debian — neovim and zoxide may be old/absent in older releases
-CORE_APT=(stow zsh fzf tmux git curl ncurses-term)
+CORE_APT=(stow zsh fzf tmux git curl ncurses-term jq)
 EXTRA_APT=(neovim zoxide starship)
 
 # Step 1: Install packages
@@ -124,7 +124,7 @@ check_conflict() {
 for f in init.lua stylua.toml .neoconf.json lazyvim.json; do
   check_conflict "$HOME/.config/nvim/$f"
 done
-for f in autocmds.lua keymaps.lua lazy.lua options.lua; do
+for f in autocmds.lua keymaps.lua lazy.lua options.lua remote_clipboard.lua; do
   check_conflict "$HOME/.config/nvim/lua/config/$f"
 done
 for f in all-themes.lua better-escape.lua disable-news-alert.lua example.lua plugins.lua snacks-animated-scrolling-off.lua; do
@@ -150,6 +150,9 @@ check_conflict "$HOME/.config/tmux/scripts/sessionizer.sh"
 
 check_conflict "$HOME/.claude/settings.json"
 check_conflict "$HOME/.claude/settings.local.json"
+for f in CLAUDE.md RTK.md hooks/tmux-status.sh hooks/rtk-rewrite.sh; do
+  check_conflict "$HOME/.claude/$f"
+done
 check_conflict "$HOME/.gitconfig"
 check_conflict "$HOME/.ssh/config"
 
@@ -160,6 +163,9 @@ done
 
 # powershell/ package conflicts
 check_conflict "$HOME/.config/powershell/profile.ps1"
+
+# ghostty/ package conflicts
+check_conflict "$HOME/.config/ghostty/config"
 
 # alacritty/ package conflicts
 check_conflict "$HOME/.config/alacritty/alacritty.toml"

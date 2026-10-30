@@ -14,6 +14,7 @@ stow --no-folding <package>    # create symlinks
 stow -D <package>              # remove symlinks
 stow -R <package>              # restow (remove + create)
 ./install.sh                   # full bootstrap (pacman, zinit, stow all)
+./sync.sh                      # pull, re-link all packages, report drifted files
 ```
 
 **`--no-folding` is required** — creates per-file symlinks so omarchy's theme files (`theme.lua`, `omarchy-theme-hotreload.lua`) coexist with stow-managed nvim files.

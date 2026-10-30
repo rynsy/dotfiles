@@ -7,3 +7,4 @@
 **/.zcompdump*
 **/.zcompcache/
 **/lazy-lock.json
+.serena/

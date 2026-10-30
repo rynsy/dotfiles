@@ -15,3 +15,6 @@ padding = { x = 14, y = 14 }
 
 [cursor]
 style = { shape = "Block", blinking = "Off" }
+
+# Send Shift+Return as CSI-u so TUIs can distinguish it from Return without treating it as Alt+Return.
+{ key = "Return", mods = "Shift", chars = "\u001B[13;2u" }
