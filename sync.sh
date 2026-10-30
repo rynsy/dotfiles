@@ -13,7 +13,7 @@ git pull --rebase --autostash
 
 drift=0
 for pkg in "${PACKAGES[@]}"; do
-  conflicts=$(stow -n --no-folding "$pkg" 2>&1 | sed -n 's/.*over existing target \(.*\) since.*/\1/p')
+  conflicts=$(stow -n --no-folding "$pkg" 2>&1 | sed -n 's/.*over existing target \(.*\) since.*/\1/p' || true)
   for target in $conflicts; do
     if cmp -s "$pkg/$target" "$HOME/$target"; then
       rm "$HOME/$target"
