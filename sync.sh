@@ -8,11 +8,14 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 eval "$(grep '^PACKAGES=' install.sh)"
+# Packages listed in ~/.config/dotfiles/skip (untracked, per machine) are never stowed here.
+SKIP=" $(cat "$HOME/.config/dotfiles/skip" 2>/dev/null || true) "
 
 git pull --rebase --autostash
 
 drift=0
 for pkg in "${PACKAGES[@]}"; do
+  [[ "$SKIP" == *[[:space:]]"$pkg"[[:space:]]* ]] && continue
   conflicts=$(stow -n --no-folding "$pkg" 2>&1 | sed -n 's/.*over existing target \(.*\) since.*/\1/p' || true)
   for target in $conflicts; do
     if cmp -s "$pkg/$target" "$HOME/$target"; then

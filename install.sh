@@ -30,6 +30,9 @@ esac
 
 DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
 PACKAGES=(nvim zsh claude pi opencode git ssh tmux ghostty bash shell powershell alacritty)
+# Packages listed in ~/.config/dotfiles/skip (untracked, per machine) are never stowed here,
+# and their real files are never backed up/moved away.
+SKIP=" $(cat "$HOME/.config/dotfiles/skip" 2>/dev/null || true) "
 BACKUP_DIR="/tmp/dotfiles-backup/$(date +%Y%m%d-%H%M%S)"
 
 echo "=== Dotfiles Bootstrap ==="
@@ -119,6 +122,9 @@ check_conflict() {
   [ -L "$target" ] && return
   # Skip if file doesn't exist
   [ ! -e "$target" ] && return
+  # Skip files owned by a package this machine opts out of
+  local s
+  for s in $SKIP; do [ -e "$DOTFILES_DIR/$s/${target#$HOME/}" ] && return; done
   # Skip files that resolve into the dotfiles directory (stow folder-folding)
   local resolved
   resolved="$(cd "$(dirname "$target")" 2>/dev/null && pwd -P)/$(basename "$target")"
@@ -195,6 +201,7 @@ fi
 echo "--- Stowing packages ---"
 cd "$DOTFILES_DIR"
 for pkg in "${PACKAGES[@]}"; do
+  [[ "$SKIP" == *[[:space:]]"$pkg"[[:space:]]* ]] && { echo "  skip $pkg (~/.config/dotfiles/skip)"; continue; }
   echo "  stow --no-folding $pkg"
   stow --no-folding "$pkg" || echo "  Warning: stow $pkg had conflicts — resolve manually then re-run stow"
 done

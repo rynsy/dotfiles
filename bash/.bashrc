@@ -25,6 +25,7 @@ case "$(uname -s)" in
   Darwin) for f in env.darwin path.darwin alias.darwin; do [[ -f "$_shell_config/$f" ]] && . "$_shell_config/$f"; done ;;
 esac
 [[ -f "$_shell_config/secrets" ]] && . "$_shell_config/secrets"
+[[ -f "$_shell_config/local" ]] && . "$_shell_config/local"   # per-machine, untracked
 unset _shell_config
 
 # Shell integrations

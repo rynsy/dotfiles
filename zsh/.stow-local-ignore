@@ -1,0 +1,4 @@
+# Generated zsh caches: gitignored, and never stowed (stow does not read .gitignore)
+\.zcompdump.*
+\.zcompcache
+\.stow-local-ignore
