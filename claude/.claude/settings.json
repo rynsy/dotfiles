@@ -2,11 +2,6 @@
   "permissions": {
     "defaultMode": "auto"
   },
-  "model": "opus",
-  "statusLine": {
-    "type": "command",
-    "command": "$HOME/.claude/hooks/statusline.sh"
-  },
   "hooks": {
     "PreToolUse": [
       {
@@ -109,6 +104,10 @@
         ]
       }
     ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "$HOME/.claude/hooks/statusline.sh"
   },
   "enabledPlugins": {
     "ponytail@ponytail": true,
