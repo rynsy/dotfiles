@@ -6,9 +6,12 @@
 input=$(cat)
 field() { jq -r ".$1 // empty" <<<"$input"; }
 
+# Pane's current session id, for tmux-resurrect to restore with --resume.
+tmux set -p -t "$TMUX_PANE" @claude_session "$(field session_id)"
+
 case $(field hook_event_name) in
   SessionEnd)
-    exec tmux set -wu -t "$TMUX_PANE" @claude_state ;;
+    exec tmux set -wu -t "$TMUX_PANE" @claude_state \; set -pu -t "$TMUX_PANE" @claude_session ;;
   UserPromptSubmit | PostToolUse | PostToolUseFailure)
     state=running ;;
   PreToolUse) # settings.json limits this to tools that wait on the user
