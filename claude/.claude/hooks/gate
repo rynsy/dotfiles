@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# gate: run this repo's `make check`; when it passes, stamp the exact tree it passed on.
+# The commit gate (gate-commit.sh) lets `git commit` through only for a stamped tree.
+set -euo pipefail
+here=$(dirname "$(readlink -f "$0")")
+repo=$(git rev-parse --show-toplevel)
+cd "$repo"
+if ! grep -qE '^check:' Makefile 2>/dev/null; then
+  echo "gate: $repo has no 'make check'; nothing to gate"
+  exit 0
+fi
+make check
+"$here/gate-fingerprint" > "$(git rev-parse --git-dir)/gate-pass"
+echo "gate: make check passed; stamped this tree at $(git rev-parse --short HEAD 2>/dev/null || echo no-head)"

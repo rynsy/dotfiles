@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# The exact state of the working tree: HEAD, every tracked change (staged or not), every
+# untracked non-ignored file's content. Same output = same code that `make check` saw.
+set -euo pipefail
+{
+  git rev-parse HEAD 2>/dev/null || echo no-head
+  git diff HEAD --binary
+  git ls-files -o --exclude-standard -z | xargs -0 -r sha256sum
+} | sha256sum | cut -d' ' -f1

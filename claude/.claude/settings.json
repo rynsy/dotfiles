@@ -10,6 +10,11 @@
           {
             "type": "command",
             "command": "$HOME/.claude/hooks/rtk-rewrite.sh"
+          },
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/gate-commit.sh",
+            "timeout": 30
           }
         ]
       },
@@ -80,6 +85,11 @@
           {
             "type": "command",
             "command": "$HOME/.claude/hooks/tmux-status.sh"
+          },
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/stop-dirty.sh",
+            "timeout": 30
           }
         ]
       }
