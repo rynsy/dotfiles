@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-# Stop: refuse to end the turn while files changed during this session sit uncommitted in an
-# agent worktree (~/worktrees) or in the vault's agent folders. A second stop in a row is
+# Stop: refuse to end the turn while files changed during this session sit uncommitted in the
+# worktree the main session is in (its cwd, under ~/worktrees) or in the vault's agent folders.
+# Other worktrees are skipped: background agents work there and commit their own changes. A second stop in a row is
 # allowed, so a reply that says why the changes stay uncommitted can end the turn.
 # ponytail: "changed this session" = modified after the transcript file was created;
 # deletions are not seen (no mtime).
@@ -22,9 +23,9 @@ check_repo() {
     [ "$(stat -c %Y "$repo/$path")" -ge "$start" ] && dirty+=("$repo/$path")
   done < <(git -C "$repo" status --porcelain 2>/dev/null)
 }
-for g in "$HOME"/worktrees/*/.git "$HOME"/worktrees/*/*/.git "$HOME"/worktrees/*/*/*/.git; do
-  [ -e "$g" ] && check_repo "$(dirname "$g")" ""
-done
+cwd=$(jq -r '.cwd // empty' <<<"$input")
+top=$([ -n "$cwd" ] && git -C "$cwd" rev-parse --show-toplevel 2>/dev/null)
+case "$top" in "$HOME"/worktrees/*) check_repo "$top" "" ;; esac
 [ -d "$HOME/journal/.git" ] && check_repo "$HOME/journal" "raw/|workstreams/|runbooks/|wiki/|scripts/|AGENTS.md"
 
 [ ${#dirty[@]} -eq 0 ] && exit 0
